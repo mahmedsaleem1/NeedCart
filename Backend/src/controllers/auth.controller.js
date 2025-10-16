@@ -21,8 +21,8 @@ export const registerWithEmail = asyncHandler(async (req, res) => {
 });
 
 export const resetPassword = asyncHandler(async (req, res) => {
-  const { email } = req.body;
-  
+  const { email } = req.body;  
+
   if (!email) {
     throw new apiError(400, "Email is required");
   }

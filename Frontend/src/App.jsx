@@ -1,11 +1,28 @@
+import {
+  Login,
+  Signup,
+  // Header,
+  // Footer,
+  ForgetPassword 
+} from './components/index.js';
 
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
 
   return (
-    <>
-      <h1>Hi</h1>
-    </>
+      <Router>
+        <Routes>
+          {/* <Route path="/" element={<Home />} /> */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/forget-password" element={<ForgetPassword />} />
+          {/* <Route path="/contact" element={<Contact />} /> */}
+          {/* <Route path="/upload" element={<UploadPage />} /> */}
+          {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+          {/* Add more routes as needed */}
+        </Routes>
+      </Router>
   )
 }
 
