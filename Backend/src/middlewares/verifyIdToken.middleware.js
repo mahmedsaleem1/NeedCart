@@ -13,7 +13,7 @@ export const verifyFirebaseToken = async (req, res, next) => {
 
   try {
     const decoded = await admin.auth().verifyIdToken(idToken);
-    req.user = decoded; // attach user info to request    
+    req.user = decoded; // attach user info to request        
     
     next();
   } catch (error) {

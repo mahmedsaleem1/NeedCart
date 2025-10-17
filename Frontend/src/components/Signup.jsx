@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import {googleLogin} from '../config/firebase/auth.config.js';
 import { useDispatch } from 'react-redux';
-import { login } from "../store/auth.slice";
+import { login, signup } from "../store/auth.slice";
 import { useSelector } from 'react-redux';
 
-const Signup = () => {
+const Signup = () => {    
     const user = useSelector((state) => state.auth.user);
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -30,16 +30,14 @@ const Signup = () => {
         setMessage("");
         
         try {
-            const { email, password } = data;
+            const { email, role, password } = data;
             const response = await fetch(`${import.meta.env.VITE_URL}/api/v1/auth/signup`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ email, password }),
-            });
-            console.log(response);
-            
+                body: JSON.stringify({ email, role, password}),
+            });            
 
             // Check if response is JSON
             const contentType = response.headers.get("content-type");
@@ -56,6 +54,9 @@ const Signup = () => {
                 setTimeout(() => {
                     navigate('/login');
                 }, 2000);
+                dispatch(signup(role))
+                console.log("role", user.role);
+                
             } else {
                 setMessage(result.message || "Failed to create account. Please try again.");
             }
@@ -163,6 +164,33 @@ const Signup = () => {
                             </span>
                         )}
                     </div>
+                    <div style={{ textAlign: 'left' }}>
+                        <select
+                            {...register("role", { required: "Please select a role" })}
+                            defaultValue="Buyer"
+                            style={{
+                            width: '100%',
+                            padding: '14px 16px',
+                            border: `2px solid ${errors.role ? '#dc3545' : '#e1e5e9'}`,
+                            borderRadius: '8px',
+                            fontSize: '16px',
+                            outline: 'none',
+                            backgroundColor: '#fff',
+                            boxSizing: 'border-box'
+                            }}
+                            onFocus={(e) => e.target.style.borderColor = errors.role ? '#dc3545' : '#007bff'}
+                            onBlur={(e) => e.target.style.borderColor = errors.role ? '#dc3545' : '#e1e5e9'}
+                        >
+                            <option value="Buyer">Buyer</option>
+                            <option value="Seller">Seller</option>
+                        </select>
+                        {errors.role && (
+                            <span style={{ color: '#dc3545', fontSize: '12px', marginTop: '4px', display: 'block' }}>
+                            {errors.role.message}
+                            </span>
+                        )}
+                        </div>
+
 
                     <div style={{ textAlign: 'left' }}>
                         <input 

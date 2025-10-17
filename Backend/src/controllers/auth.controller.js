@@ -3,19 +3,42 @@ import {asyncHandler} from '../utills/asyncHandler.js';
 import apiError from '../utills/apiError.js';
 import apiResponse from '../utills/apiResponse.js';
 import { sendEmail } from '../utills/nodemailer.js';
-
+import { Buyer, Seller } from '../models/index.js';
 
 export const registerWithEmail = asyncHandler(async (req, res) => {
+
   const { email, password } = req.body;
+  var role = req.body.role
+  role = role.toLowerCase().trim();
+  console.log("backend role ", role);
+  
   if (!email || !password) {
     throw new apiError(400, "Email and password are required");
   }
+
   try {
     const user = await admin.auth().createUser({ email, password });
+
+    const uid = user.uid;
+
+    if (role == "buyer") {
+      await Buyer.create({
+        email: email,
+        firebaseUID: uid
+      })
+    }
+    else if (role == "seller") {
+      await Seller.create({
+        email: email,
+        firebaseUID: uid
+      })
+    }
+
     return res
       .status(201)
-      .json(new apiResponse("User registered successfully", { user}));
-  } catch (error) {
+      .json(new apiResponse("User registered successfully", { user }));
+  } 
+  catch (error) {
     throw new apiError(error.statusCode, error);
   }
 });
@@ -40,11 +63,15 @@ export const resetPassword = asyncHandler(async (req, res) => {
 
 export const loginWithIdToken = asyncHandler(async (req, res) => {
   try {
-    const uid = req.user.uid;
-  
+    const uid = req.user;
+
+    console.log(uid);
+    
+
     const user = await admin.auth().getUser(uid); // get full info
   
     return res.status(200).json(new apiResponse("Login successful", { user }));
+    
   } catch (error) {
     throw new apiError(error.code, error.message);
   }
