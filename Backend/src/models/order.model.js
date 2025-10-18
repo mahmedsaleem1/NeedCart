@@ -1,6 +1,6 @@
 import mongoose, {Schema} from 'mongoose';
 
-const transactionSchema = new Schema({
+const orderSchema = new Schema({
   buyerId: {
     type: Schema.Types.ObjectId,
     ref: 'buyers',
@@ -9,6 +9,20 @@ const transactionSchema = new Schema({
   sellerId: {
     type: Schema.Types.ObjectId,
     ref: 'sellers',
+    required: true
+  },
+  address: {
+    type: String,
+    required: true
+  },
+  status: {
+    type: String,
+    enum: ['pending', 'shipped', 'delivered', 'cancelled'],
+    default: 'pending'
+  },
+  transactionId: {
+    type: Schema.Types.ObjectId,
+    ref: 'transactions',
     required: true
   },
   productId: {
@@ -26,6 +40,11 @@ const transactionSchema = new Schema({
     ref: 'rents',
     default: null
   },
+  quantity: {
+    type: Number,
+    required: true,
+    min: 1
+  },
   totalPrice: {
     type: Number,
     required: true,
@@ -35,12 +54,12 @@ const transactionSchema = new Schema({
   timestamps: true
 });
 
-transactionSchema.pre('validate', function (next) {
+orderSchema.pre('validate', function (next) {
   if (!this.productId && !this.postId && !this.rentId) {
-    next(new Error('Transaction must have either productId, postId or rentId.'));
+    next(new Error('Order must have either productId, postId or rentId.'));
   } else {
     next();
   }
 });
 
-export const Transaction = mongoose.model('Transaction', transactionSchema);
+export const Order = mongoose.model('Order', orderSchema);
