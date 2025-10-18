@@ -3,7 +3,8 @@ import cors from 'cors';
 import {
   authRouter,
   postRouter,
-  offerRouter
+  offerRouter, 
+  likeRouter
 } from './routes/index.js';
 import bodyParser from 'body-parser';
 
@@ -25,5 +26,6 @@ app.get('/', (req, res) => {
 app.use('/api/v1/auth', authRouter)
 app.use('/api/v1/post', postRouter)
 app.use('/api/v1/offer', offerRouter)
+app.use('/api/v1/like', likeRouter)
 
 export default app;

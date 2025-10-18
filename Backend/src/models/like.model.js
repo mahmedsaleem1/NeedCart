@@ -3,17 +3,17 @@ import mongoose, {Schema} from 'mongoose';
 const likeSchema = new Schema({
   postId: {
     type: Schema.Types.ObjectId,
-    ref: 'posts',
+    ref: 'Post',
     required: true,
   },
   sellerId: {
     type: Schema.Types.ObjectId,
-    ref: 'sellers',
+    ref: 'Seller',
     default: null
   },
   buyerId: {
     type: Schema.Types.ObjectId,
-    ref: 'buyers',
+    ref: 'Buyer',
     default: null
   }
 }, {
