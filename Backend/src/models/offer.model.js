@@ -3,17 +3,12 @@ import mongoose, {Schema} from 'mongoose';
 const offerSchema = new Schema({
   postId: {
     type: Schema.Types.ObjectId,
-    ref: 'posts',
+    ref: 'Post',
     required: true
   },
   senderId: {
     type: Schema.Types.ObjectId,
-    ref: 'sellers',
-    required: true
-  },
-  receiverId: {
-    type: Schema.Types.ObjectId,
-    ref: 'buyers',
+    ref: 'Seller',
     required: true
   },
   amount: {

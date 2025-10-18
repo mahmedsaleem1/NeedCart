@@ -8,8 +8,9 @@ export const verifyFirebaseToken = async (req, res, next) => {
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return next(new apiError(401, "No token provided"));
   }
-
-  const idToken = authHeader.split(" ")[1];
+  console.log("no way", authHeader);
+  
+  const idToken = authHeader.split(" ")[1];  
 
   try {
     const decoded = await admin.auth().verifyIdToken(idToken);

@@ -3,7 +3,7 @@ import mongoose, {Schema} from 'mongoose';
 const postSchema = new Schema({
     buyerId: { 
         type: Schema.Types.ObjectId,
-        ref: 'buyers',
+        ref: 'Buyer',
         required: true
     },
     title: {
@@ -15,6 +15,10 @@ const postSchema = new Schema({
         type: String,
         required: true,
         trim: true
+    },
+    image: {
+        type: String,
+        required: true
     },
     budget: {
         type: Number,

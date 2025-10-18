@@ -25,6 +25,7 @@ export const registerWithEmail = asyncHandler(async (req, res) => {
         email: email,
         firebaseUID: uid
       })
+      
     }
     else if (role == "seller") {
       await Seller.create({
@@ -62,10 +63,9 @@ export const resetPassword = asyncHandler(async (req, res) => {
 
 export const loginWithIdToken = asyncHandler(async (req, res) => {
   try {
-    const uid = req.user.uid;    
+    const uid = req.user.uid;        
 
     const user = await admin.auth().getUser(uid); // get full info    
-  console.log("mf", user);
   
     return res.status(200).json(new apiResponse("Login successful", { user }));
     
