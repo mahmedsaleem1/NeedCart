@@ -1,6 +1,7 @@
 import {
   Login,
   Signup,
+  Logout,
   // Header,
   // Footer,
   ForgetPassword 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
+          <Route path="/logout" element={<Logout />} />
           {/* <Route path="/contact" element={<Contact />} /> */}
           {/* <Route path="/upload" element={<UploadPage />} /> */}
           {/* <Route path="/dashboard" element={<Dashboard />} /> */}

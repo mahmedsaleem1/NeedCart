@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { loginWithEmail, googleLogin } from "../config/firebase/auth.config.js";
 import {useDispatch} from "react-redux";
@@ -33,20 +33,31 @@ export default function LoginForm() {
       });
 
       const userData = await user.json();
-      if (user) {
+      
+      if (userData && userData.data.user.email === import.meta.env.VITE_ADMIN_EMAIL) {
+        const serializableUserData = {
+            email: userData.email
+        };
+        dispatch(login({ ...serializableUserData, role: 'admin' }));
+        alert("Admin login successful.");
+        navigate("/admin");
+        return userData;
+      }
+
+      else if (userData) {  // user by default
         const serializableUserData = {
             email: userData.email,
             displayName: userData.displayName,
             photoURL: userData.photoURL,
         };
 
-        dispatch(login(serializableUserData));
+        dispatch(login(serializableUserData));        
         navigate("/");
         return userData
       };
 
     } catch (err) {
-      alert("Login failed. Please check your credentials.");
+      alert(err.message);
     }
   };
 
