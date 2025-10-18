@@ -1,8 +1,3 @@
-// Offer is sent by seller
-// Offer can be accepted or rejected by the buyer
-// All sellers can see the offers that r sent
-
-
 import apiError from '../utills/apiError.js';
 import apiResponse from '../utills/apiResponse.js';
 import { asyncHandler } from '../utills/asyncHandler.js';
@@ -63,7 +58,72 @@ export const getAllOffers = asyncHandler(async (req, res) => {
     }
 });
 
-export const acceptOffer = asyncHandler(async (req, res) => {});
+export const acceptOffer = asyncHandler(async (req, res) => {
+    const offerId = req.params.offerId;
 
-export const rejectOffer = asyncHandler(async (req, res) => {});
+    const offer = await Offer.findOne({
+        _id: offerId,
+    });
+    const postId = offer.postId;
+    const post = await Post.findOne({
+        _id: postId,
+    });
+
+    const uid = req.user.uid;
+    const buyer = await Buyer.findOne({ firebaseUID: uid  });
+    const buyerId = post.buyerId;
+
+    if (buyerId.toString() !== buyer._id.toString()) {
+        throw new apiError(403, 'You are not authorized to accept this offer');
+    }
+
+    try {
+        const acceptedOffer = await Offer.updateOne(
+            { _id: offerId },
+            { $set: { status: 'accepted' } }
+        );
+        if (acceptedOffer) {
+            return res
+                .status(200)
+                .json(new apiResponse(200, 'Offer accepted successfully', acceptedOffer));
+        }
+    } catch (error) {
+        throw new apiError(error.statusCode, error.message);
+    }
+
+});
+
+export const rejectOffer = asyncHandler(async (req, res) => {
+    const offerId = req.params.offerId;
+
+    const offer = await Offer.findOne({
+        _id: offerId,
+    });
+    const postId = offer.postId;
+    const post = await Post.findOne({
+        _id: postId,
+    });
+
+    const uid = req.user.uid;
+    const buyer = await Buyer.findOne({ firebaseUID: uid  });
+    const buyerId = post.buyerId;
+
+    if (buyerId.toString() !== buyer._id.toString()) {
+        throw new apiError(403, 'You are not authorized to reject this offer');
+    }
+
+    try {
+        const rejectedOffer = await Offer.updateOne(
+            { _id: offerId },
+            { $set: { status: 'rejected' } }
+        );
+        if (rejectedOffer) {
+            return res
+                .status(200)
+                .json(new apiResponse(200, 'Offer rejected successfully', rejectedOffer));
+        }
+    } catch (error) {
+        throw new apiError(error.statusCode, error.message);
+    }
+});
 
