@@ -8,7 +8,7 @@
 import apiError from '../utills/apiError.js';
 import apiResponse from '../utills/apiResponse.js';
 import { asyncHandler } from '../utills/asyncHandler.js';
-import { Buyer, Seller, Like, Comment, Post, Offer } from '../models/index.js';
+import { Buyer, Post } from '../models/index.js';
 import { uploadImage } from '../utills/cloudinary.utill.js';
 import fs from 'fs';
 

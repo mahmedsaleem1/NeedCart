@@ -1,7 +1,7 @@
 import apiError from '../utills/apiError.js';
 import apiResponse from '../utills/apiResponse.js';
 import { asyncHandler } from '../utills/asyncHandler.js';
-import { Buyer, Seller, Like, Comment, Post, Offer } from '../models/index.js';
+import { Buyer, Like, Post } from '../models/index.js';
 
 export const likePost = asyncHandler(async (req, res) => {
     try {

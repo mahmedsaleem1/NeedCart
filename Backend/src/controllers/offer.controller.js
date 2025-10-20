@@ -1,7 +1,7 @@
 import apiError from '../utills/apiError.js';
 import apiResponse from '../utills/apiResponse.js';
 import { asyncHandler } from '../utills/asyncHandler.js';
-import { Buyer, Seller, Like, Comment, Post, Offer } from '../models/index.js';
+import { Buyer, Seller, Post, Offer } from '../models/index.js';
 
 export const createOffer = asyncHandler(async (req, res) => {
     const postId = req.params.postId;

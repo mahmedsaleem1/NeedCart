@@ -3,27 +3,27 @@ import mongoose, {Schema} from 'mongoose';
 const transactionSchema = new Schema({
   buyerId: {
     type: Schema.Types.ObjectId,
-    ref: 'buyers',
+    ref: 'Buyer',
     required: true
   },
   sellerId: {
     type: Schema.Types.ObjectId,
-    ref: 'sellers',
+    ref: 'Seller',
     required: true
   },
   productId: {
     type: Schema.Types.ObjectId,
-    ref: 'products',
+    ref: 'Product',
     default: null
   },
   postId: {
     type: Schema.Types.ObjectId,
-    ref: 'posts',
+    ref: 'Post',
     default: null
   },
   rentId: {
     type: Schema.Types.ObjectId,
-    ref: 'rents',
+    ref: 'Rent',
     default: null
   },
   totalPrice: {
