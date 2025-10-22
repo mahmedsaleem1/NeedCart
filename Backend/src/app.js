@@ -6,7 +6,8 @@ import {
   offerRouter, 
   likeRouter,
   commentRouter,
-  productRouter
+  productRouter,
+  wishlistRouter
 } from './routes/index.js';
 import bodyParser from 'body-parser';
 
@@ -31,5 +32,6 @@ app.use('/api/v1/offer', offerRouter)
 app.use('/api/v1/like', likeRouter)
 app.use('/api/v1/comment', commentRouter)
 app.use('/api/v1/product', productRouter)
+app.use('/api/v1/wishlist', wishlistRouter)
 
 export default app;
