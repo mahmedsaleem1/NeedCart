@@ -5,7 +5,8 @@ import {
   postRouter,
   offerRouter, 
   likeRouter,
-  commentRouter
+  commentRouter,
+  productRouter
 } from './routes/index.js';
 import bodyParser from 'body-parser';
 
@@ -29,5 +30,6 @@ app.use('/api/v1/post', postRouter)
 app.use('/api/v1/offer', offerRouter)
 app.use('/api/v1/like', likeRouter)
 app.use('/api/v1/comment', commentRouter)
+app.use('/api/v1/product', productRouter)
 
 export default app;

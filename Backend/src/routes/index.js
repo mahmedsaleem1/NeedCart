@@ -3,11 +3,13 @@ import postRouter from './post.route.js'
 import offerRouter from './offer.route.js'
 import likeRouter from './like.route.js'
 import commentRouter from './comment.route.js'
+import productRouter from './product.route.js'
 
 export {
     authRouter,
     postRouter,
     offerRouter,
     commentRouter,
-    likeRouter
+    likeRouter,
+    productRouter
 }

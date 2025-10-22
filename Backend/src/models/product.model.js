@@ -20,16 +20,16 @@ const productSchema = new Schema({
     },
     category: {
         type: String,
-        enum: ['Electronics', 'Clothing', 'Books', 'Home', 'Beauty', 'Sports', 'Toys', 'Other'],
+        enum: ['Electronics', 'Clothing', 'Books', 'Home', 'Beauty', 'Sports', 'Toys', 'Others'],
         required: true,
     },
     price:{
         type: Number,
         required: true,
     },
-    availabilityStatus:{
-        type: Boolean,
-        default: true,
+    availableStock:{
+        type: Number,
+        required: true,
     }
 }, {
   timestamps : true,
