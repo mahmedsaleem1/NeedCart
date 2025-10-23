@@ -6,6 +6,7 @@ import commentRouter from './comment.route.js'
 import productRouter from './product.route.js'
 import wishlistRouter from './wishlist.route.js'
 import reviewRouter from './review.route.js'
+import rentRouter from './rent.route.js'
 
 export {
     authRouter,
@@ -15,5 +16,6 @@ export {
     commentRouter,
     likeRouter,
     productRouter,
-    reviewRouter
+    reviewRouter,
+    rentRouter
 }

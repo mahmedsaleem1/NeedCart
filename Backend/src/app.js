@@ -8,7 +8,8 @@ import {
   commentRouter,
   productRouter,
   wishlistRouter,
-  reviewRouter
+  reviewRouter,
+  rentRouter
 } from './routes/index.js';
 import bodyParser from 'body-parser';
 
@@ -35,5 +36,6 @@ app.use('/api/v1/comment', commentRouter)
 app.use('/api/v1/product', productRouter)
 app.use('/api/v1/wishlist', wishlistRouter)
 app.use('/api/v1/review', reviewRouter)
+app.use('/api/v1/rent', rentRouter)
 
 export default app;

@@ -1,16 +1,25 @@
 import mongoose, {Schema} from 'mongoose';
 
 const rentSchema = new Schema({
-    sellerId: {
+    sellerId: { // one who lists the item for rent
         type: Schema.Types.ObjectId,
         ref: 'Seller',
         required: true,
+    },
+    buyerId: { // one who rents the item
+        type: Schema.Types.ObjectId,
+        ref: 'Buyer',
+        default: null
     },
     item_name: {
         type: String,
         required: true,
     },
     item_description: {
+        type: String,
+        required: true,
+    },
+    item_image: {
         type: String,
         required: true,
     },
@@ -22,7 +31,7 @@ const rentSchema = new Schema({
         type: String,
         required: true
     },
-    deposit_amount: {
+    advance_amount: {
         type: Number,
         required: true
     },
