@@ -6,11 +6,6 @@ const reviewSchema = new Schema({
     ref: 'Buyer',
     required: true
   },
-  sellerId: {
-    type: Schema.Types.ObjectId,
-    ref: 'Seller',
-    required: true
-  },
   productId: {
     type: Schema.Types.ObjectId,
     ref: 'Product',

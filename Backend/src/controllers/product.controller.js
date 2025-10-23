@@ -24,10 +24,14 @@ export const addProduct = asyncHandler(async (req, res) => {
             throw new apiError(401, 'All fields are required'); // use throw + new
         }
 
-        const sellerId = await Seller.findOne({firebaseUID: uid})
+        const seller = await Seller.findOne({firebaseUID: uid})
 
-        if (!sellerId) {
+        if (!seller) {
             throw new apiError(404, 'You must be logged in as a seller to add a product');
+        }
+
+        if (!seller.is_verified) {
+            throw new apiError(403, 'Your seller account is not verified');
         }
 
         // Upload image using your utility
@@ -41,7 +45,7 @@ export const addProduct = asyncHandler(async (req, res) => {
         }
 
         const product = await Product.create({
-            sellerId,
+            sellerId: seller._id,
             title,
             description,
             image: imageUrl,
