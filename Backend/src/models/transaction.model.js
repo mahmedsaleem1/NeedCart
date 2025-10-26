@@ -16,14 +16,9 @@ const transactionSchema = new Schema({
     ref: 'Product',
     default: null
   },
-  postId: {
+  offerId: {
     type: Schema.Types.ObjectId,
-    ref: 'Post',
-    default: null
-  },
-  rentId: {
-    type: Schema.Types.ObjectId,
-    ref: 'Rent',
+    ref: 'Offer',
     default: null
   },
   totalPrice: {
@@ -38,8 +33,7 @@ const transactionSchema = new Schema({
   },
   paymentMethod: {
     type: String,
-    enum: ['stripe','cod'],
-    default: 'stripe',
+    enum: ['stripe','cod']
   },
   transactionDate: {
     type: Date,
@@ -50,8 +44,8 @@ const transactionSchema = new Schema({
 });
 
 transactionSchema.pre('validate', function (next) {
-  if (!this.productId && !this.postId && !this.rentId) {
-    next(new Error('Transaction must have either productId, postId or rentId.'));
+  if (!this.productId && !this.offerId) {
+    next(new Error('Transaction must have either productId or offerId.'));
   } else {
     next();
   }

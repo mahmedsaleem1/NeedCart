@@ -35,11 +35,6 @@ const orderSchema = new Schema({
     ref: 'Post',
     default: null
   },
-  rentId: {
-    type: Schema.Types.ObjectId,
-    ref: 'Rent',
-    default: null
-  },
   quantity: {
     type: Number,
     required: true,
@@ -61,8 +56,8 @@ const orderSchema = new Schema({
 });
 
 orderSchema.pre('validate', function (next) {
-  if (!this.productId && !this.postId && !this.rentId) {
-    next(new Error('Order must have either productId, postId or rentId.'));
+  if (!this.productId && !this.postId) {
+    next(new Error('Order must have either productId or postId.'));
   } else {
     next();
   }
