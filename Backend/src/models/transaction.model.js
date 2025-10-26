@@ -30,6 +30,20 @@ const transactionSchema = new Schema({
     type: Number,
     required: true,
     min: 0
+  },
+  paymentStatus: {
+    type: String,
+    enum: ['pending', 'paid', 'failed', 'refunded'],
+    default: 'pending',
+  },
+  paymentMethod: {
+    type: String,
+    enum: ['stripe','cod'],
+    default: 'stripe',
+  },
+  transactionDate: {
+    type: Date,
+    default: Date.now,
   }
 }, {
   timestamps: true

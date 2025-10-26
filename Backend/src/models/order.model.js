@@ -17,7 +17,7 @@ const orderSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ['pending', 'shipped', 'delivered', 'cancelled'],
+    enum: ['pending', 'confirmed', 'delivered', 'cancelled'],
     default: 'pending'
   },
   transactionId: {
@@ -49,6 +49,12 @@ const orderSchema = new Schema({
     type: Number,
     required: true,
     min: 0
+  },
+  deliveredAt: {
+    type: Date,
+  },
+  cancelledAt: {
+    type: Date,
   }
 }, {
   timestamps: true
