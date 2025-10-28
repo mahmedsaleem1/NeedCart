@@ -38,6 +38,7 @@ const orderSchema = new Schema({
   quantity: {
     type: Number,
     required: true,
+    default: 1,
     min: 1
   },
   totalPrice: {
@@ -56,6 +57,8 @@ const orderSchema = new Schema({
 });
 
 orderSchema.pre('validate', function (next) {
+  if (this.postId) this.quantity = 1;
+  
   if (!this.productId && !this.postId) {
     next(new Error('Order must have either productId or postId.'));
   } else {

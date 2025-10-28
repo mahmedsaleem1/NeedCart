@@ -7,6 +7,7 @@ import productRouter from './product.route.js'
 import wishlistRouter from './wishlist.route.js'
 import reviewRouter from './review.route.js'
 import transactionRouter from './transaction.route.js'
+import TOPRouter from './TOP.route.js'
 
 export {
     authRouter,
@@ -17,5 +18,6 @@ export {
     commentRouter,
     likeRouter,
     productRouter,
-    reviewRouter
+    reviewRouter,
+    TOPRouter
 }
