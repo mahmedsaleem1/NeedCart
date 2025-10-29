@@ -8,9 +8,9 @@ import { Buyer, Product, Seller, Review, Order, Transaction } from '../models/in
 export const createReview = asyncHandler(async (req, res) => {
     // user must be logged in as a buyer
     // product must be 'delived' to the buyer (order)
-    try {
+    try {        
         const uid = req.user.uid;
-        const {productId} = req.params.prodId;
+        const productId = req.params.prodId;
         const {rating, comment} = req.body
 
         if (!rating || !comment) {
@@ -22,6 +22,12 @@ export const createReview = asyncHandler(async (req, res) => {
         if(!buyer) {
             throw new apiError(401, "You must be Logged in as a Buyer to continue")
         }
+        
+        const product = await Product.findById(productId)
+
+        if (!product) {
+            throw new apiError(404, "Product not found")
+        }
 
         const transaction = await Transaction.findOne({
             buyerId: buyer._id,
@@ -32,12 +38,6 @@ export const createReview = asyncHandler(async (req, res) => {
             throw new apiError(401, "You have not purchased this product")
         }
 
-        const product = await Product.findById(productId)
-
-        if (!product) {
-            throw new apiError(404, "Product not found")
-        }
-
         const order = await Order.findOne({
             buyerId: buyer._id,
             productId: product._id,
@@ -46,6 +46,10 @@ export const createReview = asyncHandler(async (req, res) => {
 
         if (!order) {
             throw new apiError(404, "Order not found for this product")
+        }
+
+        if(order.status !== 'delivered') {
+            throw new apiError(401, "You can only review a product that has been delivered")
         }
 
         const review = await Review.create({
@@ -103,12 +107,12 @@ export const getReviewsForProduct = asyncHandler(async (req, res) => {
         if (!product)
             throw new apiError(404, "The product you are looking for does not exists")
 
-        const reviews = await Review.find({productId: product._id})
+        const reviews = await Review.find({productId: product._id}).populate('productId')
 
-        if (!reviews) 
+        if (!reviews || reviews.length === 0)
             throw new apiError(404, "This product have no reviews")
 
-        return req.status(200).json(new apiResponse(200, {reviews}, "Reviews fetched Successfully"))
+        return res.status(200).json(new apiResponse(200, {reviews}, "Reviews fetched Successfully"))
 
 
     } catch (error) {

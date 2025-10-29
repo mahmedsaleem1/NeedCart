@@ -66,7 +66,7 @@ export const wishlistOfLoggedInBuyer = asyncHandler(async (req, res) => {
             throw new apiError(402, "You must be Logged in as a Buyer to See Wishlist")
         }
 
-        const wishlist = await Wishlist.find({buyerId: buyer._id})
+        const wishlist = await Wishlist.find({buyerId: buyer._id}).populate('productId');
         if(!wishlist) {
             throw new apiError(401, "Your Wishlist is Empty")
         }
