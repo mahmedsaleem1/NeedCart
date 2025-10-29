@@ -44,6 +44,47 @@ export const createTransaction_INTERNAL = async (uid, itemId, totalPrice) => {
         throw new apiError(error.statusCode, error.message);
 }};
 
+export const createTransactionCOD_INTERNAL = async (uid, itemId, totalPrice) => {
+    try {
+    
+        const buyer = await Buyer.findOne({ firebaseUID: uid });
+        
+        if (!buyer) {
+            throw new apiError(404, 'You must be logged in as a buyer to create a transaction.');
+        }
+        
+        const product = await Product.findById(itemId) || null;
+        
+        const offer = await Offer.findById(itemId) || null;
+
+        if (!product && !offer) {
+            throw new apiError(404, 'Product or Offer not found for the given ID.');
+        }
+        
+        if (!totalPrice || totalPrice < 0) {
+            throw (400, 'Total price is required and must be non-negative.');
+        }
+
+        if (totalPrice !== (offer ? offer.amount : product ? product.price : 0)) {
+            throw new apiError(400, 'Total price does not match the product price or offer amount.');
+        }
+    
+        const transaction = await Transaction.create({ // 'Pending' Transaction
+            buyerId: buyer._id,
+            sellerId: product ? product.sellerId : offer ? offer.senderId : null,
+            productId: product ? product._id : null,
+            offerId: offer ? offer._id : null,
+            totalPrice,
+            paymentMethod: "cod",
+        });
+
+        if (transaction) {
+            return(new apiResponse(true, 'Transaction created successfully.', transaction));
+        }
+    } catch (error) {
+        throw new apiError(error.statusCode, error.message);
+}};
+
 export const updateTransactionStatus_INTERNAL = async (orderId, paymentStatus) => {
     try { // From Pending to Paid/Failed
 

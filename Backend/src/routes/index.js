@@ -8,6 +8,7 @@ import wishlistRouter from './wishlist.route.js'
 import reviewRouter from './review.route.js'
 import transactionRouter from './transaction.route.js'
 import TOPRouter from './TOP.route.js'
+import CODRouter from './COD.route.js'
 
 export {
     authRouter,
@@ -19,5 +20,6 @@ export {
     likeRouter,
     productRouter,
     reviewRouter,
-    TOPRouter
+    TOPRouter,
+    CODRouter
 }

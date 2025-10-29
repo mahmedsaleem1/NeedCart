@@ -7,7 +7,7 @@ import { Buyer, Product, Seller, Review, Order, Transaction } from '../models/in
 
 export const createReview = asyncHandler(async (req, res) => {
     // user must be logged in as a buyer
-    // product must be purchased by the buyer (order)
+    // product must be 'delived' to the buyer (order)
     try {
         const uid = req.user.uid;
         const {productId} = req.params.prodId;
