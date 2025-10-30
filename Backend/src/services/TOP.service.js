@@ -5,7 +5,7 @@ import { createCheckoutSession_INTERNAL } from '../controllers/payment.controlle
 import { createTransaction_INTERNAL, updateTransactionStatus_INTERNAL } from '../controllers/transaction.controller.js';
 import { createOrder_INTERNAL, updateOrderStatus_INTERNAL } from '../controllers/order.controller.js';
 
-export const performTOP = asyncHandler(async (req, res) => { 
+export const performTOP = async (req, res) => { 
     // TOP Update: Transaction -> Order -> Payment -> Update
     try {
         // T - Transaction Creation
@@ -41,7 +41,7 @@ export const performTOP = asyncHandler(async (req, res) => {
     } catch (error) {
         throw new apiError(error.statusCode, error.message);
     }
-});
+};
 
 export const updateTOPStatus = asyncHandler(async (req, res) => {
     try {

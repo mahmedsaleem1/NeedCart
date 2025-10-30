@@ -11,7 +11,8 @@ import {
   reviewRouter,
   transactionRouter,
   TOPRouter,
-  CODRouter
+  CODRouter,
+  adminRouter
 } from './routes/index.js';
 import bodyParser from 'body-parser';
 
@@ -41,5 +42,6 @@ app.use('/api/v1/review', reviewRouter)
 app.use('/api/v1/transaction', transactionRouter)
 app.use('/api/v1/item', TOPRouter)
 app.use('/api/v1/item-cod', CODRouter)
+app.use('/api/v1/admin', adminRouter)
 
 export default app;

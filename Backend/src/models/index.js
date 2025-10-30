@@ -10,5 +10,6 @@ import {Product} from './product.model.js';
 import {Review} from './review.model.js';
 import {Transaction} from './transaction.model.js';
 import {Wishlist} from './wishlist.model.js';
+import {EscrowPayout} from './escrow.model.js';
 
-export { Admin, Buyer, Seller, Comment, Like, Offer, Post, Order, Product, Review, Transaction, Wishlist };
+export { Admin, Buyer, Seller, Comment, Like, Offer, Post, Order, Product, Review, Transaction, Wishlist, EscrowPayout };

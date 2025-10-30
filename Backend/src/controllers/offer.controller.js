@@ -14,6 +14,14 @@ export const createOffer = asyncHandler(async (req, res) => {
     
     const post = await Post.findById(postId);
 
+    if (!post) {
+        throw new apiError(404, 'Post not found');
+    }
+
+    if (post.status === 'closed') {
+        throw new apiError(400, 'Cannot create offer for closed post');
+    }
+
     if (!amount) {
         throw new apiError(400, 'Amount is required');
     }
@@ -82,6 +90,12 @@ export const acceptOffer = asyncHandler(async (req, res) => {
             { _id: offerId },
             { $set: { status: 'accepted' } }
         );
+
+        await Post.updateOne(
+            { _id: postId },
+            { $set: { status: 'closed' } }
+        );
+
         if (acceptedOffer) {
             return res
                 .status(200)

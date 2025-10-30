@@ -2,6 +2,7 @@ import apiError from '../utills/apiError.js';
 import apiResponse from '../utills/apiResponse.js';
 import { asyncHandler } from '../utills/asyncHandler.js';
 import { Buyer, Seller, Post, Product, Order, Transaction, Offer } from '../models/index.js';
+import {createEscrowPayout_INTERNAL} from './admin.controller.js'
 
 // Helper: validate and normalize desired status
 const ALLOWED_ORDER_STATUS = ['pending', 'confirmed', 'delivered', 'cancelled'];
@@ -89,7 +90,10 @@ export const createOrder_INTERNAL = async (uid, transactionId, address, quantity
 		}
 
 		const order = await Order.create(orderPayload);
-		return(new apiResponse(201, { order }, 'Order placed successfully'));
+
+		const escrow = await createEscrowPayout_INTERNAL(order);
+
+		return(new apiResponse(201, { order, escrow }, 'Order placed successfully'));
 	} catch (error) {
 		throw new apiError(error.statusCode, error.message);
 	}
