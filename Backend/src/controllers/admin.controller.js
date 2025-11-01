@@ -43,11 +43,24 @@ export const getAllOrderPaymentStatus = asyncHandler(async (req, res) => {
     }
 });
 
-
 export const releasePayment = asyncHandler(async (req, res) => {
     try {
         const {escrowId} = req.params;
         const escrowPayment = await EscrowPayout.findById(escrowId);
+
+        const order = await Order.findById(escrowPayment.orderId);
+        if (!order) {
+            throw new apiError(404, 'Order associated with this escrow not found');
+        }
+
+        const seller = await Seller.findById(order.sellerId);
+        if (!seller) {
+            throw new apiError(404, 'Seller associated with this order not found');
+        }
+        if (!seller.is_verified || !seller.bankName || !seller.accountNumber) {
+            throw new apiError(400, 'Seller must have verified account and payment details');
+        }
+
         if (!escrowPayment) {
             throw new apiError(404, 'Escrow payment not found');
         }
@@ -60,4 +73,27 @@ export const releasePayment = asyncHandler(async (req, res) => {
     }
 });
 
+export const acceptToBeSellerRequest = asyncHandler(async (req, res) => {
+    try {
+        const { sellerId } = req.params;
 
+        const seller = await Seller.findById(sellerId);
+        if (!seller) {
+            throw new apiError(404, 'Seller not found');
+        }
+
+        const {choice}  = req.body;
+        if (choice == 'reject') {
+            seller.is_verified = false;
+            await seller.save();
+        }
+        else {
+            seller.is_verified = true;
+            await seller.save();
+        }
+
+        res.status(200).json(new apiResponse(200, seller, 'Seller request dealt accordingly'));
+    } catch (error) {
+        throw new apiError(error.statusCode, error.message);
+    }
+});

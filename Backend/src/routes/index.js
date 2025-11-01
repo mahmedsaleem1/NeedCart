@@ -10,6 +10,7 @@ import transactionRouter from './transaction.route.js'
 import TOPRouter from './TOP.route.js'
 import CODRouter from './COD.route.js'
 import adminRouter from './admin.route.js'
+import sellerDashboardRouter from './seller-dashboard.route.js'
 
 export {
     authRouter,
@@ -23,5 +24,6 @@ export {
     reviewRouter,
     TOPRouter,
     CODRouter,
-    adminRouter
+    adminRouter,
+    sellerDashboardRouter
 }

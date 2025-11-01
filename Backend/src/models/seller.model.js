@@ -16,7 +16,17 @@ const sellerSchema = new Schema({
   is_verified : {
     type : Boolean,
     default : false,
-  }
+  },
+  bankName: {
+    type: String,
+    enum: ['EasyPaisa', 'JazzCash', 'Meezan Bank', 'Muslim Commercial Bank', 'Bank Alfalah', 'Faysal Bank', 'Standard Chartered', 'Allied Bank', 'Bank of Punjab', 'Askari Bank', 'Habib Bank Limited', 'National Bank of Pakistan', 'Soneri Bank', 'Silk Bank', 'Summit Bank', 'United Bank Limited', 'Zarai Taraqiati Bank'],
+    default: null,
+  },
+  accountNumber: {
+    type: Number,
+    unique: true,
+    default: null,
+  },
 }, {
   timestamps : true,
 });

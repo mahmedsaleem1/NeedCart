@@ -12,7 +12,8 @@ import {
   transactionRouter,
   TOPRouter,
   CODRouter,
-  adminRouter
+  adminRouter,
+  sellerDashboardRouter
 } from './routes/index.js';
 import bodyParser from 'body-parser';
 
@@ -43,5 +44,6 @@ app.use('/api/v1/transaction', transactionRouter)
 app.use('/api/v1/item', TOPRouter)
 app.use('/api/v1/item-cod', CODRouter)
 app.use('/api/v1/admin', adminRouter)
+app.use('/api/v1/seller-dashboard', sellerDashboardRouter)
 
 export default app;
