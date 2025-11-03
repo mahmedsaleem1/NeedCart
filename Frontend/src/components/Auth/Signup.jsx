@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import {googleLogin} from '../config/firebase/auth.config.js';
+import {googleLogin} from '../../config/firebase/auth.config.js';
 import { useDispatch } from 'react-redux';
-import { login, signup } from "../store/auth.slice";
+import { login, signup } from "../../store/auth.slice.js";
 import { useSelector } from 'react-redux';
 
 const Signup = () => {    

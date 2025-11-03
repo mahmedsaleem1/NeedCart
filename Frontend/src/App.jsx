@@ -2,8 +2,6 @@ import {
   Login,
   Signup,
   Logout,
-  // Header,
-  // Footer,
   ForgetPassword 
 } from './components/index.js';
 

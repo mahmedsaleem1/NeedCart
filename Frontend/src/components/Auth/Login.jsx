@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { loginWithEmail, googleLogin } from "../config/firebase/auth.config.js";
+import { loginWithEmail, googleLogin } from "../../config/firebase/auth.config.js";
 import {useDispatch} from "react-redux";
 import { useSelector } from "react-redux";
 import {useNavigate} from "react-router-dom";
-import { login } from "../store/auth.slice";
+import { login } from "../../store/auth.slice.js";
 import ForgetPassword from "./ForgetPassword";
 
 export default function LoginForm() {

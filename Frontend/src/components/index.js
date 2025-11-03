@@ -1,15 +1,11 @@
-import Login from './Login';
-import Signup from './Signup';
-// import Header from './Header';
-// import Footer from './Footer';
-import ForgetPassword from './ForgetPassword';
-import Logout from './Logout';
+import Login from './Auth/Login';
+import Signup from './Auth/Signup';
+import ForgetPassword from './Auth/ForgetPassword';
+import Logout from './Auth/Logout';
 
 export {
     Login,
     Signup,
-    // Header,
     Logout,
-    // Footer,
     ForgetPassword
 }

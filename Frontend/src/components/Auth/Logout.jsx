@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { logout } from '../store/auth.slice.js';
+import { logout } from '../../store/auth.slice.js';
 
 
 const Logout = () => {
