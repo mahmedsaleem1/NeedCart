@@ -54,7 +54,7 @@ const Signup = () => {
                 setTimeout(() => {
                     navigate('/login');
                 }, 2000);
-                dispatch(signup(role))
+                dispatch(signup({ role }));
                 console.log("role", user.role);
                 
             } else {
@@ -124,7 +124,7 @@ const Signup = () => {
                         color: '#666',
                         fontSize: '14px'
                     }}>
-                        Sign up to get started with AirBridge
+                        Sign up to get started with NeedCart
                     </p>
                 </div>
 

@@ -65,14 +65,34 @@ export const loginWithIdToken = asyncHandler(async (req, res) => {
   try {
     const uid = req.user.uid;        
 
-    const user = await admin.auth().getUser(uid); // get full info    
-  
-    return res.status(200).json(new apiResponse("Login successful", { user }));
-    
+    // Get Firebase user info
+    const user = await admin.auth().getUser(uid);
+
+    // Check if the user is a Buyer
+    let role = null;
+
+    const buyer = await Buyer.findOne({ firebaseUID: uid });
+    if (buyer) {
+      role = "buyer";
+    } else {
+      const seller = await Seller.findOne({ firebaseUID: uid });
+      if (seller) {
+        role = "seller";
+      }
+    }
+    if (!role) {
+      role = "admin";
+    }
+
+    return res.status(200).json(
+      new apiResponse("Login successful", { user, role })
+    );
+
   } catch (error) {
-    throw new apiError(error.code, error.message);
+    throw new apiError(error.code || 500, error.message);
   }
 });
+
 
 export const getUserByEmail = asyncHandler(async (req, res) => {
   const { email } = req.body;

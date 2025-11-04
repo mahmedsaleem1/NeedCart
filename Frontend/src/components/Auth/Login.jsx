@@ -38,17 +38,18 @@ export default function LoginForm() {
         const serializableUserData = {
             email: userData.email
         };
-        dispatch(login({ ...serializableUserData, role: 'admin' }));
+        dispatch(login(serializableUserData));
         alert("Admin login successful.");
         navigate("/admin");
         return userData;
       }
 
-      else if (userData) {  // user by default
+      else if (userData) { 
         const serializableUserData = {
             email: userData.email,
             displayName: userData.displayName,
             photoURL: userData.photoURL,
+            role: userData.data.role
         };
 
         dispatch(login(serializableUserData));        
@@ -88,7 +89,7 @@ export default function LoginForm() {
             Sign in to your account
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Welcome back to AirBridge
+            Welcome back to NeedCart
           </p>
         </div>
         

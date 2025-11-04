@@ -4,7 +4,9 @@ import {
   Logout,
   ForgetPassword 
 } from './components/index.js';
-
+import {
+  LandingPage
+} from './pages/index.js'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -12,7 +14,7 @@ function App() {
   return (
       <Router>
         <Routes>
-          {/* <Route path="/" element={<Home />} /> */}
+          <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forget-password" element={<ForgetPassword />} />

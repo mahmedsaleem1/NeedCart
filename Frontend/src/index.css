@@ -1,1 +1,125 @@
 @import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS for animations and gradients */
+@layer utilities {
+  /* Hero Heading Gradient Text */
+  .bg-clip-text {
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+}
+
+/* Blob Animation */
+@keyframes blob {
+  0%, 100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: translate(0px, 0px) scale(1);
+  }
+  14% {
+    border-radius: 50% 50% 40% 60% / 50% 50% 50% 50%;
+    transform: translate(-10px, -5px) scale(1.05);
+  }
+  28% {
+    border-radius: 70% 30% 60% 40% / 40% 70% 30% 60%;
+    transform: translate(15px, 10px) scale(0.95);
+  }
+  42% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: translate(-5px, 8px) scale(1);
+  }
+  56% {
+    border-radius: 40% 60% 70% 30% / 30% 60% 40% 70%;
+    transform: translate(12px, -3px) scale(1.03);
+  }
+  70% {
+    border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+    transform: translate(-7px, -12px) scale(0.98);
+  }
+  84% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 15s infinite; /* Adjust duration as needed */
+}
+.animation-delay-2000 {
+  animation-delay: 2s; /* To offset the animation start for the second blob */
+}
+.animation-delay-4000 {
+    animation-delay: 4s;
+}
+
+/* Spin Animations for CTA Section */
+@keyframes spin-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite; /* Adjust duration as needed */
+}
+
+@keyframes spin-reverse-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+.animate-spin-reverse-slow {
+  animation: spin-reverse-slow 25s linear infinite; /* Adjust duration as needed */
+}
+
+/* Text reveal animation */
+@keyframes text-reveal {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+.animate-text-reveal {
+  animation: text-reveal 0.8s ease-out forwards;
+  overflow: hidden; /* Hide text before animation starts */
+  display: inline-block; /* Essential for translateY on text */
+}
+
+.animation-delay-100 { animation-delay: 0.1s; }
+.animation-delay-200 { animation-delay: 0.2s; }
+/* ... add more delays as needed for staggered animation ... */
+
+
+/* Custom Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.8;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
