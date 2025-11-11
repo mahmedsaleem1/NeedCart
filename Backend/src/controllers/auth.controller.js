@@ -36,7 +36,7 @@ export const registerWithEmail = asyncHandler(async (req, res) => {
 
     return res
       .status(201)
-      .json(new apiResponse("User registered successfully", { user }));
+      .json(new apiResponse(201, user, "User registered successfully"));
   } 
   catch (error) {
     throw new apiError(error.statusCode, error);
@@ -54,7 +54,7 @@ export const resetPassword = asyncHandler(async (req, res) => {
     const link = await admin.auth().generatePasswordResetLink(email);
 
     await sendEmail(email, "Password Reset", `Click here to reset your password: ${link}`);
-    return res.status(200).json(new apiResponse(200, { link }, "Password reset email sent"));
+    return res.status(200).json(new apiResponse(200, link, "Password reset email sent"));
     
   } catch (error) {
     throw new apiError(error.code, error.message);
@@ -85,14 +85,13 @@ export const loginWithIdToken = asyncHandler(async (req, res) => {
     }
 
     return res.status(200).json(
-      new apiResponse("Login successful", { user, role })
+      new apiResponse(200, { user, role }, "Login successful")
     );
 
   } catch (error) {
     throw new apiError(error.code || 500, error.message);
   }
 });
-
 
 export const getUserByEmail = asyncHandler(async (req, res) => {
   const { email } = req.body;
@@ -102,7 +101,7 @@ export const getUserByEmail = asyncHandler(async (req, res) => {
 
   try {
     const user = await admin.auth().getUserByEmail(email);
-    return res.status(200).json(new apiResponse("User fetched successfully", { user }));
+    return res.status(200).json(new apiResponse(200, user, "User fetched successfully"));
   } catch (error) {
     throw new apiError(error.code || 500, error.message);
   }
@@ -113,8 +112,8 @@ export const googleLogin = asyncHandler(async (req, res) => {
     const uid = req.user.uid;
   
     const user = await admin.auth().getUser(uid);
-  
-    return res.status(200).json(new apiResponse("Google login successful", { user }));
+
+    return res.status(200).json(new apiResponse(200, user, "Google login successful"));
   } catch (error) {
     throw new apiError(error.code , error.message);
   }

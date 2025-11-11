@@ -11,6 +11,7 @@ import OfferCard from './Post/OfferCard';
 import Post from './Post/Post';
 import RespondToOffer from './Post/RespondToOffer';
 import SendOffer from './Post/SendOffer';
+import PaymentRedirect from './Post/PaymentRedirect';
 
 export {
     Login,
@@ -25,5 +26,6 @@ export {
     OfferCard,
     Post,
     RespondToOffer,
-    SendOffer
+    SendOffer,
+    PaymentRedirect
 }

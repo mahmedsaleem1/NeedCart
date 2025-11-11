@@ -46,6 +46,7 @@ export default function LoginForm() {
 
       else if (userData) { 
         const serializableUserData = {
+            uid: userData.uid, // Store Firebase UID
             email: userData.email,
             displayName: userData.displayName,
             photoURL: userData.photoURL,
@@ -70,6 +71,7 @@ export default function LoginForm() {
     try {
       const userData = await googleLogin();
       const serializableUserData = {
+        uid: userData.uid, // Store Firebase UID
         email: userData.email,
         displayName: userData.displayName,
         photoURL: userData.photoURL,

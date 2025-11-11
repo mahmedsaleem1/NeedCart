@@ -71,9 +71,9 @@ export const createOrder_INTERNAL = async (uid, transactionId, address, quantity
 			const offer = await Offer.findById(transaction.offerId);
 			if (!offer) throw new apiError(404, 'Offer associated with transaction not found');
 
-			// Optional: ensure offer was accepted (business rule)
-			if (offer.status !== 'accepted') {
-				throw new apiError(400, 'Offer must be accepted before placing an order');
+			// Verify offer is not rejected (allow pending or accepted)
+			if (offer.status === 'rejected') {
+				throw new apiError(400, 'Cannot place order for a rejected offer');
 			}
 
 			// Map to post order
@@ -156,9 +156,9 @@ export const createOrderCOD_INTERNAL = async (uid, transactionId, address, quant
 			const offer = await Offer.findById(transaction.offerId);
 			if (!offer) throw new apiError(404, 'Offer associated with transaction not found');
 
-			// Optional: ensure offer was accepted (business rule)
-			if (offer.status !== 'accepted') {
-				throw new apiError(400, 'Offer must be accepted before placing an order');
+			// Verify offer is not rejected (allow pending or accepted)
+			if (offer.status === 'rejected') {
+				throw new apiError(400, 'Cannot place order for a rejected offer');
 			}
 
 			// Map to post order
@@ -175,7 +175,7 @@ export const createOrderCOD_INTERNAL = async (uid, transactionId, address, quant
 		}
 
 		const order = await Order.create(orderPayload);
-		return(new apiResponse(201, { order }, 'Order placed successfully'));
+		return(new apiResponse(201, order, 'Order placed successfully'));
 	} catch (error) {
 		throw new apiError(error.statusCode, error.message);
 	}
@@ -190,7 +190,7 @@ export const updateOrderStatus_INTERNAL = async (orderId, status) => {
 		}
 		order.status = status;
 		await order.save();
-		return (new apiResponse(true, 'Order updated successfully.', order));
+		return (new apiResponse(201, order, 'Order updated successfully.'));
 	} catch (error) {
 		throw new apiError(error.statusCode, error.message);  
 	}
@@ -269,9 +269,9 @@ export const createOrder = asyncHandler(async (req, res) => {
 			const offer = await Offer.findById(transaction.offerId);
 			if (!offer) throw new apiError(404, 'Offer associated with transaction not found');
 
-			// Optional: ensure offer was accepted (business rule)
-			if (offer.status !== 'accepted') {
-				throw new apiError(400, 'Offer must be accepted before placing an order');
+			// Verify offer is not rejected (allow pending or accepted)
+			if (offer.status === 'rejected') {
+				throw new apiError(400, 'Cannot place order for a rejected offer');
 			}
 
 			// Map to post order
@@ -288,7 +288,7 @@ export const createOrder = asyncHandler(async (req, res) => {
 		}
 
 		const order = await Order.create(orderPayload);
-		return res.status(201).json(new apiResponse(201, { order }, 'Order placed successfully'));
+		return res.status(201).json(new apiResponse(201, order, 'Order placed successfully'));
 	} catch (error) {
 		throw new apiError(error.statusCode, error.message);
 	}
@@ -322,7 +322,7 @@ export const getOrderDetails = asyncHandler(async (req, res) => {
 			throw new apiError(403, 'You are not authorized to view this order');
 		}
 
-		return res.status(200).json(new apiResponse(200, { order }, 'Order fetched successfully'));
+		return res.status(200).json(new apiResponse(200, order, 'Order fetched successfully'));
 	} catch (error) {
 		throw new apiError(error.statusCode || 500, error.message || 'Failed to fetch order details');
 	}
@@ -420,7 +420,7 @@ export const getSellerOrders = asyncHandler(async (req, res) => {
 			.populate('postId')
 			.populate('transactionId');
 
-		return res.status(200).json(new apiResponse(200, { orders }, 'Seller orders retrieved successfully'));
+		return res.status(200).json(new apiResponse(200, orders, 'Seller orders retrieved successfully'));
 	} catch (error) {
 		throw new apiError(error.statusCode || 500, error.message || 'Failed to get seller orders');
 	}

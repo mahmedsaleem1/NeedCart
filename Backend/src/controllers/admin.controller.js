@@ -27,7 +27,7 @@ export const createEscrowPayout_INTERNAL = async (order) => {
         if (!escrowPayment) {
             throw new Error('Failed to create escrow payout.');
         }
-        return (new apiResponse(201, { escrowPayment }, 'Escrow payout created successfully'));
+        return (new apiResponse(201, escrowPayment, 'Escrow payout created successfully'));
     } catch (error) {
         throw new apiError(error.statusCode, `Escrow Payout Creation Error: ${error.message}`);
     }
@@ -37,7 +37,7 @@ export const createEscrowPayout_INTERNAL = async (order) => {
 export const getAllOrderPaymentStatus = asyncHandler(async (req, res) => {
     try {
         const orders = await EscrowPayout.find().populate('orderId');
-        res.status(200).json(new apiResponse('Fetched all order payment statuses successfully', orders));
+        res.status(200).json(new apiResponse(200, orders, 'Fetched all order payment statuses successfully'));
     } catch (error) {
         throw new apiError(error.statusCode, error.message);
     }

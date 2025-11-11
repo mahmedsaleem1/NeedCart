@@ -40,9 +40,24 @@ export const createPost = asyncHandler(async (req, res) => {
 
     return res
       .status(200)
-      .json(new apiResponse('Post created successfully', { newPost }));
+      .json(new apiResponse(200, newPost, 'Post created successfully'));
   } catch (error) {
     throw new apiError(error.statusCode, error.message );
+  }
+});
+
+export const getPostById = asyncHandler(async (req, res) => {
+  const postId = req.params.postId;
+  try {
+    const post = await Post.findById(postId)
+      .populate('buyerId', 'email firebaseUID') // include firebaseUID for ownership checks
+      .select('-__v'); // exclude version key 
+    if (!post) {
+      throw new apiError(404, 'Post not found');
+    }
+    return res.status(200).json(new apiResponse(200, post, 'Post fetched successfully'));
+  } catch (error) {
+    throw new apiError(error.statusCode, error.message);
   }
 });
 
@@ -52,7 +67,7 @@ export const getAllPosts = asyncHandler(async (req, res) => {
   try {
     // Fetch posts with pagination and populate buyer info
     const posts = await Post.find()
-      .populate('buyerId', 'email') // only show necessary buyer fields
+      .populate('buyerId', 'email firebaseUID') // include firebaseUID for ownership checks
       .select('-__v') // exclude version key
       .sort({ createdAt: -1 }) // newest first
       .skip((page - 1) * limit)
@@ -62,12 +77,12 @@ export const getAllPosts = asyncHandler(async (req, res) => {
     const totalPosts = await Post.countDocuments();
 
     return res.status(200).json(
-      new apiResponse('Posts fetched successfully', {
+      new apiResponse(200, {
         total: totalPosts,
         page: parseInt(page),
         limit: parseInt(limit),
         posts,
-      })
+      }, 'Posts fetched successfully')
     );
   } catch (error) {
     throw new apiError(error.statusCode, error.message);

@@ -39,7 +39,7 @@ export const createOffer = asyncHandler(async (req, res) => {
         if (offer) {
             return res
                 .status(201)
-                .json(new apiResponse(201, 'Offer created successfully', offer));
+                .json(new apiResponse(201, offer, 'Offer created successfully'));
 
         }
     } catch (error) {
@@ -60,7 +60,7 @@ export const getAllOffers = asyncHandler(async (req, res) => {
         
         return res
             .status(200)
-            .json(new apiResponse(200, 'Offers fetched successfully', offers));
+            .json(new apiResponse(200, offers, 'Offers fetched successfully'));
     } catch (error) {
         throw new apiError(error.statusCode, error.message);
     }
@@ -99,7 +99,7 @@ export const acceptOffer = asyncHandler(async (req, res) => {
         if (acceptedOffer) {
             return res
                 .status(200)
-                .json(new apiResponse(200, 'Offer accepted successfully', acceptedOffer));
+                .json(new apiResponse(200, acceptedOffer, 'Offer accepted successfully'));
         }
     } catch (error) {
         throw new apiError(error.statusCode, error.message);
@@ -134,7 +134,7 @@ export const rejectOffer = asyncHandler(async (req, res) => {
         if (rejectedOffer) {
             return res
                 .status(200)
-                .json(new apiResponse(200, 'Offer rejected successfully', rejectedOffer));
+                .json(new apiResponse(200, rejectedOffer, 'Offer rejected successfully'));
         }
     } catch (error) {
         throw new apiError(error.statusCode, error.message);

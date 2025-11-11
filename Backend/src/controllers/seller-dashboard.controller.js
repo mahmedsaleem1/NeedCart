@@ -83,10 +83,9 @@ export const getTotalHeldAmount = asyncHandler(async (req, res) => {
         res.status(200).json(new apiResponse(200, totalHeldAmount, 'Total held amount retrieved successfully'));
         
     } catch (error) {
-        throw new apiError(error.statusCode || 500, error.message);
+        throw new apiError(error.statusCode, error.message);
     }
 });
-
 
 export const getTotalReleasedAmount = asyncHandler(async (req, res) => {
     try {

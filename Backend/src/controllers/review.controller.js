@@ -59,7 +59,7 @@ export const createReview = asyncHandler(async (req, res) => {
             comment
         })
 
-        return res.status(201).json(new apiResponse(201, {review}, "Review added Successfully"))
+        return res.status(201).json(new apiResponse(201, review, "Review added Successfully"))
 
 
     } catch (error) {
@@ -91,7 +91,7 @@ export const deleteReview = asyncHandler(async (req, res) => {
 
         const deletedReview = await Review.findByIdAndDelete(review._id)
 
-        return res.status(200).json(new apiResponse(200, {deletedReview}, "Review deleted Successfully"))
+        return res.status(200).json(new apiResponse(200, deletedReview, "Review deleted Successfully"))
 
     } catch (error) {
         throw new apiError(error.statusCode, error.message);
@@ -112,7 +112,7 @@ export const getReviewsForProduct = asyncHandler(async (req, res) => {
         if (!reviews || reviews.length === 0)
             throw new apiError(404, "This product have no reviews")
 
-        return res.status(200).json(new apiResponse(200, {reviews}, "Reviews fetched Successfully"))
+        return res.status(200).json(new apiResponse(200, reviews, "Reviews fetched Successfully"))
 
 
     } catch (error) {

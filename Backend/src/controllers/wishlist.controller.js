@@ -26,7 +26,7 @@ export const addToWishlist = asyncHandler(async (req, res) => {
             productId
         });
 
-        return res.status(201).json(new apiResponse('Product added to wishlist', wishlistItem));
+        return res.status(201).json(new apiResponse(200, wishlistItem, 'Product added to wishlist'));
 
     } catch (error) {
         throw new apiError(error.statusCode, error.message);
@@ -51,7 +51,7 @@ export const removeFromWishlist = asyncHandler(async (req, res) => {
         if (!wishlistItem) {
             throw new apiError(404, 'Wishlist item not found');
         }
-        return res.status(200).json(new apiResponse('Product removed from wishlist', wishlistItem));
+        return res.status(200).json(new apiResponse(200, wishlistItem, 'Product removed from wishlist'));
         
     } catch (error) {
         throw new apiError(error.statusCode, error.message);
@@ -72,7 +72,7 @@ export const wishlistOfLoggedInBuyer = asyncHandler(async (req, res) => {
         }
 
         return res.status(200)
-                    .json(new apiResponse(200, {wishlist}, "Wishlist fetched successfully"));
+                    .json(new apiResponse(200, wishlist, "Wishlist fetched successfully"));
     } catch (error) {
         throw new apiError(error.statusCode, error.message);
     }

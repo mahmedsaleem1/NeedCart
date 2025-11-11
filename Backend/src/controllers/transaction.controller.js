@@ -38,7 +38,7 @@ export const createTransaction_INTERNAL = async (uid, itemId, totalPrice) => {
         });
 
         if (transaction) {
-            return(new apiResponse(true, 'Transaction created successfully.', transaction));
+            return(new apiResponse(201, transaction, 'Transaction created successfully.'));
         }
     } catch (error) {
         throw new apiError(error.statusCode, error.message);
@@ -79,7 +79,7 @@ export const createTransactionCOD_INTERNAL = async (uid, itemId, totalPrice) => 
         });
 
         if (transaction) {
-            return(new apiResponse(true, 'Transaction created successfully.', transaction));
+            return(new apiResponse(201, transaction, 'Transaction created successfully.'));
         }
     } catch (error) {
         throw new apiError(error.statusCode, error.message);
@@ -96,7 +96,7 @@ export const updateTransactionStatus_INTERNAL = async (orderId, paymentStatus) =
         
         transaction.paymentStatus = paymentStatus;
         await transaction.save();
-        return (new apiResponse(true, 'Transaction updated successfully.', transaction));
+        return (new apiResponse(200, transaction, 'Transaction updated successfully.'));
     } catch (error) {
         throw new apiError(error.statusCode, error.message);  
     }
@@ -144,7 +144,7 @@ export const createTransaction = asyncHandler(async (req, res) => {
         });
 
         if (transaction) {
-            res.status(201).json(new apiResponse(true, 'Transaction created successfully.', transaction));
+            res.status(201).json(new apiResponse(201, transaction, 'Transaction created successfully.'));
         }
     } catch (error) {
         throw new apiError(error.statusCode, error.message);
@@ -161,7 +161,7 @@ export const updateTransactionStatus = asyncHandler(async (req, res) => {
         }
         transaction.paymentStatus = paymentStatus;
         await transaction.save();
-        res.status(200).json(new apiResponse(true, 'Transaction updated successfully.', transaction));
+        res.status(200).json(new apiResponse(200, transaction, 'Transaction updated successfully.'));
     } catch (error) {
         throw new apiError(error.statusCode, error.message);  
     }
@@ -174,7 +174,7 @@ export const getTransactionById = asyncHandler(async (req, res) => {
         if (!transaction) {
             throw new apiError(404, 'Transaction not found.');
         }
-        res.status(200).json(new apiResponse(true, 'Transaction retrieved successfully.', transaction));
+        res.status(200).json(new apiResponse(200, transaction, 'Transaction retrieved successfully.'));
     } catch (error) {
         throw new apiError(error.statusCode, error.message);  
     }
@@ -188,7 +188,7 @@ export const getTransactionsByBuyer = asyncHandler(async (req, res) => {
             throw new apiError(404, 'You must be logged in as a buyer to view transactions.');
         }
         const transactions = await Transaction.find({ buyerId: buyer._id });
-        res.status(200).json(new apiResponse(true, 'Transactions retrieved successfully.', transactions));
+        res.status(200).json(new apiResponse(200, transactions, 'Transactions retrieved successfully.'));
     } catch (error) {
         throw new apiError(error.statusCode, error.message);  
     }
@@ -202,7 +202,7 @@ export const getTransactionsBySeller = asyncHandler(async (req, res) => {
             throw new apiError(404, 'You must be logged in as a seller to view transactions.');
         }
         const transactions = await Transaction.find({ sellerId: seller._id });
-        res.status(200).json(new apiResponse(true, 'Transactions retrieved successfully.', transactions));
+        res.status(200).json(new apiResponse(200, transactions, 'Transactions retrieved successfully.'));
     } catch (error) {
         throw new apiError(error.statusCode, error.message);  
     }

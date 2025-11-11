@@ -37,7 +37,7 @@ export const addCommentOnAPost = asyncHandler(async (req, res) => {
 
     return res
       .status(201)
-      .json(new apiResponse(201, 'Comment added successfully', comment));
+      .json(new apiResponse(201, comment, "Comment added successfully"));
   } catch (error) {
     throw new apiError(error.statusCode, error.message);
   }
@@ -49,7 +49,7 @@ export const deleteComment = asyncHandler(async (req, res) => {
     const uid = req.user.uid;
 
     // Find the comment
-    const comment = await Comment.findById(commentId);
+    const comment = await Comment.findById(commentId).populate('postId');
     if (!comment) {
       throw new apiError(404, 'Comment not found');
     }
@@ -62,20 +62,25 @@ export const deleteComment = asyncHandler(async (req, res) => {
       throw new apiError(400, 'You must be logged in as Buyer or Seller to delete a comment');
     }
 
-    // Check ownership before deletion
-    const isOwner =
+    // Check if user is comment owner
+    const isCommentOwner =
       (buyer && comment.buyerId?.toString() === buyer._id.toString()) ||
       (seller && comment.sellerId?.toString() === seller._id.toString());
 
-    if (!isOwner) {
+    // Check if user is post owner
+    const isPostOwner = 
+      buyer && comment.postId?.buyerId?.toString() === buyer._id.toString();
+
+    // Allow deletion if user is comment owner OR post owner
+    if (!isCommentOwner && !isPostOwner) {
       throw new apiError(403, 'You are not authorized to delete this comment');
     }
 
-    await comment.deleteOne();
+    const deletedComment = await comment.deleteOne();
 
     return res
       .status(200)
-      .json(new apiResponse(200, 'Comment deleted successfully'));
+      .json(new apiResponse(200, deletedComment, 'Comment deleted successfully'));
   } catch (error) {
     throw new apiError(error.statusCode, error.message);
   }
@@ -99,7 +104,7 @@ export const getAllCommentsForPost = asyncHandler(async (req, res) => {
 
     return res
       .status(200)
-      .json(new apiResponse(200, 'Comments retrieved successfully', comments));
+      .json(new apiResponse(200, comments, 'Comments retrieved successfully'));
   } catch (error) {
     throw new apiError(error.statusCode, error.message);
   }

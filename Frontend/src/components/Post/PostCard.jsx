@@ -1,61 +1,89 @@
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Clock, DollarSign, Eye } from "lucide-react";
 
 export default function PostCard({ post }) {
   const navigate = useNavigate();
 
+  if (!post) return null;
+
   return (
-    <div 
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -5 }}
       onClick={() => navigate(`/post/${post._id}`)}
-      className="bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden cursor-pointer"
+      className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden cursor-pointer border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition-all duration-300"
     >
-      <div className="relative h-48 overflow-hidden">
+      {/* Image */}
+      <div className="relative h-48 w-full overflow-hidden">
         <img
-          src={post.image}
-          alt={post.title}
-          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+          src={post.image || "/placeholder.png"}
+          alt={post.title || "Post Image"}
+          className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-110"
         />
-        <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold ${
-          post.status === 'open' 
-            ? 'bg-green-500 text-white' 
-            : 'bg-gray-500 text-white'
-        }`}>
-          {post.status === 'open' ? 'Open' : 'Closed'}
-        </div>
+        <span
+          className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm ${
+            post.status === "open" 
+              ? "bg-green-500/90 text-white" 
+              : "bg-gray-500/90 text-white"
+          }`}
+        >
+          {post.status === "open" ? "Open" : "Closed"}
+        </span>
       </div>
 
-      <div className="p-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-1">
-          {post.title}
+      {/* Content */}
+      <div className="p-5">
+        <h3
+          className="text-xl font-extrabold text-gray-900 dark:text-white mb-2 line-clamp-1"
+          style={{ fontFamily: "'Lemon Milk', sans-serif" }}
+        >
+          {post.title || "Untitled Post"}
         </h3>
         
-        <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-          {post.description}
+        <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2 leading-relaxed">
+          {post.description || "No description available."}
         </p>
 
-        <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+        <div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 pt-4">
+          {/* Budget */}
           <div>
-            <p className="text-xs text-gray-500 mb-1">Budget</p>
-            <p className="text-lg font-bold text-blue-600">
-              PKR {post.budget.toLocaleString()}
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-1 flex items-center gap-1">
+              <DollarSign size={12} />
+              Budget
+            </p>
+            <p className="text-lg font-bold text-[#3772ff]">
+              PKR {post.budget?.toLocaleString() || "0"}
             </p>
           </div>
 
-          <div className="text-right">
-            <p className="text-xs text-gray-500 mb-1">Posted by</p>
-            <p className="text-sm font-medium text-gray-700">
-              {post.buyerId?.email || 'Anonymous'}
-            </p>
-          </div>
+          {/* View Button */}
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-4 py-2 text-sm font-semibold bg-gradient-to-r from-[#3772ff] to-blue-400 text-white rounded-full hover:shadow-lg transition-all flex items-center gap-2"
+          >
+            <Eye size={16} />
+            View
+          </motion.button>
         </div>
 
-        <div className="mt-4 text-xs text-gray-400">
-          {new Date(post.createdAt).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-          })}
+        {/* Date */}
+        <div className="mt-3 flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500">
+          <Clock size={12} />
+          <span>
+            {post.createdAt
+              ? new Date(post.createdAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })
+              : "Date not available"}
+          </span>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

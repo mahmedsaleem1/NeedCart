@@ -2,10 +2,13 @@ import {
   Login,
   Signup,
   Logout,
-  ForgetPassword 
+  ForgetPassword,
+  Post
 } from './components/index.js';
 import {
-  LandingPage
+  LandingPage,
+  Posts,
+  CreatePostPage
 } from './pages/index.js'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -19,9 +22,12 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/forget-password" element={<ForgetPassword />} />
           <Route path="/logout" element={<Logout />} />
-          {/* <Route path="/contact" element={<Contact />} /> */}
-          {/* <Route path="/upload" element={<UploadPage />} /> */}
-          {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+          
+          {/* Post Routes */}
+          <Route path="/posts" element={<Posts />} />
+          <Route path="/post/:postId" element={<Post />} />
+          <Route path="/create-post" element={<CreatePostPage />} />
+
           {/* Add more routes as needed */}
         </Routes>
       </Router>

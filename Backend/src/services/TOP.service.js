@@ -21,7 +21,7 @@ export const performTOP = async (req, res) => {
         }        
 
         // O - Order Creation
-        const transactionId = transaction.message._id;
+        const transactionId = transaction.data._id;
         
         const address = req.body.address;
         const quantity = req.body.quantity;
@@ -34,9 +34,8 @@ export const performTOP = async (req, res) => {
         // P - Payment Processing
         // PAYMENT
         const payment = await createCheckoutSession_INTERNAL(uid, order.data.order._id);
-        console.log(payment);
 
-        return res.status(200).json(new apiResponse(200, { payment }, 'Checkout Session Created Successfully.'));
+        return res.status(200).json(new apiResponse(200, payment, 'Checkout Session Created Successfully.'));
 
     } catch (error) {
         throw new apiError(error.statusCode, error.message);

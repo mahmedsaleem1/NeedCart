@@ -24,7 +24,6 @@ const sellerSchema = new Schema({
   },
   accountNumber: {
     type: Number,
-    unique: true,
     default: null,
   },
 }, {

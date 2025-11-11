@@ -54,7 +54,7 @@ export const addProduct = asyncHandler(async (req, res) => {
             availableStock
         });
 
-        return res.status(201).json(new apiResponse('Product added successfully', product));
+        return res.status(201).json(new apiResponse(201, product, 'Product added successfully'));
 
     } catch (error) {
         throw new apiError(error.statusCode, error.message);
@@ -80,7 +80,7 @@ export const removeProduct = asyncHandler(async (req, res) => {
 
         const deletedProduct = await Product.findByIdAndDelete(productId);
 
-        return res.status(200).json(new apiResponse('Product deleted successfully', deletedProduct));
+        return res.status(200).json(new apiResponse(200, deletedProduct, 'Product deleted successfully'));
         
     } catch (error) {
         throw new apiError(error.statusCode, error.message);
@@ -94,7 +94,7 @@ export const getAllProducts = asyncHandler(async (req, res) => {
         if (!products) {
             throw new apiError(404, 'No products found');
         }
-        return res.status(200).json(new apiResponse('Products fetched successfully', products));
+        return res.status(200).json(new apiResponse(200, products, 'Products fetched successfully'));
     } catch (error) {
         throw new apiError(error.statusCode, error.message);
     }
@@ -109,7 +109,7 @@ export const getProductById = asyncHandler(async (req, res) => {
             throw new apiError(404, 'Product not found');
         }
 
-        return res.status(200).json(new apiResponse('Product fetched successfully', product));
+        return res.status(200).json(new apiResponse(200, product, 'Product fetched successfully'));
     } catch (error) {
         throw new apiError(error.statusCode, error.message);
     }

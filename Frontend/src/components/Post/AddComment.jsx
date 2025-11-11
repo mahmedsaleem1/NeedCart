@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
+import { motion } from 'framer-motion';
+import { Send } from 'lucide-react';
 import { auth } from '../../config/firebase/firebase';
 
 export default function AddComment({ postId, onCommentAdded }) {
@@ -32,16 +34,25 @@ export default function AddComment({ postId, onCommentAdded }) {
 
       const result = await response.json();
 
-      if (result.success) {
-        reset(); // Clear the form
+      if (response.ok && result.data) {
+        reset();
         if (onCommentAdded) {
-          onCommentAdded(result.data); // Notify parent component
+          onCommentAdded(result.data);
         }
       } else {
-        setError(result.message || 'Failed to add comment');
+        // Handle errors gracefully
+        const errorMessage = result.message || result.data || 'Failed to add comment';
+        
+        if (response.status === 400) {
+          setError('⚠️ Comment cannot be empty');
+        } else if (response.status === 404) {
+          setError('❌ Post not found');
+        } else {
+          setError(`❌ ${errorMessage}`);
+        }
       }
     } catch (err) {
-      setError(err.message || 'An error occurred while adding comment');
+      setError('❌ An error occurred while adding comment');
     } finally {
       setIsSubmitting(false);
     }
@@ -49,14 +60,18 @@ export default function AddComment({ postId, onCommentAdded }) {
 
   if (!isAuthenticated) {
     return (
-      <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 text-center">
-        <p className="text-gray-600">Please login to comment</p>
+      <div className="bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl p-4 text-center">
+        <p className="text-gray-600 dark:text-gray-300">Please login to comment</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-4">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl p-4 shadow-sm"
+    >
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
         <div>
           <textarea
@@ -65,7 +80,7 @@ export default function AddComment({ postId, onCommentAdded }) {
               minLength: { value: 1, message: 'Comment is too short' }
             })}
             rows={3}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-xl focus:ring-2 focus:ring-[#3772ff] focus:border-[#3772ff] resize-none transition-all"
             placeholder="Write your comment..."
           />
           {errors.content && (
@@ -74,21 +89,24 @@ export default function AddComment({ postId, onCommentAdded }) {
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 rounded text-sm">
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-3 py-2 rounded-xl text-sm">
             {error}
           </div>
         )}
 
         <div className="flex justify-end">
-          <button
+          <motion.button
             type="submit"
             disabled={isSubmitting}
-            className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed font-medium transition duration-150"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-gradient-to-r from-[#3772ff] to-blue-400 text-white px-6 py-2 rounded-full hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed font-semibold transition-all flex items-center gap-2"
           >
+            <Send size={18} />
             {isSubmitting ? 'Posting...' : 'Post Comment'}
-          </button>
+          </motion.button>
         </div>
       </form>
-    </div>
+    </motion.div>
   );
 }
