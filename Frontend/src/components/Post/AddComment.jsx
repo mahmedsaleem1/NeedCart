@@ -100,7 +100,7 @@ export default function AddComment({ postId, onCommentAdded }) {
             disabled={isSubmitting}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-[#3772ff] to-blue-400 text-white px-6 py-2 rounded-full hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed font-semibold transition-all flex items-center gap-2"
+            className="bg-gradient-to-r from-[#3772ff] to-[#5c8cff] text-white px-6 py-2 rounded-full hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed font-semibold transition-all flex items-center gap-2"
           >
             <Send size={18} />
             {isSubmitting ? 'Posting...' : 'Post Comment'}
@@ -110,3 +110,5 @@ export default function AddComment({ postId, onCommentAdded }) {
     </motion.div>
   );
 }
+
+

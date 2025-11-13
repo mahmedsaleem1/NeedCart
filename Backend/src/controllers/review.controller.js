@@ -23,16 +23,16 @@ export const createReview = asyncHandler(async (req, res) => {
             throw new apiError(401, "You must be Logged in as a Buyer to continue")
         }
         
+        
         const product = await Product.findById(productId)
-
-        if (!product) {
-            throw new apiError(404, "Product not found")
-        }
+        console.log("Product", product);
 
         const transaction = await Transaction.findOne({
             buyerId: buyer._id,
             productId: product._id
         })
+        console.log("transaction", transaction);
+        
 
         if (!transaction) {
             throw new apiError(401, "You have not purchased this product")
@@ -43,9 +43,11 @@ export const createReview = asyncHandler(async (req, res) => {
             productId: product._id,
             transactionId: transaction._id
         })
+        console.log("order", order);
+        
 
         if (!order) {
-            throw new apiError(404, "Order not found for this product")
+            throw new apiError(402, "Order not found for this product")
         }
 
         if(order.status !== 'delivered') {

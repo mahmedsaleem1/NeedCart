@@ -1,10 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Users, ShoppingBag, Sparkles, Star } from "lucide-react";
+import { Users, ShoppingBag, Sparkles, Star, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import Footer from "../components/misc/Footer";
 import Navbar from "../components/misc/Navbar.jsx";
 
 const LandingPage = () => {
+  const navigate = useNavigate();
+  
   return (
     <>
     <Navbar />
@@ -12,10 +15,10 @@ const LandingPage = () => {
       {/* HERO SECTION */}
       <section
         id="hero"
-        className="h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#3772ff] to-blue-400 text-white text-center relative overflow-hidden"
+        className="h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#2759dd] via-[#3772ff] to-[#5c8cff] text-white text-center relative overflow-hidden"
       >
         <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-white opacity-10 blur-[120px] rounded-full"></div>
-        <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-blue-200 opacity-20 blur-[100px] rounded-full"></div>
+        <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-[#5c8cff] opacity-20 blur-[100px] rounded-full"></div>
 
         <motion.h1
           initial={{ opacity: 0, y: -40 }}
@@ -136,7 +139,7 @@ const LandingPage = () => {
       {/* STATS SECTION */}
       <section
         id="stats"
-        className="h-screen flex flex-col justify-center items-center bg-gradient-to-br from-[#3772ff] to-blue-600 text-white text-center"
+        className="h-screen flex flex-col justify-center items-center bg-gradient-to-br from-[#3772ff] to-[#2759dd] text-white text-center"
       >
         <motion.h2
           initial={{ opacity: 0, y: -30 }}
@@ -233,6 +236,80 @@ const LandingPage = () => {
           ))}
         </div>
       </section>
+
+      {/* GET STARTED SECTION */}
+      <section
+        id="get-started"
+        className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 text-center px-6 py-20"
+      >
+        <motion.h2
+          initial={{ opacity: 0, y: -30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-5xl md:text-6xl font-bold mb-8 text-[#3772ff]"
+          style={{ fontFamily: "'Lemon Milk', sans-serif" }}
+        >
+          Start Your Journey
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+          className="max-w-3xl text-lg md:text-xl leading-relaxed text-gray-700 dark:text-gray-300 mb-12"
+        >
+          Whether you're looking to buy unique products or showcase your own creations,
+          NeedCart is your gateway to endless possibilities.
+        </motion.p>
+
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl w-full">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            onClick={() => navigate("/posts")}
+            className="bg-gradient-to-br from-[#3772ff] to-[#5c8cff] rounded-3xl p-10 text-white cursor-pointer hover:scale-105 transition-transform shadow-2xl"
+          >
+            <Users size={60} className="mb-4 mx-auto" />
+            <h3
+              className="text-3xl font-bold mb-4"
+              style={{ fontFamily: "'Lemon Milk', sans-serif" }}
+            >
+              Browse Posts
+            </h3>
+            <p className="text-lg mb-6 opacity-90">
+              Discover needs from buyers and offer your services
+            </p>
+            <div className="flex items-center justify-center gap-2 text-lg font-semibold">
+              Explore Posts <ArrowRight size={20} />
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            onClick={() => navigate("/products")}
+            className="bg-gradient-to-br from-purple-500 to-pink-500 rounded-3xl p-10 text-white cursor-pointer hover:scale-105 transition-transform shadow-2xl"
+          >
+            <ShoppingBag size={60} className="mb-4 mx-auto" />
+            <h3
+              className="text-3xl font-bold mb-4"
+              style={{ fontFamily: "'Lemon Milk', sans-serif" }}
+            >
+              Shop Products
+            </h3>
+            <p className="text-lg mb-6 opacity-90">
+              Find amazing products from verified sellers
+            </p>
+            <div className="flex items-center justify-center gap-2 text-lg font-semibold">
+              Explore Products <ArrowRight size={20} />
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </div>
     <Footer />
     </>
@@ -240,3 +317,6 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+
+
+

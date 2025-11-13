@@ -3,7 +3,7 @@ import apiResponse from '../utills/apiResponse.js';
 import { asyncHandler } from '../utills/asyncHandler.js';
 import { Buyer, Seller, Offer, Transaction, Product, Order } from '../models/index.js';
 
-export const createTransaction_INTERNAL = async (uid, itemId, totalPrice) => {
+export const createTransaction_INTERNAL = async (uid, itemId, totalPrice, quantity = 1) => {
     try {
     
         const buyer = await Buyer.findOne({ firebaseUID: uid });
@@ -24,8 +24,10 @@ export const createTransaction_INTERNAL = async (uid, itemId, totalPrice) => {
             throw (400, 'Total price is required and must be non-negative.');
         }
 
-        if (totalPrice !== (offer ? offer.amount : product ? product.price : 0)) {
-            throw new apiError(400, 'Total price does not match the product price or offer amount.');
+        // Validate total price based on quantity
+        const expectedPrice = (offer ? offer.amount : product ? product.price * quantity : 0);
+        if (totalPrice !== expectedPrice) {
+            throw new apiError(400, `Total price does not match. Expected: ${expectedPrice}, Received: ${totalPrice}`);
         }
     
         const transaction = await Transaction.create({ // 'Pending' Transaction
@@ -44,7 +46,7 @@ export const createTransaction_INTERNAL = async (uid, itemId, totalPrice) => {
         throw new apiError(error.statusCode, error.message);
 }};
 
-export const createTransactionCOD_INTERNAL = async (uid, itemId, totalPrice) => {
+export const createTransactionCOD_INTERNAL = async (uid, itemId, totalPrice, quantity = 1) => {
     try {
     
         const buyer = await Buyer.findOne({ firebaseUID: uid });
@@ -65,8 +67,10 @@ export const createTransactionCOD_INTERNAL = async (uid, itemId, totalPrice) => 
             throw (400, 'Total price is required and must be non-negative.');
         }
 
-        if (totalPrice !== (offer ? offer.amount : product ? product.price : 0)) {
-            throw new apiError(400, 'Total price does not match the product price or offer amount.');
+        // Validate total price based on quantity
+        const expectedPrice = (offer ? offer.amount : product ? product.price * quantity : 0);
+        if (totalPrice !== expectedPrice) {
+            throw new apiError(400, `Total price does not match. Expected: ${expectedPrice}, Received: ${totalPrice}`);
         }
     
         const transaction = await Transaction.create({ // 'Pending' Transaction

@@ -46,4 +46,26 @@ app.use('/api/v1/item-cod', CODRouter)
 app.use('/api/v1/admin', adminRouter)
 app.use('/api/v1/seller-dashboard', sellerDashboardRouter)
 
+// Error handling middleware - must be after all routes
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || 'Internal Server Error';
+  
+  res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+    stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
+  });
+});
+
+// 404 handler for undefined routes
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    statusCode: 404,
+    message: `Route ${req.originalUrl} not found`
+  });
+});
+
 export default app;

@@ -13,12 +13,12 @@ export default function PaymentRedirect() {
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-          className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-[#3772ff] to-blue-400 rounded-full flex items-center justify-center"
+          className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-[#3772ff] to-[#5c8cff] rounded-full flex items-center justify-center"
         >
           <CreditCard size={40} className="text-white" />
         </motion.div>
 
-        <h2 className="text-2xl font-bold mb-3 bg-gradient-to-r from-[#3772ff] to-blue-400 bg-clip-text text-transparent" style={{ fontFamily: 'Lemon Milk, sans-serif' }}>
+        <h2 className="text-2xl font-bold mb-3 bg-gradient-to-r from-[#3772ff] to-[#5c8cff] bg-clip-text text-transparent" style={{ fontFamily: 'Lemon Milk, sans-serif' }}>
           Redirecting to Payment
         </h2>
 
@@ -34,3 +34,6 @@ export default function PaymentRedirect() {
     </div>
   );
 }
+
+
+

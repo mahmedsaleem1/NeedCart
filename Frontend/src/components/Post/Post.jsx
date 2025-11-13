@@ -160,7 +160,7 @@ export default function Post() {
           <p className="text-red-500 text-xl mb-4">{error}</p>
           <button
             onClick={() => navigate('/posts')}
-            className="px-6 py-2 bg-[#3772ff] text-white rounded-full hover:bg-blue-600 transition-colors"
+            className="px-6 py-2 bg-[#3772ff] text-white rounded-full hover:bg-[#2759dd] transition-colors"
           >
             Go Back
           </button>
@@ -388,3 +388,6 @@ export default function Post() {
     </>
   );
 }
+
+
+

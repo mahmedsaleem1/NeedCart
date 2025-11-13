@@ -67,7 +67,7 @@ export default function SendOffer({ postId, onOfferSent }) {
         onClick={() => setShowForm(true)}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        className="w-full bg-gradient-to-r from-[#3772ff] to-blue-400 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
+        className="w-full bg-gradient-to-r from-[#3772ff] to-[#5c8cff] text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
       >
         <Send size={20} />
         Send Offer
@@ -136,7 +136,7 @@ export default function SendOffer({ postId, onOfferSent }) {
             disabled={isSubmitting}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="flex-1 bg-gradient-to-r from-[#3772ff] to-blue-400 text-white py-3 px-6 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+            className="flex-1 bg-gradient-to-r from-[#3772ff] to-[#5c8cff] text-white py-3 px-6 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
           >
             <Send size={18} />
             {isSubmitting ? 'Sending...' : 'Send Offer'}
@@ -146,3 +146,5 @@ export default function SendOffer({ postId, onOfferSent }) {
     </motion.div>
   );
 }
+
+

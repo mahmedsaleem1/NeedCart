@@ -238,3 +238,5 @@ export default function OfferCard({ offer, isPostOwner, postStatus, onOfferUpdat
     </>
   );
 }
+
+

@@ -95,7 +95,7 @@ const CreatePost = () => {
             whileTap={{ scale: 0.95 }}
             type="submit"
             disabled={loading}
-            className="bg-gradient-to-r from-[#3772ff] to-blue-400 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-2xl transition-all disabled:opacity-50"
+            className="bg-gradient-to-r from-[#3772ff] to-[#5c8cff] text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-2xl transition-all disabled:opacity-50"
           >
             {loading ? "Creating..." : "Create Post"}
           </motion.button>
@@ -106,3 +106,6 @@ const CreatePost = () => {
 };
 
 export default CreatePost;
+
+
+

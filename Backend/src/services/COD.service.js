@@ -15,21 +15,21 @@ export const performCOD = asyncHandler(async (req, res) => {
         const uid = req.user.uid;
         const itemId = req.params.itemId; // Product or Offer ID
         const totalPrice = req.body.totalPrice;
+        const quantity = req.body.quantity || 1;
         
         
-        const transaction = await createTransactionCOD_INTERNAL(uid, itemId, totalPrice);
+        const transaction = await createTransactionCOD_INTERNAL(uid, itemId, totalPrice, quantity);
 
         if (!transaction) {
             throw new apiError(500, 'Transaction creation failed during COD.');
         }        
 
         // O - Order Creation
-        const transactionId = transaction.message._id;
+        const transactionId = transaction.data._id;
         
         const address = req.body.address;
-        const quantity = req.body.quantity;
 
-        const order = await createOrderCOD_INTERNAL(uid, transactionId, address, quantity ?? 1);
+        const order = await createOrderCOD_INTERNAL(uid, transactionId, address, quantity);
 
         if (!order) {
             throw new apiError(500, 'Order creation failed during COD.');

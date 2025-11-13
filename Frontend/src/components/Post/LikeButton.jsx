@@ -125,3 +125,5 @@ export default function LikeButton({ postId, initialLikes = [] }) {
     </motion.button>
   );
 }
+
+

@@ -21,6 +21,16 @@ export const addToWishlist = asyncHandler(async (req, res) => {
             throw new apiError(404, 'Product not found');
         }
 
+        // Check if product is already in wishlist
+        const existingItem = await Wishlist.findOne({
+            buyerId: buyer._id,
+            productId
+        });
+
+        if (existingItem) {
+            throw new apiError(400, 'Product is already in your wishlist');
+        }
+
         const wishlistItem = await Wishlist.create({
             buyerId: buyer._id,
             productId
@@ -43,15 +53,17 @@ export const removeFromWishlist = asyncHandler(async (req, res) => {
 
         const productId = req.params.prodId;
 
-        const wishlistItem = await Wishlist.findOneAndDelete({
+        // Use deleteMany to remove all duplicate entries
+        const result = await Wishlist.deleteMany({
             buyerId: buyer._id,
             productId
         });
 
-        if (!wishlistItem) {
+        if (!result || result.deletedCount === 0) {
             throw new apiError(404, 'Wishlist item not found');
         }
-        return res.status(200).json(new apiResponse(200, wishlistItem, 'Product removed from wishlist'));
+        
+        return res.status(200).json(new apiResponse(200, result, `Removed ${result.deletedCount} item(s) from wishlist`));
         
     } catch (error) {
         throw new apiError(error.statusCode, error.message);

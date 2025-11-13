@@ -3,12 +3,17 @@ import {
   Signup,
   Logout,
   ForgetPassword,
-  Post
+  Post,
+  Product
 } from './components/index.js';
 import {
   LandingPage,
   Posts,
-  CreatePostPage
+  CreatePostPage,
+  Products,
+  AddProductPage,
+  Wishlist,
+  MyProducts
 } from './pages/index.js'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -28,6 +33,13 @@ function App() {
           <Route path="/post/:postId" element={<Post />} />
           <Route path="/create-post" element={<CreatePostPage />} />
 
+          {/* Product Routes */}
+          <Route path="/products" element={<Products />} />
+          <Route path="/product/:productId" element={<Product />} />
+          <Route path="/add-product" element={<AddProductPage />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/my-products" element={<MyProducts />} />
+
           {/* Add more routes as needed */}
         </Routes>
       </Router>
@@ -35,3 +47,6 @@ function App() {
 }
 
 export default App
+
+
+

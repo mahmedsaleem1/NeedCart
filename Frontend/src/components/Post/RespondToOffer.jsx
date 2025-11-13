@@ -9,3 +9,6 @@ export default function RespondToOffer({ offerId, offerAmount, sellerEmail, onRe
     </div>
   );
 }
+
+
+

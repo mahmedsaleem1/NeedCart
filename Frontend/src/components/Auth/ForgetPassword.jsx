@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { Footer } from '../index.js';
+import { Navbar } from '../index.js';
 
 const ForgetPassword = () => {
     
@@ -59,6 +61,8 @@ const ForgetPassword = () => {
     }
 
     return (
+        <>
+        <Navbar  />
         <div style={{
             minHeight: '100vh',
             display: 'flex',
@@ -182,7 +186,11 @@ const ForgetPassword = () => {
                 }
             `}</style>
         </div>
+        <Footer />
+        </>
     );
 }
 
 export default ForgetPassword;
+
+

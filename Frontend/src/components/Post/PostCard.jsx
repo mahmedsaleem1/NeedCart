@@ -63,7 +63,7 @@ export default function PostCard({ post }) {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-4 py-2 text-sm font-semibold bg-gradient-to-r from-[#3772ff] to-blue-400 text-white rounded-full hover:shadow-lg transition-all flex items-center gap-2"
+            className="px-4 py-2 text-sm font-semibold bg-gradient-to-r from-[#3772ff] to-[#5c8cff] text-white rounded-full hover:shadow-lg transition-all flex items-center gap-2"
           >
             <Eye size={16} />
             View
@@ -87,3 +87,6 @@ export default function PostCard({ post }) {
     </motion.div>
   );
 }
+
+
+

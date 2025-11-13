@@ -114,7 +114,7 @@ export default function Posts() {
                     onClick={() => navigate('/create-post')}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="bg-gradient-to-r from-[#3772ff] to-blue-400 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center gap-2 whitespace-nowrap"
+                    className="bg-gradient-to-r from-[#3772ff] to-[#5c8cff] text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center gap-2 whitespace-nowrap"
                   >
                     <Plus size={20} />
                     Create Post
@@ -135,7 +135,7 @@ export default function Posts() {
               <p className="text-red-500 text-xl mb-4">{error}</p>
               <button
                 onClick={fetchPosts}
-                className="px-6 py-2 bg-[#3772ff] text-white rounded-full hover:bg-blue-600 transition-colors"
+                className="px-6 py-2 bg-[#3772ff] text-white rounded-full hover:bg-[#2759dd] transition-colors"
               >
                 Try Again
               </button>
@@ -156,7 +156,7 @@ export default function Posts() {
                   onClick={() => navigate('/create-post')}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="mt-6 bg-gradient-to-r from-[#3772ff] to-blue-400 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all"
+                  className="mt-6 bg-gradient-to-r from-[#3772ff] to-[#5c8cff] text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all"
                 >
                   Create First Post
                 </motion.button>
@@ -187,3 +187,6 @@ export default function Posts() {
     </>
   );
 }
+
+
+

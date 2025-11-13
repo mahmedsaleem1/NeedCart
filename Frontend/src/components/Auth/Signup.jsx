@@ -5,6 +5,8 @@ import {googleLogin} from '../../config/firebase/auth.config.js';
 import { useDispatch } from 'react-redux';
 import { login, signup } from "../../store/auth.slice.js";
 import { useSelector } from 'react-redux';
+import { Footer } from '../index.js';
+import { Navbar } from '../index.js';
 
 const Signup = () => {    
     const user = useSelector((state) => state.auth.user);
@@ -93,6 +95,8 @@ const Signup = () => {
     };        
 
     return (
+        <>
+        <Navbar  />
         <div style={{
             minHeight: '100vh',
             display: 'flex',
@@ -343,7 +347,11 @@ const Signup = () => {
                 }
             `}</style>
         </div>
+        <Footer />
+        </>
     );
 };
 
 export default Signup;
+
+
