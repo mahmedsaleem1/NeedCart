@@ -167,7 +167,7 @@ export default function Posts() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              className="flex flex-col items-center"
             >
               {filteredPosts.map((post, index) => (
                 <motion.div
@@ -175,6 +175,7 @@ export default function Posts() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
+                  className="w-full"
                 >
                   <PostCard post={post} />
                 </motion.div>

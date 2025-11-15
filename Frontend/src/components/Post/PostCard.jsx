@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Clock, DollarSign, Eye } from "lucide-react";
+import { Clock, DollarSign, Eye, User, MessageCircle, Send } from "lucide-react";
 
 export default function PostCard({ post }) {
   const navigate = useNavigate();
@@ -12,77 +12,113 @@ export default function PostCard({ post }) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -5 }}
-      onClick={() => navigate(`/post/${post._id}`)}
-      className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden cursor-pointer border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition-all duration-300"
+      className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 mb-6 max-w-2xl mx-auto"
     >
-      {/* Image */}
-      <div className="relative h-48 w-full overflow-hidden">
-        <img
-          src={post.image || "/placeholder.png"}
-          alt={post.title || "Post Image"}
-          className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-110"
-        />
+      {/* Post Header - User Info */}
+      <div className="flex items-center justify-between p-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#3772ff] to-[#5c8cff] flex items-center justify-center text-white font-bold">
+            {post.buyerId?.email?.charAt(0).toUpperCase() || "U"}
+          </div>
+          <div>
+            <p className="font-semibold text-gray-900 dark:text-white text-sm">
+              {post.buyerId?.email?.split('@')[0] || "Anonymous"}
+            </p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
+              <Clock size={12} />
+              {post.createdAt
+                ? new Date(post.createdAt).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })
+                : "Date not available"}
+            </p>
+          </div>
+        </div>
         <span
-          className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm ${
+          className={`px-3 py-1 rounded-full text-xs font-semibold ${
             post.status === "open" 
-              ? "bg-green-500/90 text-white" 
-              : "bg-gray-500/90 text-white"
+              ? "bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400" 
+              : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
           }`}
         >
           {post.status === "open" ? "Open" : "Closed"}
         </span>
       </div>
 
-      {/* Content */}
-      <div className="p-5">
+      {/* Post Image */}
+      <div 
+        className="relative w-full cursor-pointer"
+        onClick={() => navigate(`/post/${post._id}`)}
+      >
+        <img
+          src={post.image || "/placeholder.png"}
+          alt={post.title || "Post Image"}
+          className="w-full max-h-[500px] object-cover"
+        />
+      </div>
+
+      {/* Action Buttons */}
+      <div className="flex items-center gap-4 px-4 py-3 border-b border-gray-100 dark:border-gray-700">
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => navigate(`/post/${post._id}`)}
+          className="text-gray-700 dark:text-gray-300 hover:text-[#3772ff] dark:hover:text-[#3772ff] transition-colors"
+        >
+          <MessageCircle size={24} />
+        </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => navigate(`/post/${post._id}`)}
+          className="text-gray-700 dark:text-gray-300 hover:text-[#3772ff] dark:hover:text-[#3772ff] transition-colors"
+        >
+          <Send size={24} />
+        </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => navigate(`/post/${post._id}`)}
+          className="ml-auto px-4 py-2 text-sm font-semibold bg-gradient-to-r from-[#3772ff] to-[#5c8cff] text-white rounded-full hover:shadow-lg transition-all flex items-center gap-2"
+        >
+          <Eye size={16} />
+          View Details
+        </motion.button>
+      </div>
+
+      {/* Post Content */}
+      <div className="px-4 py-3">
+        {/* Budget */}
+        <div className="flex items-center gap-2 mb-2">
+          <DollarSign size={18} className="text-[#3772ff]" />
+          <span className="text-xl font-bold text-[#3772ff]">
+            PKR {post.budget?.toLocaleString() || "0"}
+          </span>
+          <span className="text-sm text-gray-500 dark:text-gray-400">Budget</span>
+        </div>
+
+        {/* Title */}
         <h3
-          className="text-xl font-extrabold text-gray-900 dark:text-white mb-2 line-clamp-1"
+          className="text-lg font-bold text-gray-900 dark:text-white mb-2"
           style={{ fontFamily: "'Lemon Milk', sans-serif" }}
         >
           {post.title || "Untitled Post"}
         </h3>
         
-        <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2 leading-relaxed">
+        {/* Description */}
+        <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed line-clamp-3">
           {post.description || "No description available."}
         </p>
-
-        <div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 pt-4">
-          {/* Budget */}
-          <div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mb-1 flex items-center gap-1">
-              <DollarSign size={12} />
-              Budget
-            </p>
-            <p className="text-lg font-bold text-[#3772ff]">
-              PKR {post.budget?.toLocaleString() || "0"}
-            </p>
-          </div>
-
-          {/* View Button */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-4 py-2 text-sm font-semibold bg-gradient-to-r from-[#3772ff] to-[#5c8cff] text-white rounded-full hover:shadow-lg transition-all flex items-center gap-2"
-          >
-            <Eye size={16} />
-            View
-          </motion.button>
-        </div>
-
-        {/* Date */}
-        <div className="mt-3 flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500">
-          <Clock size={12} />
-          <span>
-            {post.createdAt
-              ? new Date(post.createdAt).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })
-              : "Date not available"}
-          </span>
-        </div>
+        
+        {/* Read More */}
+        <button
+          onClick={() => navigate(`/post/${post._id}`)}
+          className="text-[#3772ff] text-sm font-semibold mt-1 hover:underline"
+        >
+          Read more
+        </button>
       </div>
     </motion.div>
   );
