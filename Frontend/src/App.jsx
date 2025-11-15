@@ -28,7 +28,7 @@ import {
   NotFound
 } from './pages/index.js'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Chatbot from './components/Chatbot';
+import ChatBot from './components/Chatbot';
 
 function App() {
 
@@ -77,7 +77,7 @@ function App() {
         </Routes>
         
         {/* Floating Chatbot - Available on all pages */}
-        <Chatbot />
+        <ChatBot />
       </Router>
   )
 }
