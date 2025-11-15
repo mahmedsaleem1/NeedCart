@@ -28,7 +28,7 @@ import {
   NotFound
 } from './pages/index.js'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ChatBot from './components/Chatbot';
+import ChatBot from './components/ChatBot';
 
 function App() {
 
