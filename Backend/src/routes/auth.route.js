@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import {
     registerWithEmail,
+    verifyOTP,
+    resendOTP,
     resetPassword,
     loginWithIdToken,
     getUserByEmail,
@@ -12,6 +14,8 @@ import { verifyFirebaseToken } from '../middlewares/verifyIdToken.middleware.js'
 const router = Router();
 
 router.route('/signup').post(registerWithEmail);
+router.route('/verify-otp').post(verifyOTP);
+router.route('/resend-otp').post(resendOTP);
 router.route('/login').post(verifyFirebaseToken, loginWithIdToken);
 router.post('/google-login', verifyFirebaseToken, googleLogin);
 router.route('/reset-password').post(resetPassword);

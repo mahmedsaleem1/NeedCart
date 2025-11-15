@@ -11,5 +11,6 @@ import {Review} from './review.model.js';
 import {Transaction} from './transaction.model.js';
 import {Wishlist} from './wishlist.model.js';
 import {EscrowPayout} from './escrow.model.js';
+import {OTP} from './otp.model.js';
 
-export { Admin, Buyer, Seller, Comment, Like, Offer, Post, Order, Product, Review, Transaction, Wishlist, EscrowPayout };
+export { Admin, Buyer, Seller, Comment, Like, Offer, Post, Order, Product, Review, Transaction, Wishlist, EscrowPayout, OTP };

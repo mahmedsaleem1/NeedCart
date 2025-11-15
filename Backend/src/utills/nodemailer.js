@@ -30,6 +30,76 @@ export const sendEmail = async (to, subject, text, html = null) => {
   }
 };
 
+// Email template for OTP verification
+export const sendOTPEmail = async (to, otp) => {
+  const subject = 'Verify Your Email - NeedCart Registration';
+  const text = `Your OTP for NeedCart registration is: ${otp}\n\nThis OTP will expire in 10 minutes.\n\nIf you didn't request this, please ignore this email.`;
+  
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background-color: #4CAF50; color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+        .header h1 { margin: 0; font-size: 28px; }
+        .content { background-color: #f9f9f9; padding: 30px; border: 1px solid #ddd; border-radius: 0 0 10px 10px; }
+        .otp-box { background-color: white; padding: 20px; margin: 20px 0; text-align: center; border-radius: 8px; border: 2px dashed #4CAF50; }
+        .otp-code { font-size: 36px; font-weight: bold; color: #4CAF50; letter-spacing: 8px; margin: 10px 0; }
+        .info-text { color: #666; font-size: 14px; margin: 15px 0; }
+        .warning { background-color: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin: 20px 0; border-radius: 4px; }
+        .footer { text-align: center; padding: 20px; color: #777; font-size: 12px; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h1>🛒 NeedCart</h1>
+          <p style="margin: 10px 0 0 0;">Email Verification</p>
+        </div>
+        <div class="content">
+          <h2 style="color: #333; margin-top: 0;">Welcome to NeedCart!</h2>
+          <p>Thank you for registering with us. To complete your registration, please verify your email address using the OTP below:</p>
+          
+          <div class="otp-box">
+            <p style="margin: 0; font-size: 14px; color: #666;">Your One-Time Password</p>
+            <div class="otp-code">${otp}</div>
+            <p class="info-text">Valid for 10 minutes</p>
+          </div>
+
+          <div class="warning">
+            <strong>⚠️ Security Notice:</strong>
+            <p style="margin: 5px 0 0 0;">Never share this OTP with anyone. NeedCart will never ask for your OTP via phone or email.</p>
+          </div>
+
+          <p>If you didn't request this verification, please ignore this email or contact our support team.</p>
+        </div>
+        <div class="footer">
+          <p>© 2025 NeedCart. All rights reserved.</p>
+          <p>This is an automated email. Please do not reply.</p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  try {
+    const info = await transporter.sendMail({
+      from: `NeedCart <${process.env.GMAIL_EMAIL_ADDRESS}>`,
+      to,
+      subject,
+      text,
+      html,
+    });
+    console.log('OTP email sent successfully:', info.messageId);
+    return info;
+  } catch (error) {
+    console.error('Failed to send OTP email:', error.message);
+    throw new Error(`Failed to send OTP email: ${error.message}`);
+  }
+};
+
 // Email template for order placed (sent to buyer)
 export const sendOrderPlacedEmailToBuyer = async (buyerEmail, orderDetails) => {
   const { orderId, itemName, quantity, totalPrice, address, status } = orderDetails;
