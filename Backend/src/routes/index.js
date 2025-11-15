@@ -13,6 +13,7 @@ import adminRouter from './admin.route.js'
 import sellerDashboardRouter from './seller-dashboard.route.js'
 import buyerDashboardRouter from './buyer-dashboard.route.js'
 import orderRouter from './order.route.js'
+import chatbotRouter from './chatbot.route.js'
 
 export {
     authRouter,
@@ -29,5 +30,6 @@ export {
     adminRouter,
     sellerDashboardRouter,
     buyerDashboardRouter,
-    orderRouter
+    orderRouter,
+    chatbotRouter
 }

@@ -27,6 +27,7 @@ import {
   TransactionManagement
 } from './pages/index.js'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Chatbot from './components/Chatbot';
 
 function App() {
 
@@ -72,6 +73,9 @@ function App() {
 
           {/* Add more routes as needed */}
         </Routes>
+        
+        {/* Floating Chatbot - Available on all pages */}
+        <Chatbot />
       </Router>
   )
 }
