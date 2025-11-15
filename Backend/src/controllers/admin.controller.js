@@ -65,7 +65,14 @@ export const releasePayment = asyncHandler(async (req, res) => {
             throw new apiError(404, 'Escrow payment not found');
         }
 
-        const escrow = await EscrowPayout.findByIdAndUpdate(escrowId, { escrowStatus: 'released' });
+        const escrow = await EscrowPayout.findByIdAndUpdate(
+            escrowId, 
+            { 
+                escrowStatus: 'released',
+                releasedAt: new Date()
+            },
+            { new: true }
+        );
 
         res.status(200).json(new apiResponse(200, escrow,'Payment released successfully'));
     } catch (error) {

@@ -13,7 +13,8 @@ import {
   Products,
   AddProductPage,
   Wishlist,
-  MyProducts
+  MyProducts,
+  SellerDashboard
 } from './pages/index.js'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -39,6 +40,9 @@ function App() {
           <Route path="/add-product" element={<AddProductPage />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/my-products" element={<MyProducts />} />
+
+          {/* Seller Dashboard Route */}
+          <Route path="/seller" element={<SellerDashboard />} />
 
           {/* Add more routes as needed */}
         </Routes>

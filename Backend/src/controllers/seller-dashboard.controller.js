@@ -11,14 +11,23 @@ export const getHeldPaymentOrders = asyncHandler(async (req, res) => {
             throw new apiError(401, 'You must be Logged in as Seller to access this route');
         }
 
-        const orders =  await Order.find({ sellerId: seller._id, status: 'confirmed' });
+        // Find ALL orders for this seller (regardless of status)
+        const orders = await Order.find({ sellerId: seller._id });
         if (!orders || orders.length === 0) {
-            throw new apiError(404, 'No confirmed orders found for this seller');
+            return res.status(200).json(new apiResponse(200, [], 'No orders found for this seller'));
         }
 
+        // Get held escrow payouts for these orders
         const heldPayments = await EscrowPayout.find(
                 { orderId: { $in: orders.map(order => order._id) }, escrowStatus: 'held' }
-            ).populate('orderId');
+            ).populate({
+                path: 'orderId',
+                populate: [
+                    { path: 'buyerId', select: 'email firebaseUID' },
+                    { path: 'productId', select: 'title image price' },
+                    { path: 'postId', select: 'title image' }
+                ]
+            });
         
         res.status(200).json(new apiResponse(200, heldPayments, 'Held payment orders retrieved successfully'));
 
@@ -35,17 +44,23 @@ export const getReleasedPaymentOrders = asyncHandler(async (req, res) => {
             throw new apiError(401, 'You must be Logged in as Seller to access this route');
         }
 
-        const orders =  await Order.find({ sellerId: seller._id, status: 'delivered' });
+        // Find all delivered orders for this seller
+        const orders = await Order.find({ sellerId: seller._id, status: 'delivered' });
         if (!orders || orders.length === 0) {
-            throw new apiError(404, 'No delivered orders found for this seller');
+            return res.status(200).json(new apiResponse(200, [], 'No delivered orders found for this seller'));
         }
-        console.log(orders);
         
+        // Get released escrow payouts for these orders
         const releasedPayments = await EscrowPayout.find(
                 { orderId: { $in: orders.map(order => order._id) }, escrowStatus: 'released' }
-            ).populate('orderId');
-
-        console.log(releasedPayments);
+            ).populate({
+                path: 'orderId',
+                populate: [
+                    { path: 'buyerId', select: 'email firebaseUID' },
+                    { path: 'productId', select: 'title image price' },
+                    { path: 'postId', select: 'title image' }
+                ]
+            });
         
         res.status(200).json(new apiResponse(200, releasedPayments, 'Released payment orders retrieved successfully'));
 
