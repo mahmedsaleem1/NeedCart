@@ -2,6 +2,7 @@ import apiError from '../utills/apiError.js';
 import apiResponse from '../utills/apiResponse.js';
 import { asyncHandler } from '../utills/asyncHandler.js';
 import { Buyer, Seller, Order, EscrowPayout, Admin, Product, Post, Review, Transaction, Wishlist } from '../models/index.js';
+import { sendPaymentReleasedEmailToSeller } from '../utills/nodemailer.js';
 
 export const createEscrowPayout_INTERNAL = async (order) => {
     try {
@@ -44,23 +45,59 @@ export const getAllOrderPaymentStatus = asyncHandler(async (req, res) => {
             query.escrowStatus = status;
         }
 
-        const orders = await EscrowPayout.find(query)
+        const payments = await EscrowPayout.find(query)
             .populate({
                 path: 'orderId',
                 populate: [
-                    { path: 'buyerId', select: 'firstName lastName email' },
-                    { path: 'sellerId', select: 'firstName lastName email' },
-                    { path: 'productId', select: 'title images' }
+                    { path: 'buyerId', select: 'email' },
+                    { path: 'sellerId', select: 'email bankName accountNumber is_verified' },
+                    { path: 'productId', select: 'title' },
+                    { path: 'postId', select: 'description' }
                 ]
             })
             .skip(skip)
             .limit(parseInt(limit))
-            .sort({ createdAt: -1 });
+            .sort({ createdAt: -1 })
+            .lean(); // Use lean() for better performance and plain objects
 
         const totalCount = await EscrowPayout.countDocuments(query);
 
+        // Format response to clearly show seller bank details
+        const formattedPayments = payments.map(payment => {
+            const order = payment.orderId;
+            
+            return {
+                _id: payment._id,
+                orderId: order?._id || null,
+                totalAmount: payment.totalAmount,
+                platformFee: payment.platformFee,
+                netAmount: payment.netAmount,
+                escrowStatus: payment.escrowStatus,
+                createdAt: payment.createdAt,
+                releasedAt: payment.releasedAt,
+                orderDetails: order ? {
+                    orderId: order._id,
+                    quantity: order.quantity || 1,
+                    status: order.status || 'unknown',
+                    address: order.address || 'N/A',
+                    deliveredAt: order.deliveredAt || null,
+                    itemName: order.productId?.title || order.postId?.description || 'N/A'
+                } : null,
+                buyerInfo: order?.buyerId ? {
+                    email: order.buyerId.email
+                } : null,
+                sellerBankDetails: order?.sellerId ? {
+                    sellerEmail: order.sellerId.email || 'N/A',
+                    bankName: order.sellerId.bankName || 'Not provided',
+                    accountNumber: order.sellerId.accountNumber ? String(order.sellerId.accountNumber) : 'Not provided',
+                    isVerified: order.sellerId.is_verified || false,
+                    canRelease: !!(order.sellerId.is_verified && order.sellerId.bankName && order.sellerId.accountNumber && order.status === 'delivered')
+                } : null
+            };
+        });
+
         res.status(200).json(new apiResponse(200, {
-            payments: orders,
+            payments: formattedPayments,
             pagination: {
                 currentPage: parseInt(page),
                 totalPages: Math.ceil(totalCount / limit),
@@ -105,7 +142,43 @@ export const releasePayment = asyncHandler(async (req, res) => {
             { new: true }
         );
 
-        res.status(200).json(new apiResponse(200, escrow,'Payment released successfully'));
+        // Send payment released email to seller
+        try {
+            const itemName = order.productId 
+                ? (await Product.findById(order.productId))?.title || 'Product'
+                : (await Post.findById(order.postId))?.description || 'Post Item';
+
+            await sendPaymentReleasedEmailToSeller(seller.email, {
+                orderId: order._id.toString(),
+                totalAmount: escrow.totalAmount,
+                platformFee: escrow.platformFee,
+                netAmount: escrow.netAmount,
+                bankName: seller.bankName,
+                accountNumber: seller.accountNumber
+            });
+        } catch (emailError) {
+            console.error('Failed to send payment release email:', emailError.message);
+            // Continue even if email fails
+        }
+
+        // Return escrow data with seller bank details for admin visibility
+        const responseData = {
+            escrow,
+            sellerBankDetails: {
+                sellerEmail: seller.email,
+                bankName: seller.bankName,
+                accountNumber: seller.accountNumber,
+                isVerified: seller.is_verified
+            },
+            paymentSummary: {
+                totalAmount: escrow.totalAmount,
+                platformFee: escrow.platformFee,
+                netAmountToSeller: escrow.netAmount,
+                releasedAt: escrow.releasedAt
+            }
+        };
+
+        res.status(200).json(new apiResponse(200, responseData, 'Payment released successfully'));
     } catch (error) {
         throw new apiError(error.statusCode, error.message);
     }

@@ -2,7 +2,16 @@ import apiError from '../utills/apiError.js';
 import apiResponse from '../utills/apiResponse.js';
 import { asyncHandler } from '../utills/asyncHandler.js';
 import { Buyer, Seller, Post, Product, Order, Transaction, Offer } from '../models/index.js';
-import {createEscrowPayout_INTERNAL} from './admin.controller.js'
+import {createEscrowPayout_INTERNAL} from './admin.controller.js';
+import {
+	sendOrderPlacedEmailToBuyer,
+	sendNewOrderEmailToSeller,
+	sendOrderConfirmedEmailToBuyer,
+	sendOrderDeliveredEmailToBuyer,
+	sendOrderDeliveredEmailToSeller,
+	sendOrderCancelledEmailToBuyer,
+	sendOrderCancelledEmailToSeller
+} from '../utills/nodemailer.js'
 
 // Helper: validate and normalize desired status
 const ALLOWED_ORDER_STATUS = ['pending', 'confirmed', 'delivered', 'cancelled'];
@@ -93,6 +102,37 @@ export const createOrder_INTERNAL = async (uid, transactionId, address, quantity
 
 		const escrow = await createEscrowPayout_INTERNAL(order);
 
+		// Send email notifications
+		try {
+			const seller = await Seller.findById(order.sellerId);
+			const itemName = orderPayload.productId 
+				? (await Product.findById(orderPayload.productId))?.title || 'Product'
+				: (await Post.findById(orderPayload.postId))?.description || 'Post Item';
+
+			// Email to buyer
+			await sendOrderPlacedEmailToBuyer(buyer.email, {
+				orderId: order._id.toString(),
+				itemName,
+				quantity: order.quantity,
+				totalPrice: order.totalPrice,
+				address: order.address,
+				status: order.status
+			});
+
+			// Email to seller
+			await sendNewOrderEmailToSeller(seller.email, {
+				orderId: order._id.toString(),
+				itemName,
+				quantity: order.quantity,
+				totalPrice: order.totalPrice,
+				address: order.address,
+				buyerEmail: buyer.email
+			});
+		} catch (emailError) {
+			console.error('Failed to send order placement emails:', emailError.message);
+			// Continue even if email fails
+		}
+
 		return(new apiResponse(201, { order, escrow }, 'Order placed successfully'));
 	} catch (error) {
 		throw new apiError(error.statusCode, error.message);
@@ -175,6 +215,34 @@ export const createOrderCOD_INTERNAL = async (uid, transactionId, address, quant
 		}
 
 		const order = await Order.create(orderPayload);
+
+		// Send email notifications for COD order
+		try {
+			const seller = await Seller.findById(order.sellerId);
+			const itemName = orderPayload.productId 
+				? (await Product.findById(orderPayload.productId))?.title || 'Product'
+				: (await Post.findById(orderPayload.postId))?.description || 'Post Item';
+
+			// Email to buyer - COD order is already confirmed
+			await sendOrderConfirmedEmailToBuyer(buyer.email, {
+				orderId: order._id.toString(),
+				itemName,
+				totalPrice: order.totalPrice
+			});
+
+			// Email to seller
+			await sendNewOrderEmailToSeller(seller.email, {
+				orderId: order._id.toString(),
+				itemName,
+				quantity: order.quantity,
+				totalPrice: order.totalPrice,
+				address: order.address,
+				buyerEmail: buyer.email
+			});
+		} catch (emailError) {
+			console.error('Failed to send COD order emails:', emailError.message);
+		}
+
 		return(new apiResponse(201, order, 'Order placed successfully'));
 	} catch (error) {
 		throw new apiError(error.statusCode, error.message);
@@ -379,6 +447,35 @@ export const updateOrderStatus = asyncHandler(async (req, res) => {
 
 		order.status = status;
 		await order.save();
+
+		// Send email notifications based on status change
+		try {
+			const buyerData = await Buyer.findById(order.buyerId);
+			const sellerData = await Seller.findById(order.sellerId);
+			
+			const itemName = order.productId 
+				? (await Product.findById(order.productId))?.title || 'Product'
+				: (await Post.findById(order.postId))?.description || 'Post Item';
+
+			const emailDetails = {
+				orderId: order._id.toString(),
+				itemName,
+				totalPrice: order.totalPrice
+			};
+
+			if (status === 'confirmed') {
+				await sendOrderConfirmedEmailToBuyer(buyerData.email, emailDetails);
+			} else if (status === 'delivered') {
+				await sendOrderDeliveredEmailToBuyer(buyerData.email, emailDetails);
+				await sendOrderDeliveredEmailToSeller(sellerData.email, emailDetails);
+			} else if (status === 'cancelled') {
+				await sendOrderCancelledEmailToBuyer(buyerData.email, emailDetails);
+				await sendOrderCancelledEmailToSeller(sellerData.email, emailDetails);
+			}
+		} catch (emailError) {
+			console.error('Failed to send order status update emails:', emailError.message);
+			// Continue even if email fails
+		}
 
 		return res.status(200).json(new apiResponse(200, { order }, 'Order status updated successfully'));
 	} catch (error) {

@@ -91,7 +91,8 @@ const PaymentManagement = () => {
   const PaymentDetailsModal = ({ payment, onClose }) => {
     if (!payment) return null;
 
-    const order = payment.orderId;
+    const order = payment.orderDetails;
+    const sellerBank = payment.sellerBankDetails;
 
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -155,7 +156,11 @@ const PaymentManagement = () => {
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Order ID:</span>
-                    <span className="font-mono text-sm">{order._id}</span>
+                    <span className="font-mono text-sm">{order.orderId}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Item:</span>
+                    <span className="font-medium">{order.itemName || 'N/A'}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Quantity:</span>
@@ -166,8 +171,39 @@ const PaymentManagement = () => {
                     <span className="font-medium capitalize">{order.status || 'N/A'}</span>
                   </div>
                   <div className="flex justify-between">
+                    <span className="text-gray-600">Delivery Address:</span>
+                    <span className="font-medium text-sm">{order.address || 'N/A'}</span>
+                  </div>
+                  <div className="flex justify-between">
                     <span className="text-gray-600">Payment Method:</span>
                     <span className="font-medium capitalize">{'Stripe'}</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Seller Bank Details */}
+            {sellerBank && (
+              <div className="border rounded-lg p-4 bg-blue-50 border-blue-200">
+                <h3 className="font-semibold text-gray-800 mb-3">Seller Bank Details</h3>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Seller Email:</span>
+                    <span className="font-medium">{sellerBank.sellerEmail || 'N/A'}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Bank Name:</span>
+                    <span className="font-semibold text-blue-700">{sellerBank.bankName || 'Not provided'}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Account Number:</span>
+                    <span className="font-mono font-semibold text-blue-700">{sellerBank.accountNumber || 'Not provided'}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-600">Verified:</span>
+                    <span className={`font-semibold ${sellerBank.isVerified ? 'text-green-600' : 'text-red-600'}`}>
+                      {sellerBank.isVerified ? '✓ Yes' : '✗ No'}
+                    </span>
                   </div>
                 </div>
               </div>
