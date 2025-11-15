@@ -38,20 +38,24 @@ export default function LoginForm() {
       
       if (userData && userData.data.user.email === import.meta.env.VITE_ADMIN_EMAIL) {
         const serializableUserData = {
-            email: userData.email
+            uid: userData.data.user.uid,
+            email: userData.data.user.email,
+            displayName: userData.data.user.displayName,
+            photoURL: userData.data.user.photoURL,
+            role: 'admin'
         };
         dispatch(login(serializableUserData));
         alert("Admin login successful.");
-        navigate("/admin");
+        navigate("/admin/dashboard");
         return userData;
       }
 
       else if (userData) { 
         const serializableUserData = {
-            uid: userData.uid, // Store Firebase UID
-            email: userData.email,
-            displayName: userData.displayName,
-            photoURL: userData.photoURL,
+            uid: userData.data.user.uid, // Store Firebase UID
+            email: userData.data.user.email,
+            displayName: userData.data.user.displayName,
+            photoURL: userData.data.user.photoURL,
             role: userData.data.role
         };
 

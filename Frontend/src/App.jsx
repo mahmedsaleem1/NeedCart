@@ -15,7 +15,16 @@ import {
   Wishlist,
   MyProducts,
   SellerDashboard,
-  BuyerDashboard
+  BuyerDashboard,
+  AdminLayout,
+  AdminDashboard,
+  SellerManagement,
+  OrderManagement,
+  UserManagement,
+  ProductManagement,
+  PaymentManagement,
+  Analytics,
+  TransactionManagement
 } from './pages/index.js'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -47,6 +56,19 @@ function App() {
 
           {/* Buyer Dashboard Route */}
           <Route path="/buyer" element={<BuyerDashboard />} />
+
+          {/* Admin Routes */}
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="users" element={<UserManagement />} />
+            <Route path="sellers" element={<SellerManagement />} />
+            <Route path="orders" element={<OrderManagement />} />
+            <Route path="products" element={<ProductManagement />} />
+            <Route path="payments" element={<PaymentManagement />} />
+            <Route path="analytics" element={<Analytics />} />
+            <Route path="transactions" element={<TransactionManagement />} />
+          </Route>
 
           {/* Add more routes as needed */}
         </Routes>

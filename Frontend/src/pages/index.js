@@ -8,6 +8,9 @@ import MyProducts from "./MyProducts";
 import SellerDashboard from "./SellerDashboard";
 import BuyerDashboard from "./BuyerDashboard";
 
+// Admin Pages
+export * from "./Admin";
+
 export {
     LandingPage,
     Posts,
