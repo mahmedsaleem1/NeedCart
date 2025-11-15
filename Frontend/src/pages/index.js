@@ -7,6 +7,7 @@ import Wishlist from "./Wishlist";
 import MyProducts from "./MyProducts";
 import SellerDashboard from "./SellerDashboard";
 import BuyerDashboard from "./BuyerDashboard";
+import NotFound from "./NotFound";
 
 // Admin Pages
 export * from "./Admin";
@@ -20,7 +21,8 @@ export {
     Wishlist,
     MyProducts,
     SellerDashboard,
-    BuyerDashboard
+    BuyerDashboard,
+    NotFound
 }
 
 

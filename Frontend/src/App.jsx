@@ -24,7 +24,8 @@ import {
   ProductManagement,
   PaymentManagement,
   Analytics,
-  TransactionManagement
+  TransactionManagement,
+  NotFound
 } from './pages/index.js'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Chatbot from './components/Chatbot';
@@ -71,7 +72,8 @@ function App() {
             <Route path="transactions" element={<TransactionManagement />} />
           </Route>
 
-          {/* Add more routes as needed */}
+          {/* 404 Not Found - Catch all route (must be last) */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
         
         {/* Floating Chatbot - Available on all pages */}
