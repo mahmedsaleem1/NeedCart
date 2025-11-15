@@ -18,7 +18,7 @@ const ForgetPassword = () => {
         
         try {
             const { email } = data;
-            const response = await fetch(`${import.meta.env.VITE_URL}/api/v1/auth/reset-password`, {
+            const response = await fetch(`${import.meta.env.VITE_URL}/auth/reset-password`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

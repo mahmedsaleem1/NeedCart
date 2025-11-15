@@ -60,21 +60,21 @@ export default function BuyerDashboard() {
       
       // Fetch stats
       const statsRes = await axios.get(
-        `${import.meta.env.VITE_URL}/api/v1/buyer-dashboard/stats`,
+        `${import.meta.env.VITE_URL}/buyer-dashboard/stats`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setStats(statsRes.data.data);
 
       // Fetch orders
       const ordersRes = await axios.get(
-        `${import.meta.env.VITE_URL}/api/v1/buyer-dashboard/orders`,
+        `${import.meta.env.VITE_URL}/buyer-dashboard/orders`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setOrders(Array.isArray(ordersRes.data.data) ? ordersRes.data.data : []);
 
       // Fetch posts
       const postsRes = await axios.get(
-        `${import.meta.env.VITE_URL}/api/v1/buyer-dashboard/posts`,
+        `${import.meta.env.VITE_URL}/buyer-dashboard/posts`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setPosts(Array.isArray(postsRes.data.data) ? postsRes.data.data : []);
@@ -103,8 +103,8 @@ export default function BuyerDashboard() {
       }
       const token = await auth.currentUser.getIdToken();
       const url = status === "all" 
-        ? `${import.meta.env.VITE_URL}/api/v1/buyer-dashboard/orders`
-        : `${import.meta.env.VITE_URL}/api/v1/buyer-dashboard/orders?status=${status}`;
+        ? `${import.meta.env.VITE_URL}/buyer-dashboard/orders`
+        : `${import.meta.env.VITE_URL}/buyer-dashboard/orders?status=${status}`;
       
       const ordersRes = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` }
@@ -131,21 +131,21 @@ export default function BuyerDashboard() {
       }
       const token = await auth.currentUser.getIdToken();
       await axios.patch(
-        `${import.meta.env.VITE_URL}/api/v1/buyer-dashboard/posts/${postId}/status`,
+        `${import.meta.env.VITE_URL}/buyer-dashboard/posts/${postId}/status`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
       
       // Refresh posts
       const postsRes = await axios.get(
-        `${import.meta.env.VITE_URL}/api/v1/buyer-dashboard/posts`,
+        `${import.meta.env.VITE_URL}/buyer-dashboard/posts`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setPosts(Array.isArray(postsRes.data.data) ? postsRes.data.data : []);
       
       // Refresh stats
       const statsRes = await axios.get(
-        `${import.meta.env.VITE_URL}/api/v1/buyer-dashboard/stats`,
+        `${import.meta.env.VITE_URL}/buyer-dashboard/stats`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setStats(statsRes.data.data);
@@ -163,20 +163,20 @@ export default function BuyerDashboard() {
       }
       const token = await auth.currentUser.getIdToken();
       await axios.delete(
-        `${import.meta.env.VITE_URL}/api/v1/buyer-dashboard/posts/${postId}`,
+        `${import.meta.env.VITE_URL}/buyer-dashboard/posts/${postId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       
       // Refresh posts
       const postsRes = await axios.get(
-        `${import.meta.env.VITE_URL}/api/v1/buyer-dashboard/posts`,
+        `${import.meta.env.VITE_URL}/buyer-dashboard/posts`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setPosts(Array.isArray(postsRes.data.data) ? postsRes.data.data : []);
       
       // Refresh stats
       const statsRes = await axios.get(
-        `${import.meta.env.VITE_URL}/api/v1/buyer-dashboard/stats`,
+        `${import.meta.env.VITE_URL}/buyer-dashboard/stats`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setStats(statsRes.data.data);

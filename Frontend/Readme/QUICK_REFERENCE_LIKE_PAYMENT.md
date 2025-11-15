@@ -34,17 +34,17 @@
 
 ### Like Endpoints
 ```
-POST /api/v1/like/do-like
-POST /api/v1/like/do-unlike
-GET  /api/v1/like/get-likes/:postId
+POST /like/do-like
+POST /like/do-unlike
+GET  /like/get-likes/:postId
 ```
 
 ### Offer & Payment Endpoints
 ```
-POST /api/v1/offer/accept/:offerId
-POST /api/v1/item/buy/:itemId (offerId)
-GET  /api/v1/item/success?session_id=xxx
-GET  /api/v1/item/cancel?session_id=xxx
+POST /offer/accept/:offerId
+POST /item/buy/:itemId (offerId)
+GET  /item/success?session_id=xxx
+GET  /item/cancel?session_id=xxx
 ```
 
 ---
@@ -135,7 +135,7 @@ User clicks Like
     ↓
 Check if authenticated
     ↓
-Send POST /api/v1/like/do-like
+Send POST /like/do-like
     ↓
 Backend checks for duplicate
     ↓
@@ -154,12 +154,12 @@ Buyer clicks Accept Offer
     ↓
 Confirm dialog shown
     ↓
-POST /api/v1/offer/accept/:offerId
+POST /offer/accept/:offerId
     ↓
 Offer status → 'accepted'
 Post status → 'closed'
     ↓
-POST /api/v1/item/buy/:offerId
+POST /item/buy/:offerId
     ↓
 Transaction created (pending)
 Order created (pending)
@@ -182,7 +182,7 @@ Order status → 'confirmed'
 ### Reset like state if stuck
 ```javascript
 // In browser console
-fetch('http://localhost:3000/api/v1/like/do-unlike', {
+fetch('http://localhost:3000/like/do-unlike', {
     method: 'POST',
     headers: {
         'Authorization': 'Bearer YOUR_TOKEN',

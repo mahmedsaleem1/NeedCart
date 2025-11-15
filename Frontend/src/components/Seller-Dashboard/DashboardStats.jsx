@@ -19,10 +19,10 @@ export default function DashboardStats() {
       const token = await auth.currentUser.getIdToken();
 
       const [heldRes, releasedRes] = await Promise.all([
-        fetch(`${import.meta.env.VITE_URL}/api/v1/seller-dashboard/get-total-held-amount`, {
+        fetch(`${import.meta.env.VITE_URL}/seller-dashboard/get-total-held-amount`, {
           headers: { Authorization: `Bearer ${token}` }
         }),
-        fetch(`${import.meta.env.VITE_URL}/api/v1/seller-dashboard/get-total-released-amount`, {
+        fetch(`${import.meta.env.VITE_URL}/seller-dashboard/get-total-released-amount`, {
           headers: { Authorization: `Bearer ${token}` }
         })
       ]);

@@ -26,7 +26,7 @@ export default function LoginForm() {
     try {
       const token = await loginWithEmail(data.email, data.password);
 
-      const user = await fetch(`${import.meta.env.VITE_URL}/api/v1/auth/login`, {
+      const user = await fetch(`${import.meta.env.VITE_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

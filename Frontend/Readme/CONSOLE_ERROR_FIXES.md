@@ -59,7 +59,7 @@ const checkWishlistStatus = async () => {
 ### 3. ✅ Review Fetch JSON Parse Error
 **Error:**
 ```
-GET http://localhost:8000/api/v1/review/get/68f88151ec3737300e881b19 404 (Not Found)
+GET http://localhost:8000/review/get/68f88151ec3737300e881b19 404 (Not Found)
 Could not fetch reviews: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
 ```
 
@@ -74,7 +74,7 @@ Could not fetch reviews: SyntaxError: Unexpected token '<', "<!DOCTYPE "... is n
 // Fetch reviews - only if product exists
 try {
   const reviewsRes = await fetch(
-    `${import.meta.env.VITE_URL}/api/v1/review/get/${productId}`
+    `${import.meta.env.VITE_URL}/review/get/${productId}`
   );
   
   // Check if response is JSON before parsing
@@ -103,7 +103,7 @@ try {
 ### 4. ✅ Review Creation 404 Error
 **Error:**
 ```
-POST http://localhost:8000/api/v1/review/add/68f88151ec3737300e881b19 404 (Not Found)
+POST http://localhost:8000/review/add/68f88151ec3737300e881b19 404 (Not Found)
 ```
 
 **Status:** This error appears when trying to create a review. This is actually a **backend validation error** being returned as 404, not a routing issue.

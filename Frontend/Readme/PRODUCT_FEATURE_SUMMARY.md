@@ -179,24 +179,24 @@ All pages and components are fully responsive:
 ### Backend Routes Used ✅
 ```
 Products:
-  GET  /api/v1/product/all
-  GET  /api/v1/product/getOne/:prodId
-  POST /api/v1/product/add
-  POST /api/v1/product/remove/:prodId
+  GET  /product/all
+  GET  /product/getOne/:prodId
+  POST /product/add
+  POST /product/remove/:prodId
 
 Reviews:
-  GET  /api/v1/review/get/:prodId
-  POST /api/v1/review/add/:prodId
-  POST /api/v1/review/delete/:revId
+  GET  /review/get/:prodId
+  POST /review/add/:prodId
+  POST /review/delete/:revId
 
 Wishlist:
-  GET  /api/v1/wishlist/get
-  POST /api/v1/wishlist/add/:prodId
-  POST /api/v1/wishlist/delete/:prodId
+  GET  /wishlist/get
+  POST /wishlist/add/:prodId
+  POST /wishlist/delete/:prodId
 
 Payment:
-  POST /api/v1/top/buy/:itemId    (Stripe)
-  POST /api/v1/cod/buy/:itemId    (COD)
+  POST /top/buy/:itemId    (Stripe)
+  POST /cod/buy/:itemId    (COD)
 ```
 
 ## ✨ Key Highlights

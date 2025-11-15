@@ -46,7 +46,7 @@ export default function PaymentDetails() {
       const token = await auth.currentUser.getIdToken();
 
       const response = await fetch(
-        `${import.meta.env.VITE_URL}/api/v1/seller-dashboard/provide-payment-details`,
+        `${import.meta.env.VITE_URL}/seller-dashboard/provide-payment-details`,
         {
           method: "POST",
           headers: {

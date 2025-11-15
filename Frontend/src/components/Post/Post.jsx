@@ -70,7 +70,7 @@ export default function Post() {
       
       // Fetch post details
       const postRes = await fetch(
-        `${import.meta.env.VITE_URL}/api/v1/post/get/${postId}`,
+        `${import.meta.env.VITE_URL}/post/get/${postId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const postData = await postRes.json();
@@ -82,7 +82,7 @@ export default function Post() {
 
       // Fetch comments
       const commentsRes = await fetch(
-        `${import.meta.env.VITE_URL}/api/v1/comment/get-comments/${postId}`
+        `${import.meta.env.VITE_URL}/comment/get-comments/${postId}`
       );
       const commentsData = await commentsRes.json();
       if (commentsRes.ok) {
@@ -95,7 +95,7 @@ export default function Post() {
 
       // Fetch likes
       const likesRes = await fetch(
-        `${import.meta.env.VITE_URL}/api/v1/like/get-likes/${postId}`
+        `${import.meta.env.VITE_URL}/like/get-likes/${postId}`
       );
       const likesData = await likesRes.json();
       if (likesRes.ok) {
@@ -108,7 +108,7 @@ export default function Post() {
 
       // Fetch offers
       const offersRes = await fetch(
-        `${import.meta.env.VITE_URL}/api/v1/offer/all/${postId}`
+        `${import.meta.env.VITE_URL}/offer/all/${postId}`
       );
       const offersData = await offersRes.json();
       if (offersRes.ok) {

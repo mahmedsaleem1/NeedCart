@@ -17,7 +17,7 @@ export default function ReviewCard({ review, onDelete }) {
     try {
       const token = await auth.currentUser.getIdToken();
       const response = await fetch(
-        `${import.meta.env.VITE_URL}/api/v1/review/delete/${review._id}`,
+        `${import.meta.env.VITE_URL}/review/delete/${review._id}`,
         {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },

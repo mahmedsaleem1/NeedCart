@@ -23,7 +23,7 @@ export default function AddComment({ postId, onCommentAdded }) {
     try {
       const token = await auth.currentUser.getIdToken();
 
-      const response = await fetch(`${import.meta.env.VITE_URL}/api/v1/comment/do-comment/${postId}`, {
+      const response = await fetch(`${import.meta.env.VITE_URL}/comment/do-comment/${postId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

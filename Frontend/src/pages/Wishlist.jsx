@@ -35,7 +35,7 @@ export default function Wishlist() {
       const token = await auth.currentUser.getIdToken();
 
       const response = await fetch(
-        `${import.meta.env.VITE_URL}/api/v1/wishlist/get`,
+        `${import.meta.env.VITE_URL}/wishlist/get`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -69,7 +69,7 @@ export default function Wishlist() {
       const token = await auth.currentUser.getIdToken();
 
       const response = await fetch(
-        `${import.meta.env.VITE_URL}/api/v1/wishlist/delete/${productId}`,
+        `${import.meta.env.VITE_URL}/wishlist/delete/${productId}`,
         {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },

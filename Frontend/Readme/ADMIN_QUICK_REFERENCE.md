@@ -79,22 +79,22 @@ http://localhost:5173/admin/dashboard
 ## 🔧 Backend Endpoints
 
 ```javascript
-GET  /api/v1/admin/dashboard-overview
-GET  /api/v1/admin/revenue-analytics?period=month
-GET  /api/v1/admin/users?page=1&role=buyer
-GET  /api/v1/admin/sellers-requests?verified=false
-GET  /api/v1/admin/orders?status=pending
-GET  /api/v1/admin/products
-GET  /api/v1/admin/posts
-GET  /api/v1/admin/get-order-payment-status
-GET  /api/v1/admin/transactions
+GET  /admin/dashboard-overview
+GET  /admin/revenue-analytics?period=month
+GET  /admin/users?page=1&role=buyer
+GET  /admin/sellers-requests?verified=false
+GET  /admin/orders?status=pending
+GET  /admin/products
+GET  /admin/posts
+GET  /admin/get-order-payment-status
+GET  /admin/transactions
 
-POST /api/v1/admin/accept-seller-request/:sellerId
-POST /api/v1/admin/release-payment/:escrowId
+POST /admin/accept-seller-request/:sellerId
+POST /admin/release-payment/:escrowId
 
-DELETE /api/v1/admin/users/:role/:userId
-DELETE /api/v1/admin/products/:productId
-DELETE /api/v1/admin/posts/:postId
+DELETE /admin/users/:role/:userId
+DELETE /admin/products/:productId
+DELETE /admin/posts/:postId
 ```
 
 ## 🎨 Status Colors

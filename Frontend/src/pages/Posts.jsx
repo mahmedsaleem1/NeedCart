@@ -24,7 +24,7 @@ export default function Posts() {
   const fetchPosts = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${import.meta.env.VITE_URL}/api/v1/post/all`);
+      const response = await fetch(`${import.meta.env.VITE_URL}/post/all`);
       const result = await response.json();
 
       if (response.ok) {

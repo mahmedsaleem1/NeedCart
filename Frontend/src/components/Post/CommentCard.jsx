@@ -25,7 +25,7 @@ export default function CommentCard({ comment, onDelete, isPostOwner = false, po
     setIsDeleting(true);
     try {
       const token = await auth.currentUser.getIdToken();
-      const response = await fetch(`${import.meta.env.VITE_URL}/api/v1/comment/delete-comment`, {
+      const response = await fetch(`${import.meta.env.VITE_URL}/comment/delete-comment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -27,7 +27,7 @@ const PaymentManagement = () => {
       
       const token = await auth.currentUser.getIdToken();
       const response = await axios.get(
-        `${import.meta.env.VITE_URL}/api/v1/admin/get-order-payment-status`,
+        `${import.meta.env.VITE_URL}/admin/get-order-payment-status`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -55,7 +55,7 @@ const PaymentManagement = () => {
       
       const token = await auth.currentUser.getIdToken();
       const response = await axios.post(
-        `${import.meta.env.VITE_URL}/api/v1/admin/release-payment/${escrowId}`,
+        `${import.meta.env.VITE_URL}/admin/release-payment/${escrowId}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

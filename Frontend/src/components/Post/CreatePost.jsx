@@ -22,7 +22,7 @@ const CreatePost = () => {
       formData.append("budget", data.budget);
       formData.append("image", data.image[0]);
 
-      const response = await fetch(`${import.meta.env.VITE_URL}/api/v1/post/create`, {
+      const response = await fetch(`${import.meta.env.VITE_URL}/post/create`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

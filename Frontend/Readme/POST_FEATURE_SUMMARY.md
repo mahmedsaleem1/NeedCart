@@ -150,25 +150,25 @@ All components follow the LandingPage design system:
 ## 📡 API Endpoints Used
 
 ### Posts
-- `GET /api/v1/post/all` - Get all posts
-- `GET /api/v1/post/get/:postId` - Get single post
-- `POST /api/v1/post/create` - Create post (Buyer only)
+- `GET /post/all` - Get all posts
+- `GET /post/get/:postId` - Get single post
+- `POST /post/create` - Create post (Buyer only)
 
 ### Likes
-- `POST /api/v1/like/do-like` - Like a post
-- `POST /api/v1/like/do-unlike` - Unlike a post
-- `GET /api/v1/like/get-likes/:postId` - Get all likes for a post
+- `POST /like/do-like` - Like a post
+- `POST /like/do-unlike` - Unlike a post
+- `GET /like/get-likes/:postId` - Get all likes for a post
 
 ### Comments
-- `POST /api/v1/comment/do-comment/:postId` - Add comment
-- `POST /api/v1/comment/delete-comment` - Delete comment
-- `GET /api/v1/comment/get-comments/:postId` - Get all comments
+- `POST /comment/do-comment/:postId` - Add comment
+- `POST /comment/delete-comment` - Delete comment
+- `GET /comment/get-comments/:postId` - Get all comments
 
 ### Offers
-- `POST /api/v1/offer/create/:postId` - Create offer (Seller only)
-- `GET /api/v1/offer/all/:postId` - Get all offers for a post
-- `POST /api/v1/offer/accept/:offerId` - Accept offer (Buyer/Post owner only)
-- `POST /api/v1/offer/reject/:offerId` - Reject offer (Buyer/Post owner only)
+- `POST /offer/create/:postId` - Create offer (Seller only)
+- `GET /offer/all/:postId` - Get all offers for a post
+- `POST /offer/accept/:offerId` - Accept offer (Buyer/Post owner only)
+- `POST /offer/reject/:offerId` - Reject offer (Buyer/Post owner only)
 
 ## 🚀 Routes
 

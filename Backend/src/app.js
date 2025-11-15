@@ -35,22 +35,22 @@ app.get('/', (req, res) => {
   res.send('Welcome to the Need Kart Backend!');
 });
 
-app.use('/api/v1/auth', authRouter)
-app.use('/api/v1/post', postRouter)
-app.use('/api/v1/offer', offerRouter)
-app.use('/api/v1/like', likeRouter)
-app.use('/api/v1/comment', commentRouter)
-app.use('/api/v1/product', productRouter)
-app.use('/api/v1/wishlist', wishlistRouter)
-app.use('/api/v1/review', reviewRouter)
-app.use('/api/v1/transaction', transactionRouter)
-app.use('/api/v1/item', TOPRouter)
-app.use('/api/v1/item-cod', CODRouter)
-app.use('/api/v1/admin', adminRouter)
-app.use('/api/v1/seller-dashboard', sellerDashboardRouter)
-app.use('/api/v1/buyer-dashboard', buyerDashboardRouter)
-app.use('/api/v1/order', orderRouter)
-app.use('/api/v1/chatbot', chatbotRouter)
+app.use('/auth', authRouter)
+app.use('/post', postRouter)
+app.use('/offer', offerRouter)
+app.use('/like', likeRouter)
+app.use('/comment', commentRouter)
+app.use('/product', productRouter)
+app.use('/wishlist', wishlistRouter)
+app.use('/review', reviewRouter)
+app.use('/transaction', transactionRouter)
+app.use('/item', TOPRouter)
+app.use('/item-cod', CODRouter)
+app.use('/admin', adminRouter)
+app.use('/seller-dashboard', sellerDashboardRouter)
+app.use('/buyer-dashboard', buyerDashboardRouter)
+app.use('/order', orderRouter)
+app.use('/chatbot', chatbotRouter)
 
 // Error handling middleware - must be after all routes
 app.use((err, req, res, next) => {

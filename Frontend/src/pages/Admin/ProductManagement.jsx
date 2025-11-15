@@ -38,7 +38,7 @@ const ProductManagement = () => {
       
       const token = await auth.currentUser.getIdToken();
       const response = await axios.get(
-        `${import.meta.env.VITE_URL}/api/v1/admin/products?page=${productPagination.currentPage}&limit=20`,
+        `${import.meta.env.VITE_URL}/admin/products?page=${productPagination.currentPage}&limit=20`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -66,7 +66,7 @@ const ProductManagement = () => {
       
       const token = await auth.currentUser.getIdToken();
       const response = await axios.get(
-        `${import.meta.env.VITE_URL}/api/v1/admin/posts?page=${postPagination.currentPage}&limit=20`,
+        `${import.meta.env.VITE_URL}/admin/posts?page=${postPagination.currentPage}&limit=20`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -91,8 +91,8 @@ const ProductManagement = () => {
       
       const token = await auth.currentUser.getIdToken();
       const endpoint = type === 'product' 
-        ? `/api/v1/admin/products/${itemId}`
-        : `/api/v1/admin/posts/${itemId}`;
+        ? `/admin/products/${itemId}`
+        : `/admin/posts/${itemId}`;
       
       const response = await axios.delete(
         `${import.meta.env.VITE_URL}${endpoint}`,

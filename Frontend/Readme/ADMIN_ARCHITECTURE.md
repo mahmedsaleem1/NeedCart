@@ -224,7 +224,7 @@ const fetchData = async () => {
     setLoading(true);
     const token = await auth.currentUser.getIdToken();
     const response = await axios.get(
-      `${import.meta.env.VITE_BACKEND_URL}/api/v1/admin/endpoint`,
+      `${import.meta.env.VITE_BACKEND_URL}/admin/endpoint`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
     if (response.data.success) {

@@ -65,7 +65,7 @@ export default function Product() {
 
       // Fetch product details
       const productRes = await fetch(
-        `${import.meta.env.VITE_URL}/api/v1/product/getOne/${productId}`,
+        `${import.meta.env.VITE_URL}/product/getOne/${productId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const productData = await productRes.json();
@@ -79,7 +79,7 @@ export default function Product() {
       // Fetch reviews - only if product exists
       try {
         const reviewsRes = await fetch(
-          `${import.meta.env.VITE_URL}/api/v1/review/get/${productId}`
+          `${import.meta.env.VITE_URL}/review/get/${productId}`
         );
         
         // Check if response is JSON before parsing
@@ -122,7 +122,7 @@ export default function Product() {
       
       const token = await auth.currentUser.getIdToken();
       const response = await fetch(
-        `${import.meta.env.VITE_URL}/api/v1/wishlist/get`,
+        `${import.meta.env.VITE_URL}/wishlist/get`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -156,7 +156,7 @@ export default function Product() {
       const endpoint = isInWishlist ? "delete" : "add";
 
       const response = await fetch(
-        `${import.meta.env.VITE_URL}/api/v1/wishlist/${endpoint}/${productId}`,
+        `${import.meta.env.VITE_URL}/wishlist/${endpoint}/${productId}`,
         {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },
@@ -222,8 +222,8 @@ export default function Product() {
 
       const endpoint =
         paymentMethod === "cod"
-          ? `/api/v1/item-cod/buy/${productId}`
-          : `/api/v1/item/buy/${productId}`;
+          ? `/item-cod/buy/${productId}`
+          : `/item/buy/${productId}`;
 
       const response = await fetch(`${import.meta.env.VITE_URL}${endpoint}`, {
         method: "POST",

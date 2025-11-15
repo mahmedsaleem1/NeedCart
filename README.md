@@ -509,7 +509,7 @@ npm run preview
 
 ## 📡 API Documentation
 
-### Authentication Routes (`/api/v1/auth`)
+### Authentication Routes (`/auth`)
 
 | Method | Endpoint | Description | Auth Required |
 |--------|----------|-------------|---------------|
@@ -521,7 +521,7 @@ npm run preview
 | POST | `/reset-password` | Send password reset email | No |
 | GET | `/user` | Get user by email | Yes |
 
-### Product Routes (`/api/v1/products`)
+### Product Routes (`/products`)
 
 | Method | Endpoint | Description | Auth Required |
 |--------|----------|-------------|---------------|
@@ -531,7 +531,7 @@ npm run preview
 | PUT | `/:id` | Update product | Yes (Seller) |
 | DELETE | `/:id` | Delete product | Yes (Seller) |
 
-### Post Routes (`/api/v1/posts`)
+### Post Routes (`/posts`)
 
 | Method | Endpoint | Description | Auth Required |
 |--------|----------|-------------|---------------|
@@ -541,7 +541,7 @@ npm run preview
 | PUT | `/:id` | Update post | Yes (Buyer) |
 | DELETE | `/:id` | Delete post | Yes (Buyer) |
 
-### Offer Routes (`/api/v1/offers`)
+### Offer Routes (`/offers`)
 
 | Method | Endpoint | Description | Auth Required |
 |--------|----------|-------------|---------------|
@@ -550,7 +550,7 @@ npm run preview
 | PUT | `/:id/accept` | Accept offer | Yes (Buyer) |
 | PUT | `/:id/reject` | Reject offer | Yes (Buyer) |
 
-### Order Routes (`/api/v1/orders`)
+### Order Routes (`/orders`)
 
 | Method | Endpoint | Description | Auth Required |
 |--------|----------|-------------|---------------|
@@ -560,7 +560,7 @@ npm run preview
 | PUT | `/:id/status` | Update order status | Yes (Seller) |
 | PUT | `/:id/confirm` | Confirm delivery | Yes (Buyer) |
 
-### Payment Routes (`/api/v1/payments`)
+### Payment Routes (`/payments`)
 
 | Method | Endpoint | Description | Auth Required |
 |--------|----------|-------------|---------------|
@@ -568,7 +568,7 @@ npm run preview
 | POST | `/confirm` | Confirm payment | Yes |
 | POST | `/cod` | Place COD order | Yes |
 
-### Review Routes (`/api/v1/reviews`)
+### Review Routes (`/reviews`)
 
 | Method | Endpoint | Description | Auth Required |
 |--------|----------|-------------|---------------|
@@ -576,7 +576,7 @@ npm run preview
 | GET | `/product/:id` | Get product reviews | No |
 | POST | `/` | Create review | Yes (Buyer) |
 
-### Wishlist Routes (`/api/v1/wishlist`)
+### Wishlist Routes (`/wishlist`)
 
 | Method | Endpoint | Description | Auth Required |
 |--------|----------|-------------|---------------|
@@ -584,7 +584,7 @@ npm run preview
 | POST | `/` | Add to wishlist | Yes (Buyer) |
 | DELETE | `/:id` | Remove from wishlist | Yes (Buyer) |
 
-### Admin Routes (`/api/v1/admin`)
+### Admin Routes (`/admin`)
 
 | Method | Endpoint | Description | Auth Required |
 |--------|----------|-------------|---------------|
@@ -695,7 +695,7 @@ Use tools like Postman or Thunder Client:
 
 1. **Test OTP Registration:**
 ```bash
-POST http://localhost:8000/api/v1/auth/signup
+POST http://localhost:8000/auth/signup
 Content-Type: application/json
 
 {
@@ -707,7 +707,7 @@ Content-Type: application/json
 
 2. **Verify OTP:**
 ```bash
-POST http://localhost:8000/api/v1/auth/verify-otp
+POST http://localhost:8000/auth/verify-otp
 Content-Type: application/json
 
 {

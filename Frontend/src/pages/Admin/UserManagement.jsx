@@ -31,7 +31,7 @@ const UserManagement = () => {
       
       const roleParam = roleFilter === 'all' ? '' : `&role=${roleFilter}`;
       const response = await axios.get(
-        `${import.meta.env.VITE_URL}/api/v1/admin/users?page=${pagination.currentPage}&limit=20${roleParam}`,
+        `${import.meta.env.VITE_URL}/admin/users?page=${pagination.currentPage}&limit=20${roleParam}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -50,7 +50,7 @@ const UserManagement = () => {
     try {
       const token = await auth.currentUser.getIdToken();
       const response = await axios.delete(
-        `${import.meta.env.VITE_URL}/api/v1/admin/users/${role}/${userId}`,
+        `${import.meta.env.VITE_URL}/admin/users/${role}/${userId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 

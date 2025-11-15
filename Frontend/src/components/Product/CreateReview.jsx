@@ -26,7 +26,7 @@ export default function CreateReview({ productId, onReviewAdded }) {
       const token = await auth.currentUser.getIdToken();
 
       const response = await fetch(
-        `${import.meta.env.VITE_URL}/api/v1/review/add/${productId}`,
+        `${import.meta.env.VITE_URL}/review/add/${productId}`,
         {
           method: "POST",
           headers: {

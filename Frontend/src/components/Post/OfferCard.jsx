@@ -49,7 +49,7 @@ export default function OfferCard({ offer, isPostOwner, postStatus, onOfferUpdat
       // DON'T accept the offer yet - it will be accepted after successful payment
       setIsRedirectingToPayment(true);
       
-      const paymentUrl = `${import.meta.env.VITE_URL}/api/v1/item/buy/${offer._id}`;
+      const paymentUrl = `${import.meta.env.VITE_URL}/item/buy/${offer._id}`;
       
       const paymentBody = {
         totalPrice: offer.amount,
@@ -113,7 +113,7 @@ export default function OfferCard({ offer, isPostOwner, postStatus, onOfferUpdat
     setIsProcessing(true);
     try {
       const token = await auth.currentUser.getIdToken();
-      const response = await fetch(`${import.meta.env.VITE_URL}/api/v1/offer/reject/${offer._id}`, {
+      const response = await fetch(`${import.meta.env.VITE_URL}/offer/reject/${offer._id}`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,

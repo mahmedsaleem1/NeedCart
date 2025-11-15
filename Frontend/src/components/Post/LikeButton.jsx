@@ -48,7 +48,7 @@ export default function LikeButton({ postId, initialLikes = [] }) {
 
     try {
       const token = await auth.currentUser.getIdToken();
-      const endpoint = isLiked ? '/api/v1/like/do-unlike' : '/api/v1/like/do-like';
+      const endpoint = isLiked ? '/like/do-unlike' : '/like/do-like';
 
       const response = await fetch(`${import.meta.env.VITE_URL}${endpoint}`, {
         method: 'POST',

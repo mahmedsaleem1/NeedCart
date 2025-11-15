@@ -36,7 +36,7 @@ const Signup = () => {
         
         try {
             const { email, role, password } = data;
-            const response = await fetch(`${import.meta.env.VITE_URL}/api/v1/auth/signup`, {
+            const response = await fetch(`${import.meta.env.VITE_URL}/auth/signup`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -100,7 +100,7 @@ const Signup = () => {
         setMessage("");
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_URL}/api/v1/auth/verify-otp`, {
+            const response = await fetch(`${import.meta.env.VITE_URL}/auth/verify-otp`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -133,7 +133,7 @@ const Signup = () => {
         setMessage("");
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_URL}/api/v1/auth/resend-otp`, {
+            const response = await fetch(`${import.meta.env.VITE_URL}/auth/resend-otp`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

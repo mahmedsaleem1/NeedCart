@@ -175,44 +175,44 @@ All in `Frontend/Readme/`:
 
 ### Dashboard & Analytics
 ```
-GET  /api/v1/admin/dashboard-overview
-GET  /api/v1/admin/revenue-analytics?period=month
+GET  /admin/dashboard-overview
+GET  /admin/revenue-analytics?period=month
 ```
 
 ### User Management
 ```
-GET    /api/v1/admin/users?page=1&role=buyer
-DELETE /api/v1/admin/users/:role/:userId
+GET    /admin/users?page=1&role=buyer
+DELETE /admin/users/:role/:userId
 ```
 
 ### Seller Management
 ```
-GET  /api/v1/admin/sellers-requests?verified=false
-POST /api/v1/admin/accept-seller-request/:sellerId
+GET  /admin/sellers-requests?verified=false
+POST /admin/accept-seller-request/:sellerId
 ```
 
 ### Order Management
 ```
-GET /api/v1/admin/orders?status=pending
+GET /admin/orders?status=pending
 ```
 
 ### Product Management
 ```
-GET    /api/v1/admin/products
-GET    /api/v1/admin/posts
-DELETE /api/v1/admin/products/:productId
-DELETE /api/v1/admin/posts/:postId
+GET    /admin/products
+GET    /admin/posts
+DELETE /admin/products/:productId
+DELETE /admin/posts/:postId
 ```
 
 ### Payment Management
 ```
-GET  /api/v1/admin/get-order-payment-status
-POST /api/v1/admin/release-payment/:escrowId
+GET  /admin/get-order-payment-status
+POST /admin/release-payment/:escrowId
 ```
 
 ### Transaction Management
 ```
-GET /api/v1/admin/transactions?status=succeeded
+GET /admin/transactions?status=succeeded
 ```
 
 ## 🔐 Security

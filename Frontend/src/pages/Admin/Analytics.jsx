@@ -36,7 +36,7 @@ const Analytics = () => {
       
       const token = await auth.currentUser.getIdToken();
       const response = await axios.get(
-        `${import.meta.env.VITE_URL}/api/v1/admin/revenue-analytics?period=${period}`,
+        `${import.meta.env.VITE_URL}/admin/revenue-analytics?period=${period}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 

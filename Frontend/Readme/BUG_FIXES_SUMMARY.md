@@ -5,12 +5,12 @@
 ### 1. ✅ Payment Routes Corrected
 
 **Problem:** Frontend was using incorrect API endpoints for payment
-- COD was calling: `/api/v1/cod/buy/:itemId` ❌
-- Stripe was calling: `/api/v1/top/buy/:itemId` ❌
+- COD was calling: `/cod/buy/:itemId` ❌
+- Stripe was calling: `/top/buy/:itemId` ❌
 
 **Solution:** Updated to correct backend routes
-- COD now calls: `/api/v1/item-cod/buy/:itemId` ✅
-- Stripe now calls: `/api/v1/item/buy/:itemId` ✅
+- COD now calls: `/item-cod/buy/:itemId` ✅
+- Stripe now calls: `/item/buy/:itemId` ✅
 
 **Files Modified:**
 - `Frontend/src/components/Product/Product.jsx` - Updated `handlePurchase` function

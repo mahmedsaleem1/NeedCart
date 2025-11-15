@@ -96,14 +96,14 @@ if (errorMessage.includes('already liked')) {
 ```javascript
 const handleAccept = async () => {
     // Step 1: Accept the offer
-    const response = await fetch(`${import.meta.env.VITE_URL}/api/v1/offer/accept/${offer._id}`);
+    const response = await fetch(`${import.meta.env.VITE_URL}/offer/accept/${offer._id}`);
     
     if (response.ok) {
         // Step 2: Initiate payment using TOP
         setIsRedirectingToPayment(true);
         
         const paymentResponse = await fetch(
-            `${import.meta.env.VITE_URL}/api/v1/item/buy/${offer._id}`,
+            `${import.meta.env.VITE_URL}/item/buy/${offer._id}`,
             {
                 body: JSON.stringify({
                     totalPrice: offer.amount,
@@ -216,11 +216,11 @@ const payment = await createCheckoutSession_INTERNAL(uid, orderId);
 - Returns checkout URL
 
 ### Step 4: Payment Completion
-**On Success:** `GET /api/v1/item/success?session_id={CHECKOUT_SESSION_ID}`
+**On Success:** `GET /item/success?session_id={CHECKOUT_SESSION_ID}`
 - Updates transaction status to `paid`
 - Updates order status to `confirmed`
 
-**On Cancel:** `GET /api/v1/item/cancel?session_id={CHECKOUT_SESSION_ID}`
+**On Cancel:** `GET /item/cancel?session_id={CHECKOUT_SESSION_ID}`
 - Updates transaction status to `failed`
 - Updates order status to `cancelled`
 
@@ -344,8 +344,8 @@ STRIPE_SECRET_KEY=sk_test_...   # Stripe secret key
 ```
 
 ### Stripe Configuration
-- Success URL: `${LOCAL_URL}/api/v1/item/success?session_id={CHECKOUT_SESSION_ID}`
-- Cancel URL: `${LOCAL_URL}/api/v1/item/cancel?session_id={CHECKOUT_SESSION_ID}`
+- Success URL: `${LOCAL_URL}/item/success?session_id={CHECKOUT_SESSION_ID}`
+- Cancel URL: `${LOCAL_URL}/item/cancel?session_id={CHECKOUT_SESSION_ID}`
 
 ---
 

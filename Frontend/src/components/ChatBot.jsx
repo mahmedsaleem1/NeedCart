@@ -114,7 +114,7 @@ const Chatbot = () => {
         }));
 
       const response = await axios.post(
-        'http://localhost:8000/api/v1/chatbot/chat',
+        `${import.meta.env.VITE_URL}/chatbot/chat`,
         {
           message: userMessage,
           conversationHistory: conversationHistory.slice(0, -1), // Exclude the current message

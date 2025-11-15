@@ -54,8 +54,8 @@ export const createCheckoutSession_INTERNAL = async (uid, orderId) => {
       postId: order.postId?._id?.toString() || '',
       productId: order.productId?._id?.toString() || '',
     },
-    success_url: `${process.env.LOCAL_URL}/api/v1/item/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.LOCAL_URL}/api/v1/item/cancel?session_id={CHECKOUT_SESSION_ID}`,
+    success_url: `${process.env.LOCAL_URL}/item/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.LOCAL_URL}/item/cancel?session_id={CHECKOUT_SESSION_ID}`,
   });
 
   return session; // Return the raw Stripe session object

@@ -16,7 +16,7 @@ This URL is used to redirect users back to the frontend after payment completion
 1. User accepts offer
 2. Redirected to Stripe checkout
 3. Completes payment
-4. Stripe redirects to: `LOCAL_URL/api/v1/item/success?session_id=xxx`
+4. Stripe redirects to: `LOCAL_URL/item/success?session_id=xxx`
 5. Backend updates transaction to "paid" and order to "confirmed"
 6. Backend redirects to: `FRONTEND_URL/post/{postId}?payment=success`
 7. Frontend shows success message and refreshed offer status
@@ -25,7 +25,7 @@ This URL is used to redirect users back to the frontend after payment completion
 1. User accepts offer
 2. Redirected to Stripe checkout
 3. Clicks "Back" or cancels
-4. Stripe redirects to: `LOCAL_URL/api/v1/item/cancel?session_id=xxx`
+4. Stripe redirects to: `LOCAL_URL/item/cancel?session_id=xxx`
 5. Backend updates transaction to "failed" and order to "cancelled"
 6. Backend redirects to: `FRONTEND_URL/post/{postId}?payment=cancel`
 7. Frontend shows cancel message and offer remains "accepted"

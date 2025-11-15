@@ -18,7 +18,7 @@ export default function ReleasedPayments() {
       const token = await auth.currentUser.getIdToken();
 
       const response = await fetch(
-        `${import.meta.env.VITE_URL}/api/v1/seller-dashboard/get-released-payment-orders`,
+        `${import.meta.env.VITE_URL}/seller-dashboard/get-released-payment-orders`,
         {
           headers: { Authorization: `Bearer ${token}` }
         }

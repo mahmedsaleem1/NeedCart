@@ -182,31 +182,31 @@ npm run dev
 
 ### Posts
 ```http
-GET    /api/v1/post/all              # Get all posts
-GET    /api/v1/post/get/:postId      # Get single post
-POST   /api/v1/post/create           # Create post (Buyer only)
+GET    /post/all              # Get all posts
+GET    /post/get/:postId      # Get single post
+POST   /post/create           # Create post (Buyer only)
 ```
 
 ### Likes
 ```http
-POST   /api/v1/like/do-like          # Like a post
-POST   /api/v1/like/do-unlike        # Unlike a post
-GET    /api/v1/like/get-likes/:postId # Get all likes
+POST   /like/do-like          # Like a post
+POST   /like/do-unlike        # Unlike a post
+GET    /like/get-likes/:postId # Get all likes
 ```
 
 ### Comments
 ```http
-POST   /api/v1/comment/do-comment/:postId    # Add comment
-POST   /api/v1/comment/delete-comment        # Delete comment
-GET    /api/v1/comment/get-comments/:postId  # Get all comments
+POST   /comment/do-comment/:postId    # Add comment
+POST   /comment/delete-comment        # Delete comment
+GET    /comment/get-comments/:postId  # Get all comments
 ```
 
 ### Offers
 ```http
-POST   /api/v1/offer/create/:postId   # Create offer (Seller only)
-GET    /api/v1/offer/all/:postId      # Get all offers
-POST   /api/v1/offer/accept/:offerId  # Accept offer (Buyer only)
-POST   /api/v1/offer/reject/:offerId  # Reject offer (Buyer only)
+POST   /offer/create/:postId   # Create offer (Seller only)
+GET    /offer/all/:postId      # Get all offers
+POST   /offer/accept/:offerId  # Accept offer (Buyer only)
+POST   /offer/reject/:offerId  # Reject offer (Buyer only)
 ```
 
 ---

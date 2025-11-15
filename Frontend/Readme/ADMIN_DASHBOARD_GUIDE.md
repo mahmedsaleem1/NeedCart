@@ -110,32 +110,32 @@ The backend already includes all necessary endpoints. Make sure your backend ser
 ## 📊 API Endpoints Used
 
 ### Dashboard
-- `GET /api/v1/admin/dashboard-overview` - Complete dashboard statistics
-- `GET /api/v1/admin/revenue-analytics?period=month` - Revenue analytics
+- `GET /admin/dashboard-overview` - Complete dashboard statistics
+- `GET /admin/revenue-analytics?period=month` - Revenue analytics
 
 ### User Management
-- `GET /api/v1/admin/users?page=1&limit=20&role=buyer` - Get all users
-- `DELETE /api/v1/admin/users/:role/:userId` - Delete user
+- `GET /admin/users?page=1&limit=20&role=buyer` - Get all users
+- `DELETE /admin/users/:role/:userId` - Delete user
 
 ### Seller Management
-- `GET /api/v1/admin/sellers-requests?verified=false` - Get seller requests
-- `POST /api/v1/admin/accept-seller-request/:sellerId` - Approve/reject seller
+- `GET /admin/sellers-requests?verified=false` - Get seller requests
+- `POST /admin/accept-seller-request/:sellerId` - Approve/reject seller
 
 ### Order Management
-- `GET /api/v1/admin/orders?status=pending` - Get orders
+- `GET /admin/orders?status=pending` - Get orders
 
 ### Product Management
-- `GET /api/v1/admin/products` - Get all products
-- `GET /api/v1/admin/posts` - Get all posts
-- `DELETE /api/v1/admin/products/:productId` - Delete product
-- `DELETE /api/v1/admin/posts/:postId` - Delete post
+- `GET /admin/products` - Get all products
+- `GET /admin/posts` - Get all posts
+- `DELETE /admin/products/:productId` - Delete product
+- `DELETE /admin/posts/:postId` - Delete post
 
 ### Payment Management
-- `GET /api/v1/admin/get-order-payment-status` - Get escrow payments
-- `POST /api/v1/admin/release-payment/:escrowId` - Release payment
+- `GET /admin/get-order-payment-status` - Get escrow payments
+- `POST /admin/release-payment/:escrowId` - Release payment
 
 ### Transactions
-- `GET /api/v1/admin/transactions?status=succeeded` - Get transactions
+- `GET /admin/transactions?status=succeeded` - Get transactions
 
 ## 🔧 Configuration
 

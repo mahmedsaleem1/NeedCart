@@ -170,20 +170,20 @@ A fully functional, comprehensive admin dashboard for the NeedCart e-commerce pl
 
 | Endpoint | Method | Purpose |
 |----------|--------|---------|
-| `/api/v1/admin/dashboard-overview` | GET | Complete dashboard stats |
-| `/api/v1/admin/revenue-analytics` | GET | Revenue charts data |
-| `/api/v1/admin/users` | GET | All users list |
-| `/api/v1/admin/users/:role/:userId` | DELETE | Delete user |
-| `/api/v1/admin/sellers-requests` | GET | Seller requests |
-| `/api/v1/admin/accept-seller-request/:sellerId` | POST | Approve/reject seller |
-| `/api/v1/admin/orders` | GET | All orders |
-| `/api/v1/admin/products` | GET | All products |
-| `/api/v1/admin/products/:productId` | DELETE | Delete product |
-| `/api/v1/admin/posts` | GET | All posts |
-| `/api/v1/admin/posts/:postId` | DELETE | Delete post |
-| `/api/v1/admin/get-order-payment-status` | GET | Escrow payments |
-| `/api/v1/admin/release-payment/:escrowId` | POST | Release payment |
-| `/api/v1/admin/transactions` | GET | Transaction history |
+| `/admin/dashboard-overview` | GET | Complete dashboard stats |
+| `/admin/revenue-analytics` | GET | Revenue charts data |
+| `/admin/users` | GET | All users list |
+| `/admin/users/:role/:userId` | DELETE | Delete user |
+| `/admin/sellers-requests` | GET | Seller requests |
+| `/admin/accept-seller-request/:sellerId` | POST | Approve/reject seller |
+| `/admin/orders` | GET | All orders |
+| `/admin/products` | GET | All products |
+| `/admin/products/:productId` | DELETE | Delete product |
+| `/admin/posts` | GET | All posts |
+| `/admin/posts/:postId` | DELETE | Delete post |
+| `/admin/get-order-payment-status` | GET | Escrow payments |
+| `/admin/release-payment/:escrowId` | POST | Release payment |
+| `/admin/transactions` | GET | Transaction history |
 
 ## 🎯 Key Metrics Tracked
 

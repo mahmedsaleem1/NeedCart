@@ -40,7 +40,7 @@ const TransactionManagement = () => {
       }
       
       const response = await axios.get(
-        `${import.meta.env.VITE_URL}/api/v1/admin/transactions?page=${pagination.currentPage}&limit=20${statusParam}`,
+        `${import.meta.env.VITE_URL}/admin/transactions?page=${pagination.currentPage}&limit=20${statusParam}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 

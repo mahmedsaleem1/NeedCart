@@ -19,7 +19,7 @@ export default function OrderManagement() {
       const token = await auth.currentUser.getIdToken();
 
       const response = await fetch(
-        `${import.meta.env.VITE_URL}/api/v1/order/seller-orders`,
+        `${import.meta.env.VITE_URL}/order/seller-orders`,
         {
           headers: { Authorization: `Bearer ${token}` }
         }
@@ -57,7 +57,7 @@ export default function OrderManagement() {
       const token = await auth.currentUser.getIdToken();
 
       const response = await fetch(
-        `${import.meta.env.VITE_URL}/api/v1/seller-dashboard/update-order-status/${orderId}`,
+        `${import.meta.env.VITE_URL}/seller-dashboard/update-order-status/${orderId}`,
         {
           method: "POST",
           headers: { 

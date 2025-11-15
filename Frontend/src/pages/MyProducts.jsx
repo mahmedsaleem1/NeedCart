@@ -36,7 +36,7 @@ export default function MyProducts() {
 
       // Fetch all products
       const response = await fetch(
-        `${import.meta.env.VITE_URL}/api/v1/product/all`
+        `${import.meta.env.VITE_URL}/product/all`
       );
       const result = await response.json();
 
@@ -75,7 +75,7 @@ export default function MyProducts() {
       const token = await auth.currentUser.getIdToken();
 
       const response = await fetch(
-        `${import.meta.env.VITE_URL}/api/v1/product/remove/${productId}`,
+        `${import.meta.env.VITE_URL}/product/remove/${productId}`,
         {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },

@@ -18,7 +18,7 @@ export default function SendOffer({ postId, onOfferSent }) {
     try {
       const token = await auth.currentUser.getIdToken();
 
-      const response = await fetch(`${import.meta.env.VITE_URL}/api/v1/offer/create/${postId}`, {
+      const response = await fetch(`${import.meta.env.VITE_URL}/offer/create/${postId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

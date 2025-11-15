@@ -71,25 +71,25 @@ Frontend/
 
 ## API Routes Used
 
-### Product Routes (`/api/v1/product`)
+### Product Routes (`/product`)
 - `POST /add` - Add new product (Seller only, with image upload)
 - `POST /remove/:prodId` - Delete product (Seller only)
 - `GET /all` - Get all products
 - `GET /getOne/:prodId` - Get single product by ID
 
-### Review Routes (`/api/v1/review`)
+### Review Routes (`/review`)
 - `POST /add/:prodId` - Add review (Buyer only, must have purchased)
 - `POST /delete/:revId` - Delete review (Author only)
 - `GET /get/:prodId` - Get all reviews for a product
 
-### Wishlist Routes (`/api/v1/wishlist`)
+### Wishlist Routes (`/wishlist`)
 - `POST /add/:prodId` - Add product to wishlist (Buyer only)
 - `POST /delete/:prodId` - Remove product from wishlist (Buyer only)
 - `GET /get` - Get user's wishlist (Buyer only)
 
 ### Payment Routes
-- `POST /api/v1/top/buy/:itemId` - Stripe payment (itemId is productId)
-- `POST /api/v1/cod/buy/:itemId` - Cash on Delivery (itemId is productId)
+- `POST /top/buy/:itemId` - Stripe payment (itemId is productId)
+- `POST /cod/buy/:itemId` - Cash on Delivery (itemId is productId)
 
 ## Component Details
 
@@ -482,11 +482,11 @@ VITE_URL=<backend_url>
 
 ### Backend Routes
 Ensure all routes are registered in `Backend/src/routes/index.js`:
-- `/api/v1/product`
-- `/api/v1/review`
-- `/api/v1/wishlist`
-- `/api/v1/cod`
-- `/api/v1/top`
+- `/product`
+- `/review`
+- `/wishlist`
+- `/cod`
+- `/top`
 
 ### Dependencies
 All required npm packages should already be installed:

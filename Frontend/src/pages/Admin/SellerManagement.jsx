@@ -31,7 +31,7 @@ const SellerManagement = () => {
       
       const verifiedParam = filter === 'all' ? '' : `&verified=${filter === 'verified'}`;
       const response = await axios.get(
-        `${import.meta.env.VITE_URL}/api/v1/admin/sellers-requests?page=${pagination.currentPage}&limit=20${verifiedParam}`,
+        `${import.meta.env.VITE_URL}/admin/sellers-requests?page=${pagination.currentPage}&limit=20${verifiedParam}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -55,7 +55,7 @@ const SellerManagement = () => {
       
       const token = await auth.currentUser.getIdToken();
       const response = await axios.post(
-        `${import.meta.env.VITE_URL}/api/v1/admin/accept-seller-request/${sellerId}`,
+        `${import.meta.env.VITE_URL}/admin/accept-seller-request/${sellerId}`,
         { choice },
         { headers: { Authorization: `Bearer ${token}` } }
       );

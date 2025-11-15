@@ -38,7 +38,7 @@ export default function Products() {
     try {
       setLoading(true);
       const response = await fetch(
-        `${import.meta.env.VITE_URL}/api/v1/product/all`
+        `${import.meta.env.VITE_URL}/product/all`
       );
       const result = await response.json();
 

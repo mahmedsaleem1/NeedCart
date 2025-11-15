@@ -62,30 +62,30 @@
 
 ### Products
 ```
-GET  /api/v1/product/all              - Get all products
-GET  /api/v1/product/getOne/:prodId   - Get single product
-POST /api/v1/product/add              - Add product (Seller)
-POST /api/v1/product/remove/:prodId   - Delete product (Seller)
+GET  /product/all              - Get all products
+GET  /product/getOne/:prodId   - Get single product
+POST /product/add              - Add product (Seller)
+POST /product/remove/:prodId   - Delete product (Seller)
 ```
 
 ### Reviews
 ```
-GET  /api/v1/review/get/:prodId       - Get product reviews
-POST /api/v1/review/add/:prodId       - Add review (Buyer)
-POST /api/v1/review/delete/:revId     - Delete review (Author)
+GET  /review/get/:prodId       - Get product reviews
+POST /review/add/:prodId       - Add review (Buyer)
+POST /review/delete/:revId     - Delete review (Author)
 ```
 
 ### Wishlist
 ```
-GET  /api/v1/wishlist/get             - Get user wishlist (Buyer)
-POST /api/v1/wishlist/add/:prodId     - Add to wishlist (Buyer)
-POST /api/v1/wishlist/delete/:prodId  - Remove from wishlist (Buyer)
+GET  /wishlist/get             - Get user wishlist (Buyer)
+POST /wishlist/add/:prodId     - Add to wishlist (Buyer)
+POST /wishlist/delete/:prodId  - Remove from wishlist (Buyer)
 ```
 
 ### Payment
 ```
-POST /api/v1/top/buy/:itemId          - Stripe payment (itemId = productId)
-POST /api/v1/cod/buy/:itemId          - Cash on Delivery (itemId = productId)
+POST /top/buy/:itemId          - Stripe payment (itemId = productId)
+POST /cod/buy/:itemId          - Cash on Delivery (itemId = productId)
 ```
 
 ## 📦 Components

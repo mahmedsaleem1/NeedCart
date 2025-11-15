@@ -60,7 +60,7 @@
         ↓
 5. Get image URL
         ↓
-6. POST /api/v1/post/create
+6. POST /post/create
    Body: { title, description, budget, image: URL }
    Headers: { Authorization: Bearer <token> }
         ↓
@@ -88,7 +88,7 @@
         ↓
 4. Click "Submit"
         ↓
-5. POST /api/v1/offer/create/:postId
+5. POST /offer/create/:postId
    Body: { amount }
    Headers: { Authorization: Bearer <token> }
         ↓
@@ -115,7 +115,7 @@
         ↓
 3. Confirm acceptance
         ↓
-4. POST /api/v1/offer/accept/:offerId
+4. POST /offer/accept/:offerId
    Headers: { Authorization: Bearer <token> }
         ↓
 5. Backend verifies:

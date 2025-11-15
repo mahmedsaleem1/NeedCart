@@ -53,7 +53,7 @@ const AdminDashboard = () => {
       
       const token = await auth.currentUser.getIdToken();
       const response = await axios.get(
-        `${import.meta.env.VITE_URL}/api/v1/admin/dashboard-overview`,
+        `${import.meta.env.VITE_URL}/admin/dashboard-overview`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       
