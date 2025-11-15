@@ -6,6 +6,7 @@ import AddProductPage from "./AddProductPage";
 import Wishlist from "./Wishlist";
 import MyProducts from "./MyProducts";
 import SellerDashboard from "./SellerDashboard";
+import BuyerDashboard from "./BuyerDashboard";
 
 export {
     LandingPage,
@@ -15,7 +16,8 @@ export {
     AddProductPage,
     Wishlist,
     MyProducts,
-    SellerDashboard
+    SellerDashboard,
+    BuyerDashboard
 }
 
 

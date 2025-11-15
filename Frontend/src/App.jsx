@@ -14,7 +14,8 @@ import {
   AddProductPage,
   Wishlist,
   MyProducts,
-  SellerDashboard
+  SellerDashboard,
+  BuyerDashboard
 } from './pages/index.js'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -43,6 +44,9 @@ function App() {
 
           {/* Seller Dashboard Route */}
           <Route path="/seller" element={<SellerDashboard />} />
+
+          {/* Buyer Dashboard Route */}
+          <Route path="/buyer" element={<BuyerDashboard />} />
 
           {/* Add more routes as needed */}
         </Routes>

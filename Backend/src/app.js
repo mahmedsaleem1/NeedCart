@@ -14,6 +14,7 @@ import {
   CODRouter,
   adminRouter,
   sellerDashboardRouter,
+  buyerDashboardRouter,
   orderRouter
 } from './routes/index.js';
 import bodyParser from 'body-parser';
@@ -46,6 +47,7 @@ app.use('/api/v1/item', TOPRouter)
 app.use('/api/v1/item-cod', CODRouter)
 app.use('/api/v1/admin', adminRouter)
 app.use('/api/v1/seller-dashboard', sellerDashboardRouter)
+app.use('/api/v1/buyer-dashboard', buyerDashboardRouter)
 app.use('/api/v1/order', orderRouter)
 
 // Error handling middleware - must be after all routes
