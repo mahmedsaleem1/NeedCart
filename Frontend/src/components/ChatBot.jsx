@@ -159,14 +159,14 @@ const Chatbot = () => {
       {isOpen && (
         <div className="bg-white rounded-lg shadow-2xl mb-4 w-96 h-[500px] flex flex-col border border-gray-200">
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4 rounded-t-lg flex justify-between items-center">
+          <div className="bg-gradient-to-r from-emerald-600 to-emerald-500 text-white p-4 rounded-t-lg flex justify-between items-center">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
               <h3 className="font-semibold text-lg">NeedCart Assistant</h3>
             </div>
             <button
               onClick={toggleChat}
-              className="text-white hover:bg-blue-700 rounded-full p-1 transition-colors"
+              className="text-white hover:bg-emerald-700 rounded-full p-1 transition-colors"
             >
               <svg
                 className="w-6 h-6"
@@ -196,7 +196,7 @@ const Chatbot = () => {
                 <div
                   className={`max-w-[85%] rounded-lg p-3 ${
                     message.role === 'user'
-                      ? 'bg-blue-500 text-white'
+                      ? 'bg-emerald-600 text-white'
                       : 'bg-white text-gray-800 shadow-md border border-gray-200'
                   }`}
                 >
@@ -235,13 +235,13 @@ const Chatbot = () => {
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
                 placeholder="Type your message..."
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 disabled={isLoading}
               />
               <button
                 type="submit"
                 disabled={isLoading || !inputMessage.trim()}
-                className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+                className="bg-emerald-600 text-white p-2 rounded-full hover:bg-emerald-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
               >
                 <svg
                   className="w-6 h-6"
@@ -265,7 +265,7 @@ const Chatbot = () => {
       {/* Toggle Button */}
       <button
         onClick={toggleChat}
-        className="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all transform hover:scale-110"
+        className="bg-gradient-to-r from-emerald-600 to-emerald-500 text-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all transform hover:scale-110"
       >
         {isOpen ? (
           <svg

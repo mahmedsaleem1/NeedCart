@@ -303,9 +303,9 @@ export default function Product() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#3772ff] mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-emerald-600 mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-300 text-lg">
             Loading product...
           </p>
@@ -318,12 +318,12 @@ export default function Product() {
     return (
       <>
         <Navbar />
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
           <div className="text-center">
             <p className="text-red-500 text-xl mb-4">{error || "Product not found"}</p>
             <button
               onClick={() => navigate("/products")}
-              className="px-6 py-2 bg-[#3772ff] text-white rounded-full hover:bg-[#2759dd] transition-colors"
+              className="px-6 py-2 bg-emerald-600 text-white rounded-full hover:bg-emerald-700 transition-colors"
             >
               Back to Products
             </button>
@@ -337,7 +337,7 @@ export default function Product() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 py-20 px-4">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 py-20 px-4">
         {/* Payment Status Messages */}
         {paymentStatus && (
           <motion.div
@@ -363,7 +363,7 @@ export default function Product() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             onClick={() => navigate("/products")}
-            className="mb-6 flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-[#3772ff] transition-colors"
+            className="mb-6 flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-emerald-600 transition-colors"
           >
             <ArrowLeft size={20} />
             Back to Products
@@ -392,7 +392,7 @@ export default function Product() {
                 >
                   {product.availableStock > 0 ? "In Stock" : "Out of Stock"}
                 </span>
-                <span className="absolute top-4 left-4 px-4 py-2 rounded-full text-sm font-bold bg-[#3772ff] text-white">
+                <span className="absolute top-4 left-4 px-4 py-2 rounded-full text-sm font-bold bg-emerald-600 text-white">
                   {product.category}
                 </span>
               </div>
@@ -429,7 +429,7 @@ export default function Product() {
                     <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
                       Price
                     </p>
-                    <p className="text-4xl font-extrabold text-[#3772ff]">
+                    <p className="text-4xl font-extrabold text-emerald-600">
                       PKR {product.price.toLocaleString()}
                     </p>
                   </div>
@@ -479,7 +479,7 @@ export default function Product() {
                       whileTap={{ scale: 0.98 }}
                       onClick={handleBuyNow}
                       disabled={product.availableStock === 0}
-                      className="flex-1 bg-gradient-to-r from-[#3772ff] to-[#5c8cff] text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                      className="flex-1 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                     >
                       <ShoppingCart size={20} />
                       Buy Now
@@ -577,7 +577,7 @@ export default function Product() {
               </div>
               <div className="flex justify-between pt-2 border-t border-gray-300 dark:border-gray-600">
                 <span className="text-gray-900 dark:text-white font-bold">Total:</span>
-                <span className="text-[#3772ff] font-bold text-xl">
+                <span className="text-emerald-600 font-bold text-xl">
                   PKR {(product.price * quantity).toLocaleString()}
                 </span>
               </div>
@@ -593,7 +593,7 @@ export default function Product() {
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 placeholder="Enter your complete delivery address"
-                className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#3772ff] dark:bg-gray-700 dark:text-white resize-none"
+                className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-emerald-500 dark:bg-gray-700 dark:text-white resize-none"
                 rows="3"
                 required
               />
@@ -605,7 +605,7 @@ export default function Product() {
                 Payment Method
               </label>
               <div className="space-y-3">
-                <label className="flex items-center p-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl cursor-pointer hover:border-[#3772ff] transition-colors">
+                <label className="flex items-center p-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl cursor-pointer hover:border-emerald-600 transition-colors">
                   <input
                     type="radio"
                     value="stripe"
@@ -613,10 +613,10 @@ export default function Product() {
                     onChange={(e) => setPaymentMethod(e.target.value)}
                     className="mr-3"
                   />
-                  <CreditCard size={20} className="mr-2 text-[#3772ff]" />
+                  <CreditCard size={20} className="mr-2 text-emerald-600" />
                   <span className="font-semibold">Card Payment (Stripe)</span>
                 </label>
-                <label className="flex items-center p-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl cursor-pointer hover:border-[#3772ff] transition-colors">
+                <label className="flex items-center p-3 border-2 border-gray-300 dark:border-gray-600 rounded-xl cursor-pointer hover:border-emerald-600 transition-colors">
                   <input
                     type="radio"
                     value="cod"
@@ -624,7 +624,7 @@ export default function Product() {
                     onChange={(e) => setPaymentMethod(e.target.value)}
                     className="mr-3"
                   />
-                  <Truck size={20} className="mr-2 text-[#3772ff]" />
+                  <Truck size={20} className="mr-2 text-emerald-600" />
                   <span className="font-semibold">Cash on Delivery</span>
                 </label>
               </div>
@@ -641,7 +641,7 @@ export default function Product() {
               <button
                 onClick={handlePurchase}
                 disabled={processingPayment}
-                className="flex-1 px-6 py-3 bg-gradient-to-r from-[#3772ff] to-[#5c8cff] text-white font-semibold rounded-xl hover:shadow-lg transition-all disabled:opacity-50"
+                className="flex-1 px-6 py-3 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all disabled:opacity-50"
               >
                 {processingPayment ? "Processing..." : "Confirm Purchase"}
               </button>

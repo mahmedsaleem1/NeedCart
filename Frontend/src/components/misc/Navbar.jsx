@@ -19,7 +19,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-gradient-to-r from-[#2759dd]/95 via-[#3772ff]/95 to-[#5c8cff]/95 backdrop-blur-lg shadow-2xl border-b border-blue-300/20 font-[Lemon Milk]">
+    <header className="fixed top-0 w-full z-50 bg-gradient-to-r from-emerald-700/95 via-emerald-600/95 to-emerald-500/95 backdrop-blur-lg shadow-2xl border-b border-emerald-300/20 font-[Lemon Milk]">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
         {/* Logo */}
         <Link
@@ -65,13 +65,13 @@ const Navbar = () => {
             <>
               <Link
                 to="/login"
-                className="px-6 py-2.5 bg-white text-[#3772ff] hover:bg-white/90 rounded-xl font-semibold transition-all duration-300 shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 hover:scale-105"
+                className="px-6 py-2.5 bg-white text-emerald-600 hover:bg-white/90 rounded-xl font-semibold transition-all duration-300 shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/30 hover:scale-105"
               >
                 Login
               </Link>
               <Link
                 to="/signup"
-                className="px-6 py-2.5 border-2 border-white rounded-xl text-white hover:bg-white hover:text-[#3772ff] font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-white/30 hover:scale-105"
+                className="px-6 py-2.5 border-2 border-white rounded-xl text-white hover:bg-white hover:text-emerald-600 font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-white/30 hover:scale-105"
               >
                 Sign Up
               </Link>
@@ -88,7 +88,7 @@ const Navbar = () => {
                     {role ? role.charAt(0).toUpperCase() + role.slice(1).toLowerCase() : 'User'}
                   </span>
                 </button>
-                <div className="absolute right-0 mt-2 w-48 bg-gradient-to-br from-[#3772ff]/95 to-[#4a7fff]/95 backdrop-blur-md rounded-xl shadow-2xl border border-blue-300/30 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden">
+                <div className="absolute right-0 mt-2 w-48 bg-gradient-to-br from-emerald-600/95 to-emerald-500/95 backdrop-blur-md rounded-xl shadow-2xl border border-emerald-300/30 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden">
                   <button
                     onClick={handleDashboard}
                     className="flex items-center gap-3 w-full text-left px-5 py-3 text-white hover:bg-white/20 transition-all duration-200"

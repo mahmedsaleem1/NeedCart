@@ -134,7 +134,7 @@ export default function CreateReview({ productId, onReviewAdded }) {
             value={comment}
             onChange={(e) => setComment(e.target.value)}
             placeholder="Share your experience with this product..."
-            className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#3772ff] dark:bg-gray-800 dark:text-white resize-none"
+            className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-emerald-500 dark:bg-gray-800 dark:text-white resize-none"
             rows="4"
             required
           />
@@ -146,7 +146,7 @@ export default function CreateReview({ productId, onReviewAdded }) {
           whileTap={{ scale: 0.98 }}
           type="submit"
           disabled={loading}
-          className="w-full bg-gradient-to-r from-[#3772ff] to-[#5c8cff] text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+          className="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 flex items-center justify-center gap-2"
         >
           {loading ? (
             "Submitting..."

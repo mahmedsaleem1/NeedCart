@@ -203,7 +203,7 @@ export default function BuyerDashboard() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 pt-24 pb-16">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-emerald-50 to-gray-100 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-6">
           {/* Header */}
           <motion.div
@@ -213,7 +213,7 @@ export default function BuyerDashboard() {
           >
             <button
               onClick={() => navigate("/")}
-              className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-[#3772ff] dark:hover:text-[#5c8cff] transition-colors mb-4"
+              className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-500 transition-colors mb-4"
             >
               <ArrowLeft className="w-5 h-5" />
               Back to Home
@@ -235,7 +235,7 @@ export default function BuyerDashboard() {
               <div className="flex gap-3">
                 <button
                   onClick={() => navigate("/products")}
-                  className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 text-[#3772ff] dark:text-[#5c8cff] font-semibold rounded-xl border-2 border-[#3772ff] dark:border-[#5c8cff] hover:bg-[#3772ff] hover:text-white dark:hover:bg-[#5c8cff] transition-all duration-300 shadow-lg"
+                  className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-500 font-semibold rounded-xl border-2 border-emerald-600 dark:border-emerald-500 hover:bg-emerald-600 hover:text-white dark:hover:bg-emerald-500 transition-all duration-300 shadow-lg"
                 >
                   <ShoppingBag className="w-5 h-5" />
                   Browse Products
@@ -243,7 +243,7 @@ export default function BuyerDashboard() {
 
                 <button
                   onClick={() => navigate("/create-post")}
-                  className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#3772ff] to-[#2759dd] text-white font-semibold rounded-xl hover:from-[#2759dd] hover:to-[#1a4bcc] transition-all duration-300 shadow-lg hover:shadow-xl"
+                  className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-rose-600 to-rose-500 text-white font-semibold rounded-xl hover:from-rose-700 hover:to-rose-600 transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
                   <Plus className="w-5 h-5" />
                   Create Post
@@ -265,7 +265,7 @@ export default function BuyerDashboard() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
                     activeTab === tab.id
-                      ? "bg-gradient-to-r from-[#3772ff] to-[#2759dd] text-white shadow-lg"
+                      ? "bg-gradient-to-r from-emerald-600 to-emerald-500 text-white shadow-lg"
                       : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
                   }`}
                 >
@@ -296,7 +296,7 @@ export default function BuyerDashboard() {
                       </h2>
                       <button
                         onClick={() => setActiveTab("orders")}
-                        className="text-[#3772ff] hover:text-[#2759dd] font-semibold text-sm"
+                        className="text-emerald-600 hover:text-emerald-700 font-semibold text-sm"
                       >
                         View All
                       </button>
@@ -315,7 +315,7 @@ export default function BuyerDashboard() {
                       </h2>
                       <button
                         onClick={() => setActiveTab("posts")}
-                        className="text-[#3772ff] hover:text-[#2759dd] font-semibold text-sm"
+                        className="text-emerald-600 hover:text-emerald-700 font-semibold text-sm"
                       >
                         View All
                       </button>
@@ -342,7 +342,7 @@ export default function BuyerDashboard() {
                     <select
                       value={orderFilter}
                       onChange={(e) => handleOrderFilterChange(e.target.value)}
-                      className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-[#3772ff] focus:border-transparent"
+                      className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                     >
                       {orderFilters.map((filter) => (
                         <option key={filter.id} value={filter.id}>
@@ -364,7 +364,7 @@ export default function BuyerDashboard() {
                   </h2>
                   <button
                     onClick={() => navigate("/create-post")}
-                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#3772ff] to-[#2759dd] text-white font-semibold rounded-lg hover:from-[#2759dd] hover:to-[#1a4bcc] transition-all duration-300"
+                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-rose-600 to-rose-500 text-white font-semibold rounded-lg hover:from-rose-700 hover:to-rose-600 transition-all duration-300"
                   >
                     <Plus className="w-4 h-4" />
                     New Post

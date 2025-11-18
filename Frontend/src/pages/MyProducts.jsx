@@ -115,7 +115,7 @@ export default function MyProducts() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 py-20 px-4">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 py-20 px-4">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <motion.div
@@ -125,7 +125,7 @@ export default function MyProducts() {
             className="text-center mb-12"
           >
             <h1
-              className="text-5xl md:text-6xl font-extrabold text-[#3772ff] mb-4"
+              className="text-5xl md:text-6xl font-extrabold text-emerald-600 mb-4"
               style={{ fontFamily: "'Lemon Milk', sans-serif" }}
             >
               <Package className="inline mb-2 mr-2" size={48} />
@@ -147,7 +147,7 @@ export default function MyProducts() {
               onClick={() => navigate("/add-product")}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-[#3772ff] to-[#5c8cff] text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center gap-2"
+              className="bg-gradient-to-r from-rose-600 to-rose-500 text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center gap-2"
             >
               <Plus size={20} />
               Add New Product
@@ -157,7 +157,7 @@ export default function MyProducts() {
           {/* Products Content */}
           {loading ? (
             <div className="text-center py-20">
-              <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#3772ff] mx-auto mb-4"></div>
+              <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-emerald-600 mx-auto mb-4"></div>
               <p className="text-gray-600 dark:text-gray-300 text-lg">
                 Loading your products...
               </p>
@@ -167,7 +167,7 @@ export default function MyProducts() {
               <p className="text-red-500 text-xl mb-4">{error}</p>
               <button
                 onClick={fetchMyProducts}
-                className="px-6 py-2 bg-[#3772ff] text-white rounded-full hover:bg-[#2759dd] transition-colors"
+                className="px-6 py-2 bg-emerald-600 text-white rounded-full hover:bg-emerald-700 transition-colors"
               >
                 Try Again
               </button>
@@ -186,7 +186,7 @@ export default function MyProducts() {
                 onClick={() => navigate("/add-product")}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-[#3772ff] to-[#5c8cff] text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all flex items-center gap-2 mx-auto"
+                className="bg-gradient-to-r from-rose-600 to-rose-500 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all flex items-center gap-2 mx-auto"
               >
                 <Plus size={20} />
                 Add Your First Product
@@ -213,7 +213,7 @@ export default function MyProducts() {
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                       onClick={() => navigate(`/product/${product._id}`)}
-                      className="bg-[#3772ff] text-white p-2 rounded-full shadow-lg hover:bg-[#2759dd] transition-colors"
+                      className="bg-emerald-600 text-white p-2 rounded-full shadow-lg hover:bg-emerald-700 transition-colors"
                       title="View Product"
                     >
                       <Eye size={18} />

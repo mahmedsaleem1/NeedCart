@@ -80,7 +80,7 @@ export default function AddComment({ postId, onCommentAdded }) {
               minLength: { value: 1, message: 'Comment is too short' }
             })}
             rows={3}
-            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-xl focus:ring-2 focus:ring-[#3772ff] focus:border-[#3772ff] resize-none transition-all"
+            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-600 resize-none transition-all"
             placeholder="Write your comment..."
           />
           {errors.content && (
@@ -100,7 +100,7 @@ export default function AddComment({ postId, onCommentAdded }) {
             disabled={isSubmitting}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-gradient-to-r from-[#3772ff] to-[#5c8cff] text-white px-6 py-2 rounded-full hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed font-semibold transition-all flex items-center gap-2"
+            className="bg-gradient-to-r from-emerald-600 to-emerald-500 text-white px-6 py-2 rounded-full hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed font-semibold transition-all flex items-center gap-2"
           >
             <Send size={18} />
             {isSubmitting ? 'Posting...' : 'Post Comment'}

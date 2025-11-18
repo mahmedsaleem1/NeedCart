@@ -184,7 +184,7 @@ const PaymentManagement = () => {
 
             {/* Seller Bank Details */}
             {sellerBank && (
-              <div className="border rounded-lg p-4 bg-blue-50 border-blue-200">
+              <div className="border rounded-lg p-4 bg-emerald-50 border-emerald-200">
                 <h3 className="font-semibold text-gray-800 mb-3">Seller Bank Details</h3>
                 <div className="space-y-2">
                   <div className="flex justify-between">
@@ -193,11 +193,11 @@ const PaymentManagement = () => {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Bank Name:</span>
-                    <span className="font-semibold text-blue-700">{sellerBank.bankName || 'Not provided'}</span>
+                    <span className="font-semibold text-emerald-700">{sellerBank.bankName || 'Not provided'}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Account Number:</span>
-                    <span className="font-mono font-semibold text-blue-700">{sellerBank.accountNumber || 'Not provided'}</span>
+                    <span className="font-mono font-semibold text-emerald-700">{sellerBank.accountNumber || 'Not provided'}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Verified:</span>

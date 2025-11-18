@@ -66,16 +66,16 @@ const Footer = () => {
           <h4 className="text-lg font-semibold text-white dark:text-gray-100 mb-4">Quick Links</h4>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="text-gray-400 dark:text-gray-500 hover:text-indigo-400 dark:hover:text-indigo-300 transition-colors duration-200 text-sm">How it Works</a>
+              <a href="#" className="text-gray-400 dark:text-gray-500 hover:text-emerald-400 dark:hover:text-emerald-300 transition-colors duration-200 text-sm">How it Works</a>
             </li>
             <li>
-              <a href="#" className="text-gray-400 dark:text-gray-500 hover:text-indigo-400 dark:hover:text-indigo-300 transition-colors duration-200 text-sm">Become a Seller</a>
+              <a href="#" className="text-gray-400 dark:text-gray-500 hover:text-emerald-400 dark:hover:text-emerald-300 transition-colors duration-200 text-sm">Become a Seller</a>
             </li>
             <li>
-              <a href="#" className="text-gray-400 dark:text-gray-500 hover:text-indigo-400 dark:hover:text-indigo-300 transition-colors duration-200 text-sm">Post a Project</a>
+              <a href="#" className="text-gray-400 dark:text-gray-500 hover:text-emerald-400 dark:hover:text-emerald-300 transition-colors duration-200 text-sm">Post a Project</a>
             </li>
             <li>
-              <a href="#" className="text-gray-400 dark:text-gray-500 hover:text-indigo-400 dark:hover:text-indigo-300 transition-colors duration-200 text-sm">Help & FAQs</a>
+              <a href="#" className="text-gray-400 dark:text-gray-500 hover:text-emerald-400 dark:hover:text-emerald-300 transition-colors duration-200 text-sm">Help & FAQs</a>
             </li>
           </ul>
         </div>
@@ -85,13 +85,13 @@ const Footer = () => {
           <h4 className="text-lg font-semibold text-white dark:text-gray-100 mb-4">Legal</h4>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="text-gray-400 dark:text-gray-500 hover:text-indigo-400 dark:hover:text-indigo-300 transition-colors duration-200 text-sm">Terms of Service</a>
+              <a href="#" className="text-gray-400 dark:text-gray-500 hover:text-emerald-400 dark:hover:text-emerald-300 transition-colors duration-200 text-sm">Terms of Service</a>
             </li>
             <li>
-              <a href="#" className="text-gray-400 dark:text-gray-500 hover:text-indigo-400 dark:hover:text-indigo-300 transition-colors duration-200 text-sm">Privacy Policy</a>
+              <a href="#" className="text-gray-400 dark:text-gray-500 hover:text-emerald-400 dark:hover:text-emerald-300 transition-colors duration-200 text-sm">Privacy Policy</a>
             </li>
             <li>
-              <a href="#" className="text-gray-400 dark:text-gray-500 hover:text-indigo-400 dark:hover:text-indigo-300 transition-colors duration-200 text-sm">Cookie Policy</a>
+              <a href="#" className="text-gray-400 dark:text-gray-500 hover:text-emerald-400 dark:hover:text-emerald-300 transition-colors duration-200 text-sm">Cookie Policy</a>
             </li>
           </ul>
         </div>

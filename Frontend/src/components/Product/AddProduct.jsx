@@ -80,7 +80,7 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 px-4 py-20">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 px-4 py-20">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -88,7 +88,7 @@ const AddProduct = () => {
         className="w-full max-w-lg bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-10 border border-gray-100 dark:border-gray-700"
       >
         <h2
-          className="text-4xl font-extrabold text-[#3772ff] mb-6 text-center"
+          className="text-4xl font-extrabold text-emerald-600 mb-6 text-center"
           style={{ fontFamily: "'Lemon Milk', sans-serif" }}
         >
           Add New Product
@@ -111,20 +111,20 @@ const AddProduct = () => {
             type="text"
             placeholder="Product Title"
             {...register("title")}
-            className="p-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:text-white"
+            className="p-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-400 dark:bg-gray-700 dark:text-white"
             required
           />
 
           <textarea
             placeholder="Product Description"
             {...register("description")}
-            className="p-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:text-white resize-none h-28"
+            className="p-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:bg-gray-700 dark:text-white resize-none h-28"
             required
           />
 
           <select
             {...register("category")}
-            className="p-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:text-white"
+            className="p-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-400 dark:bg-gray-700 dark:text-white"
             required
           >
             <option value="">Select Category</option>
@@ -141,7 +141,7 @@ const AddProduct = () => {
             {...register("price")}
             min="0"
             step="0.01"
-            className="p-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:text-white"
+            className="p-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-400 dark:bg-gray-700 dark:text-white"
             required
           />
 
@@ -150,7 +150,7 @@ const AddProduct = () => {
             placeholder="Available Stock"
             {...register("availableStock")}
             min="1"
-            className="p-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:text-white"
+            className="p-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-400 dark:bg-gray-700 dark:text-white"
             required
           />
 
@@ -158,7 +158,7 @@ const AddProduct = () => {
             type="file"
             {...register("image")}
             accept="image/*"
-            className="p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-700 dark:text-white"
+            className="p-3 border border-gray-200 dark:border-gray-600 rounded-xl cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:bg-gray-700 dark:text-white"
             required
           />
 
@@ -167,7 +167,7 @@ const AddProduct = () => {
             whileTap={{ scale: 0.95 }}
             type="submit"
             disabled={loading}
-            className="bg-gradient-to-r from-[#3772ff] to-[#5c8cff] text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-2xl transition-all disabled:opacity-50"
+            className="bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-2xl transition-all disabled:opacity-50"
           >
             {loading ? "Adding Product..." : "Add Product"}
           </motion.button>

@@ -54,7 +54,7 @@ export default function HeldPayments() {
   if (loading) {
     return (
       <div className="flex justify-center items-center py-20">
-        <Loader2 className="w-10 h-10 text-[#3772ff] animate-spin" />
+        <Loader2 className="w-10 h-10 text-emerald-600 animate-spin" />
       </div>
     );
   }
@@ -113,7 +113,7 @@ export default function HeldPayments() {
                   <span className="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 rounded-full text-xs font-semibold">
                     Held
                   </span>
-                  <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-full text-xs font-semibold">
+                  <span className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-full text-xs font-semibold">
                     {payment.orderId?.status || 'Confirmed'}
                   </span>
                 </div>

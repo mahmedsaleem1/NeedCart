@@ -17,7 +17,7 @@ export default function PostCard({ post }) {
       {/* Post Header - User Info */}
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-r from-[#3772ff] to-[#5c8cff] flex items-center justify-center text-white font-bold">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-500 flex items-center justify-center text-white font-bold">
             {post.buyerId?.email?.charAt(0).toUpperCase() || "U"}
           </div>
           <div>
@@ -65,7 +65,7 @@ export default function PostCard({ post }) {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => navigate(`/post/${post._id}`)}
-          className="text-gray-700 dark:text-gray-300 hover:text-[#3772ff] dark:hover:text-[#3772ff] transition-colors"
+          className="text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-500 transition-colors"
         >
           <MessageCircle size={24} />
         </motion.button>
@@ -73,7 +73,7 @@ export default function PostCard({ post }) {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => navigate(`/post/${post._id}`)}
-          className="text-gray-700 dark:text-gray-300 hover:text-[#3772ff] dark:hover:text-[#3772ff] transition-colors"
+          className="text-gray-700 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-emerald-500 transition-colors"
         >
           <Send size={24} />
         </motion.button>
@@ -81,7 +81,7 @@ export default function PostCard({ post }) {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => navigate(`/post/${post._id}`)}
-          className="ml-auto px-4 py-2 text-sm font-semibold bg-gradient-to-r from-[#3772ff] to-[#5c8cff] text-white rounded-full hover:shadow-lg transition-all flex items-center gap-2"
+          className="ml-auto px-4 py-2 text-sm font-semibold bg-gradient-to-r from-emerald-600 to-emerald-500 text-white rounded-full hover:shadow-lg transition-all flex items-center gap-2"
         >
           <Eye size={16} />
           View Details
@@ -92,8 +92,8 @@ export default function PostCard({ post }) {
       <div className="px-4 py-3">
         {/* Budget */}
         <div className="flex items-center gap-2 mb-2">
-          <DollarSign size={18} className="text-[#3772ff]" />
-          <span className="text-xl font-bold text-[#3772ff]">
+          <DollarSign size={18} className="text-emerald-600" />
+          <span className="text-xl font-bold text-emerald-600">
             PKR {post.budget?.toLocaleString() || "0"}
           </span>
           <span className="text-sm text-gray-500 dark:text-gray-400">Budget</span>
@@ -115,7 +115,7 @@ export default function PostCard({ post }) {
         {/* Read More */}
         <button
           onClick={() => navigate(`/post/${post._id}`)}
-          className="text-[#3772ff] text-sm font-semibold mt-1 hover:underline"
+          className="text-emerald-600 text-sm font-semibold mt-1 hover:underline"
         >
           Read more
         </button>

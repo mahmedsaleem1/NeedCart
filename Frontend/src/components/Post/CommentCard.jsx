@@ -67,7 +67,7 @@ export default function CommentCard({ comment, onDelete, isPostOwner = false, po
       <div className="flex items-start justify-between">
         <div className="flex-1">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#3772ff] to-[#5c8cff] flex items-center justify-center text-white font-semibold">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-600 to-emerald-500 flex items-center justify-center text-white font-semibold">
               <User size={20} />
             </div>
             <div>

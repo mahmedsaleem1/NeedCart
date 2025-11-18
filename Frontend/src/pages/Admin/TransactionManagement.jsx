@@ -70,7 +70,7 @@ const TransactionManagement = () => {
       succeeded: 'bg-green-100 text-green-700',
       pending: 'bg-yellow-100 text-yellow-700',
       failed: 'bg-red-100 text-red-700',
-      processing: 'bg-blue-100 text-blue-700',
+      processing: 'bg-amber-100 text-amber-700',
     };
     return colors[normalizedStatus] || 'bg-gray-100 text-gray-700';
   };
@@ -99,7 +99,7 @@ const TransactionManagement = () => {
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
         <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-          <div className="bg-gradient-to-r from-indigo-600 to-blue-600 text-white p-6 rounded-t-xl">
+          <div className="bg-gradient-to-r from-emerald-700 to-emerald-600 text-white p-6 rounded-t-xl">
             <div className="flex justify-between items-start">
               <div>
                 <h2 className="text-2xl font-bold mb-1">Transaction Details</h2>
@@ -245,7 +245,7 @@ const TransactionManagement = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-gradient-to-r from-indigo-600 to-blue-600 rounded-xl shadow-lg p-6 text-white">
+      <div className="bg-gradient-to-r from-emerald-700 to-emerald-600 rounded-xl shadow-lg p-6 text-white">
         <h1 className="text-3xl font-bold mb-2 flex items-center gap-3">
           <FileText size={32} />
           Transaction History

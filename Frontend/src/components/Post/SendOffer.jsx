@@ -67,7 +67,7 @@ export default function SendOffer({ postId, onOfferSent }) {
         onClick={() => setShowForm(true)}
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        className="w-full bg-gradient-to-r from-[#3772ff] to-[#5c8cff] text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
+        className="w-full bg-gradient-to-r from-rose-600 to-rose-500 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
       >
         <Send size={20} />
         Send Offer
@@ -109,7 +109,7 @@ export default function SendOffer({ postId, onOfferSent }) {
               })}
               type="number"
               step="0.01"
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-xl focus:ring-2 focus:ring-[#3772ff] focus:border-[#3772ff] transition-all"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-600 transition-all"
               placeholder="Enter your offer amount"
             />
           </div>
@@ -136,7 +136,7 @@ export default function SendOffer({ postId, onOfferSent }) {
             disabled={isSubmitting}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="flex-1 bg-gradient-to-r from-[#3772ff] to-[#5c8cff] text-white py-3 px-6 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+            className="flex-1 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white py-3 px-6 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
           >
             <Send size={18} />
             {isSubmitting ? 'Sending...' : 'Send Offer'}

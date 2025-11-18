@@ -271,7 +271,7 @@ const UserManagement = () => {
         </div>
         <div className="bg-white rounded-lg shadow p-6">
           <div className="text-gray-600 text-sm mb-1">Buyers</div>
-          <div className="text-3xl font-bold text-blue-600">
+          <div className="text-3xl font-bold text-emerald-600">
             {users.filter(u => u.role === 'buyer').length}
           </div>
         </div>
@@ -312,7 +312,7 @@ const UserManagement = () => {
               onClick={() => setRoleFilter('buyer')}
               className={`px-6 py-3 rounded-lg font-medium transition-colors ${
                 roleFilter === 'buyer'
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-emerald-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
@@ -362,7 +362,7 @@ const UserManagement = () => {
                   <td className="px-6 py-4">
                     <span className={`px-3 py-1 rounded-full text-sm font-semibold capitalize ${
                       user.role === 'buyer' 
-                        ? 'bg-blue-100 text-blue-700' 
+                        ? 'bg-emerald-100 text-emerald-700' 
                         : 'bg-purple-100 text-purple-700'
                     }`}>
                       {user.role}

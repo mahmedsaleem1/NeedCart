@@ -221,7 +221,7 @@ const Signup = () => {
                                 backgroundColor: '#fff',
                                 boxSizing: 'border-box'
                             }}
-                            onFocus={(e) => e.target.style.borderColor = errors.email ? '#dc3545' : '#007bff'}
+                            onFocus={(e) => e.target.style.borderColor = errors.email ? '#dc3545' : '#059669'}
                             onBlur={(e) => e.target.style.borderColor = errors.email ? '#dc3545' : '#e1e5e9'}
                         />
                         {errors.email && (
@@ -244,7 +244,7 @@ const Signup = () => {
                             backgroundColor: '#fff',
                             boxSizing: 'border-box'
                             }}
-                            onFocus={(e) => e.target.style.borderColor = errors.role ? '#dc3545' : '#007bff'}
+                            onFocus={(e) => e.target.style.borderColor = errors.role ? '#dc3545' : '#059669'}
                             onBlur={(e) => e.target.style.borderColor = errors.role ? '#dc3545' : '#e1e5e9'}
                         >
                             <option value="Buyer">Buyer</option>
@@ -280,7 +280,7 @@ const Signup = () => {
                                 backgroundColor: '#fff',
                                 boxSizing: 'border-box'
                             }}
-                            onFocus={(e) => e.target.style.borderColor = errors.password ? '#dc3545' : '#007bff'}
+                            onFocus={(e) => e.target.style.borderColor = errors.password ? '#dc3545' : '#059669'}
                             onBlur={(e) => e.target.style.borderColor = errors.password ? '#dc3545' : '#e1e5e9'}
                         />
                         {errors.password && (
@@ -309,7 +309,7 @@ const Signup = () => {
                                 backgroundColor: '#fff',
                                 boxSizing: 'border-box'
                             }}
-                            onFocus={(e) => e.target.style.borderColor = errors.confirmPassword ? '#dc3545' : '#007bff'}
+                            onFocus={(e) => e.target.style.borderColor = errors.confirmPassword ? '#dc3545' : '#059669'}
                             onBlur={(e) => e.target.style.borderColor = errors.confirmPassword ? '#dc3545' : '#e1e5e9'}
                         />
                         {errors.confirmPassword && (
@@ -324,7 +324,7 @@ const Signup = () => {
                         disabled={isLoading}
                         style={{
                             padding: '14px 20px',
-                            backgroundColor: isLoading ? '#6c757d' : '#007bff',
+                            backgroundColor: isLoading ? '#6c757d' : '#10b981',
                             color: 'white',
                             border: 'none',
                             borderRadius: '8px',
@@ -339,12 +339,12 @@ const Signup = () => {
                         }}
                         onMouseOver={(e) => {
                             if (!isLoading) {
-                                e.target.style.backgroundColor = '#0056b3';
+                                e.target.style.backgroundColor = '#059669';
                             }
                         }}
                         onMouseOut={(e) => {
                             if (!isLoading) {
-                                e.target.style.backgroundColor = '#007bff';
+                                e.target.style.backgroundColor = '#10b981';
                             }
                         }}
                     >
@@ -391,7 +391,7 @@ const Signup = () => {
                         style={{
                             background: 'none',
                             border: 'none',
-                            color: '#007bff',
+                            color: '#10b981',
                             textDecoration: 'underline',
                             cursor: 'pointer',
                             fontSize: '14px'

@@ -29,8 +29,8 @@ export default function BuyerStats({ stats, loading }) {
       title: "Total Orders",
       value: stats?.totalOrders || 0,
       icon: ShoppingBag,
-      gradient: "from-blue-500 to-blue-600",
-      bgGradient: "from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20"
+      gradient: "from-emerald-600 to-emerald-500",
+      bgGradient: "from-emerald-50 to-emerald-100 dark:from-emerald-900/20 dark:to-emerald-800/20"
     },
     {
       title: "Pending Orders",

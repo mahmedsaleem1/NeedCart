@@ -288,7 +288,7 @@ const AdminDashboard = () => {
           </button>
           <button
             onClick={() => window.location.href = '/admin/payments'}
-            className="bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold py-4 px-6 rounded-lg transition-colors border-2 border-blue-200"
+            className="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-semibold py-4 px-6 rounded-lg transition-colors border-2 border-emerald-200"
           >
             <DollarSign className="mx-auto mb-2" size={24} />
             {payments.pendingPayments} Pending Payments

@@ -182,12 +182,12 @@ export default function OfferCard({ offer, isPostOwner, postStatus, onOfferUpdat
         {getStatusBadge(offer.status)}
       </div>
 
-      <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl p-4 mb-4">
+      <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/20 dark:to-emerald-800/20 rounded-xl p-4 mb-4">
         <div className="flex items-center gap-2 mb-1">
-          <DollarSign size={16} className="text-[#3772ff]" />
+          <DollarSign size={16} className="text-emerald-600" />
           <p className="text-sm text-gray-600 dark:text-gray-400">Offer Amount</p>
         </div>
-        <p className="text-3xl font-bold text-[#3772ff]">
+        <p className="text-3xl font-bold text-emerald-600">
           PKR {offer.amount?.toLocaleString()}
         </p>
       </div>

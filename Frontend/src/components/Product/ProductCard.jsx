@@ -32,7 +32,7 @@ export default function ProductCard({ product }) {
         >
           {product.availableStock > 0 ? "In Stock" : "Out of Stock"}
         </span>
-        <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold bg-[#3772ff]/90 text-white backdrop-blur-sm">
+        <span className="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-600/90 text-white backdrop-blur-sm">
           {product.category}
         </span>
       </div>
@@ -57,7 +57,7 @@ export default function ProductCard({ product }) {
               <DollarSign size={12} />
               Price
             </p>
-            <p className="text-lg font-bold text-[#3772ff]">
+            <p className="text-lg font-bold text-emerald-600">
               PKR {product.price?.toLocaleString() || "0"}
             </p>
           </div>
@@ -66,7 +66,7 @@ export default function ProductCard({ product }) {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-4 py-2 text-sm font-semibold bg-gradient-to-r from-[#3772ff] to-[#5c8cff] text-white rounded-full hover:shadow-lg hover:shadow-blue-500/20/30/30 transition-all flex items-center gap-2"
+            className="px-4 py-2 text-sm font-semibold bg-gradient-to-r from-emerald-600 to-emerald-500 text-white rounded-full hover:shadow-lg hover:shadow-emerald-500/30 transition-all flex items-center gap-2"
           >
             <Eye size={16} />
             View

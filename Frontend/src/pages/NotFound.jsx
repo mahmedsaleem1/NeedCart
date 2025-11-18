@@ -17,11 +17,11 @@ const NotFound = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-rose-50 flex items-center justify-center px-4">
       <div className="max-w-2xl w-full text-center">
         {/* 404 Illustration */}
         <div className="mb-8">
-          <h1 className="text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600 mb-4">
+          <h1 className="text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-rose-600 mb-4">
             404
           </h1>
           <div className="flex justify-center mb-6">
@@ -59,7 +59,7 @@ const NotFound = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <button
             onClick={handleGoHome}
-            className="px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-purple-300"
+            className="px-8 py-3 bg-gradient-to-r from-emerald-600 to-rose-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-emerald-300"
           >
             Go to Homepage
           </button>

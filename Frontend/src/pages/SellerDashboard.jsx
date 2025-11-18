@@ -46,7 +46,7 @@ export default function SellerDashboard() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 pt-24 pb-16">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-50 to-gray-100 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800 pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-6">
           {/* Header */}
           <motion.div
@@ -56,7 +56,7 @@ export default function SellerDashboard() {
           >
             <button
               onClick={() => navigate("/")}
-              className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-[#3772ff] dark:hover:text-[#5c8cff] transition-colors mb-4"
+              className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-500 transition-colors mb-4"
             >
               <ArrowLeft className="w-5 h-5" />
               Back to Home
@@ -78,7 +78,7 @@ export default function SellerDashboard() {
               <div className="flex gap-3">
                 <button
                   onClick={() => navigate("/my-products")}
-                  className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 text-[#3772ff] dark:text-[#5c8cff] font-semibold rounded-xl border-2 border-[#3772ff] dark:border-[#5c8cff] hover:bg-[#3772ff] hover:text-white dark:hover:bg-[#5c8cff] transition-all duration-300 shadow-lg"
+                  className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-800 text-emerald-600 dark:text-emerald-500 font-semibold rounded-xl border-2 border-emerald-600 dark:border-emerald-500 hover:bg-emerald-600 hover:text-white dark:hover:bg-emerald-500 transition-all duration-300 shadow-lg"
                 >
                   <ShoppingBag className="w-5 h-5" />
                   My Products
@@ -86,7 +86,7 @@ export default function SellerDashboard() {
 
                 <button
                   onClick={() => navigate("/add-product")}
-                  className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#3772ff] to-[#2759dd] text-white font-semibold rounded-xl hover:from-[#2759dd] hover:to-[#1a4bcc] transition-all duration-300 shadow-lg hover:shadow-xl"
+                  className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-semibold rounded-xl hover:from-emerald-700 hover:to-emerald-800 transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
                   <Plus className="w-5 h-5" />
                   Add Product
@@ -111,7 +111,7 @@ export default function SellerDashboard() {
                     onClick={() => setActiveTab(tab.id)}
                     className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300 whitespace-nowrap ${
                       activeTab === tab.id
-                        ? "bg-gradient-to-r from-[#3772ff] to-[#2759dd] text-white shadow-lg"
+                        ? "bg-gradient-to-r from-emerald-600 to-emerald-700 text-white shadow-lg"
                         : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700"
                     }`}
                   >
@@ -137,8 +137,8 @@ export default function SellerDashboard() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                   <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-xl border border-gray-200 dark:border-gray-700">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                        <TrendingUp className="w-5 h-5 text-[#3772ff]" />
+                      <div className="p-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-lg">
+                        <TrendingUp className="w-5 h-5 text-emerald-600" />
                       </div>
                       <h3 className="text-lg font-bold text-gray-900 dark:text-white">
                         Quick Stats
@@ -167,7 +167,7 @@ export default function SellerDashboard() {
                     </div>
                   </div>
 
-                  <div className="bg-gradient-to-br from-[#3772ff] to-[#2759dd] rounded-2xl p-6 shadow-xl text-white">
+                  <div className="bg-gradient-to-br from-rose-600 to-rose-700 rounded-2xl p-6 shadow-xl text-white">
                     <div className="flex items-center gap-3 mb-4">
                       <div className="p-2 bg-white/20 rounded-lg">
                         <Package className="w-5 h-5" />

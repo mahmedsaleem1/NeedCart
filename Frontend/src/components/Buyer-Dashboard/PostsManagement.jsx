@@ -48,7 +48,7 @@ export default function PostsManagement({ posts, loading, onUpdateStatus, onDele
         </p>
         <button
           onClick={() => navigate("/create-post")}
-          className="px-6 py-3 bg-gradient-to-r from-[#3772ff] to-[#2759dd] text-white font-semibold rounded-xl hover:from-[#2759dd] hover:to-[#1a4bcc] transition-all duration-300 shadow-lg"
+          className="px-6 py-3 bg-gradient-to-r from-rose-600 to-rose-500 text-white font-semibold rounded-xl hover:from-rose-700 hover:to-rose-600 transition-all duration-300 shadow-lg"
         >
           Create Your First Post
         </button>
@@ -177,7 +177,7 @@ export default function PostsManagement({ posts, loading, onUpdateStatus, onDele
 
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-[#3772ff] dark:text-[#5c8cff]">
+                <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-500">
                   <DollarSign className="w-4 h-4" />
                   <span className="font-semibold">${post.budget?.toLocaleString()}</span>
                 </div>
@@ -192,7 +192,7 @@ export default function PostsManagement({ posts, loading, onUpdateStatus, onDele
             <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 flex gap-2">
               <button
                 onClick={() => navigate(`/posts/${post._id}`)}
-                className="flex-1 px-4 py-2 bg-[#3772ff] text-white rounded-lg hover:bg-[#2759dd] transition-colors text-sm font-medium"
+                className="flex-1 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors text-sm font-medium"
               >
                 View Details
               </button>

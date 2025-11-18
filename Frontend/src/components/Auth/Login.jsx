@@ -114,7 +114,7 @@ export default function LoginForm() {
                   {...register("email")}
                   type="email"
                   required
-                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-[#3772ff] focus:z-10 sm:text-sm"
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-emerald-500 focus:border-emerald-600 focus:z-10 sm:text-sm"
                   placeholder="Enter your email"
                 />
               </div>
@@ -127,7 +127,7 @@ export default function LoginForm() {
                   {...register("password")}
                   type="password"
                   required
-                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-[#3772ff] focus:z-10 sm:text-sm"
+                  className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-emerald-500 focus:border-emerald-600 focus:z-10 sm:text-sm"
                   placeholder="Enter your password"
                 />
               </div>
@@ -135,7 +135,7 @@ export default function LoginForm() {
               <div>
                 <button
                   type="submit"
-                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#2759dd] hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out"
+                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition duration-150 ease-in-out"
                 >
                   Sign in
                 </button>
@@ -145,14 +145,14 @@ export default function LoginForm() {
                 <button
                   type="button"
                   onClick={handleForgetPasswordClick}
-                  className="text-sm text-[#2759dd] hover:text-[#3772ff] font-medium"
+                  className="text-sm text-emerald-600 hover:text-emerald-700 font-medium"
                 >
                   Forgot your password?
                 </button>
                 <button
                   type="button"
                   onClick={() => navigate("/signup")}
-                  className="text-sm text-[#2759dd] hover:text-[#3772ff] font-medium"
+                  className="text-sm text-emerald-600 hover:text-emerald-700 font-medium"
                 >
                   Don't have an account? Sign up
                 </button>
@@ -189,7 +189,7 @@ export default function LoginForm() {
             <div>
               <button
                 onClick={handleForgetPasswordClick}
-                className="mb-4 text-sm text-[#2759dd] hover:text-[#3772ff] font-medium flex items-center"
+                className="mb-4 text-sm text-emerald-600 hover:text-emerald-700 font-medium flex items-center"
               >
                 <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />

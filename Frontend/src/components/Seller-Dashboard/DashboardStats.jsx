@@ -63,16 +63,16 @@ export default function DashboardStats() {
       title: "Total Earnings",
       value: `$${(heldAmount + releasedAmount).toFixed(2)}`,
       icon: TrendingUp,
-      color: "from-[#3772ff] to-[#2759dd]",
-      bgColor: "bg-blue-50 dark:bg-blue-900/20",
-      iconColor: "text-[#3772ff] dark:text-[#5c8cff]"
+      color: "from-emerald-600 to-emerald-500",
+      bgColor: "bg-emerald-50 dark:bg-emerald-900/20",
+      iconColor: "text-emerald-600 dark:text-emerald-500"
     }
   ];
 
   if (loading) {
     return (
       <div className="flex justify-center items-center py-20">
-        <Loader2 className="w-10 h-10 text-[#3772ff] animate-spin" />
+        <Loader2 className="w-10 h-10 text-emerald-600 animate-spin" />
       </div>
     );
   }

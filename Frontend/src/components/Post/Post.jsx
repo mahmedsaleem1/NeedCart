@@ -144,9 +144,9 @@ export default function Post() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-[#3772ff] mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-emerald-600 mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-300 text-lg">Loading post...</p>
         </div>
       </div>
@@ -155,12 +155,12 @@ export default function Post() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
         <div className="text-center">
           <p className="text-red-500 text-xl mb-4">{error}</p>
           <button
             onClick={() => navigate('/posts')}
-            className="px-6 py-2 bg-[#3772ff] text-white rounded-full hover:bg-[#2759dd] transition-colors"
+            className="px-6 py-2 bg-emerald-600 text-white rounded-full hover:bg-emerald-700 transition-colors"
           >
             Go Back
           </button>
@@ -181,7 +181,7 @@ export default function Post() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 py-20 px-4">
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 py-20 px-4">
         <div className="max-w-6xl mx-auto">
           {/* Payment Status Notification */}
           {paymentStatus && (
@@ -287,7 +287,7 @@ export default function Post() {
                 </div>
                 <div className="flex items-center gap-2">
                   <DollarSign size={20} />
-                  <span className="text-[#3772ff] font-bold text-xl">
+                  <span className="text-emerald-600 font-bold text-xl">
                     PKR {post.budget?.toLocaleString()}
                   </span>
                 </div>
@@ -304,8 +304,8 @@ export default function Post() {
                   onClick={() => setActiveTab('comments')}
                   className={`flex items-center gap-2 transition-colors ${
                     activeTab === 'comments'
-                      ? 'text-[#3772ff]'
-                      : 'text-gray-600 dark:text-gray-400 hover:text-[#3772ff]'
+                      ? 'text-emerald-600'
+                      : 'text-gray-600 dark:text-gray-400 hover:text-emerald-600'
                   }`}
                 >
                   <MessageCircle size={24} />
@@ -316,8 +316,8 @@ export default function Post() {
                     onClick={() => setActiveTab('offers')}
                     className={`flex items-center gap-2 transition-colors ${
                       activeTab === 'offers'
-                        ? 'text-[#3772ff]'
-                        : 'text-gray-600 dark:text-gray-400 hover:text-[#3772ff]'
+                        ? 'text-rose-500'
+                        : 'text-gray-600 dark:text-gray-400 hover:text-rose-500'
                     }`}
                   >
                     <Send size={24} />

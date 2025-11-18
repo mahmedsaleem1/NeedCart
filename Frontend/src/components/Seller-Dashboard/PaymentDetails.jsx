@@ -124,13 +124,13 @@ export default function PaymentDetails() {
           </motion.div>
         )}
 
-        <div className="mb-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4 flex items-start gap-3">
-          <Lock className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5" />
+        <div className="mb-6 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-xl p-4 flex items-start gap-3">
+          <Lock className="w-5 h-5 text-emerald-600 dark:text-emerald-400 mt-0.5" />
           <div className="text-sm">
-            <p className="text-blue-700 dark:text-blue-400 font-semibold mb-1">
+            <p className="text-emerald-700 dark:text-emerald-400 font-semibold mb-1">
               Secure Information
             </p>
-            <p className="text-blue-600 dark:text-blue-500">
+            <p className="text-emerald-600 dark:text-emerald-500">
               Your payment details are securely stored and will be used to transfer released payments to your account.
             </p>
           </div>
@@ -139,13 +139,13 @@ export default function PaymentDetails() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label className="flex items-center gap-2 text-gray-700 dark:text-gray-300 font-semibold mb-2">
-              <Building2 className="w-5 h-5 text-[#3772ff]" />
+              <Building2 className="w-5 h-5 text-emerald-600" />
               Bank Name
             </label>
             <select
               value={bankName}
               onChange={(e) => setBankName(e.target.value)}
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3772ff] focus:border-transparent text-gray-900 dark:text-white transition-all"
+              className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-gray-900 dark:text-white transition-all"
               disabled={loading}
             >
               <option value="">Select your bank</option>
@@ -159,7 +159,7 @@ export default function PaymentDetails() {
 
           <div>
             <label className="flex items-center gap-2 text-gray-700 dark:text-gray-300 font-semibold mb-2">
-              <CreditCard className="w-5 h-5 text-[#3772ff]" />
+              <CreditCard className="w-5 h-5 text-emerald-600" />
               Account Number
             </label>
             <input
@@ -167,7 +167,7 @@ export default function PaymentDetails() {
               value={accountNumber}
               onChange={(e) => setAccountNumber(e.target.value)}
               placeholder="Enter your account number"
-              className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#3772ff] focus:border-transparent text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all"
+              className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all"
               disabled={loading}
             />
           </div>
@@ -175,7 +175,7 @@ export default function PaymentDetails() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-4 bg-gradient-to-r from-[#3772ff] to-[#2759dd] text-white font-bold rounded-xl hover:from-[#2759dd] hover:to-[#1a4bcc] transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white font-bold rounded-xl hover:from-emerald-700 hover:to-emerald-800 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             style={{ fontFamily: "'Lemon Milk', sans-serif" }}
           >
             {loading ? (

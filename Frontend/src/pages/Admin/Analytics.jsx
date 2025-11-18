@@ -132,7 +132,7 @@ const Analytics = () => {
         </div>
         <div className="bg-white rounded-lg shadow p-6">
           <div className="text-gray-600 text-sm mb-1">Average Order Value</div>
-          <div className="text-3xl font-bold text-blue-600">
+          <div className="text-3xl font-bold text-emerald-600">
             {formatCurrency(avgOrderValue)}
           </div>
           <div className="text-sm text-gray-500 mt-1">

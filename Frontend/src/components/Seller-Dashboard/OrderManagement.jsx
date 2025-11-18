@@ -90,7 +90,7 @@ export default function OrderManagement() {
   if (loading) {
     return (
       <div className="flex justify-center items-center py-20">
-        <Loader2 className="w-10 h-10 text-[#3772ff] animate-spin" />
+        <Loader2 className="w-10 h-10 text-emerald-600 animate-spin" />
       </div>
     );
   }
@@ -121,8 +121,8 @@ export default function OrderManagement() {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3 mb-6">
-        <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
-          <Truck className="w-6 h-6 text-[#3772ff] dark:text-[#5c8cff]" />
+        <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl">
+          <Truck className="w-6 h-6 text-emerald-600 dark:text-emerald-500" />
         </div>
         <div>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white" style={{ fontFamily: "'Lemon Milk', sans-serif" }}>
@@ -134,8 +134,8 @@ export default function OrderManagement() {
         </div>
       </div>
 
-      <div className="mb-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4">
-        <p className="text-sm text-blue-700 dark:text-blue-400">
+      <div className="mb-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-xl p-4">
+        <p className="text-sm text-emerald-700 dark:text-emerald-400">
           <strong>Note:</strong> After marking an order as delivered, the payment will remain in "Held Payments" 
           until the admin verifies and releases it. Once released, it will appear in "Released Payments".
         </p>
@@ -145,7 +145,7 @@ export default function OrderManagement() {
         {orders.map((order, index) => {
           const statusConfig = {
             pending: { bg: 'bg-yellow-100 dark:bg-yellow-900/30', text: 'text-yellow-700 dark:text-yellow-400', label: 'Pending' },
-            confirmed: { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-700 dark:text-blue-400', label: 'Confirmed' },
+            confirmed: { bg: 'bg-emerald-100 dark:bg-emerald-900/30', text: 'text-emerald-700 dark:text-emerald-400', label: 'Confirmed' },
             delivered: { bg: 'bg-green-100 dark:bg-green-900/30', text: 'text-green-700 dark:text-green-400', label: 'Delivered' },
             cancelled: { bg: 'bg-red-100 dark:bg-red-900/30', text: 'text-red-700 dark:text-red-400', label: 'Cancelled' }
           };
@@ -212,7 +212,7 @@ export default function OrderManagement() {
               <div className="flex flex-col justify-between items-end space-y-4">
                 <div className="text-right">
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Total Amount</p>
-                  <p className="text-3xl font-extrabold text-[#3772ff] dark:text-[#5c8cff]" style={{ fontFamily: "'Lemon Milk', sans-serif" }}>
+                  <p className="text-3xl font-extrabold text-emerald-600 dark:text-emerald-500" style={{ fontFamily: "'Lemon Milk', sans-serif" }}>
                     ${order.totalPrice?.toFixed(2) || '0.00'}
                   </p>
                 </div>
