@@ -23,7 +23,7 @@ import bodyParser from 'body-parser';
 const app = express();
 
 app.use(cors({
-  origin: ['http://localhost:8000', 'http://localhost:5173', 'https://need-cart-ci4a.vercel.app'],
+  origin: ['http://localhost:8000', 'http://localhost:5173', 'https://need-cart.vercel.app'],
   credentials: true
 }))
 app.use(express.json());
