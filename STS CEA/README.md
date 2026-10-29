@@ -32,26 +32,24 @@ python scripts/setup_test_users.py    # one time: creates the test buyer + selle
 ```
 
 ## How to run
-Start the backend (`npm start` in `Backend/`) and frontend (`npm run dev` in `Frontend/`), then from `STS CEA`:
+Start the backend (`npm start` in `Backend/`) and frontend (`npm run dev` in `Frontend/`), then from `STS CEA`. Tests run **headed** (visible browser, `--slowmo 150`) by default.
 ```
-pytest --browser chromium --html=reports/report-chromium.html --self-contained-html
-pytest --browser firefox  --html=reports/report-firefox.html  --self-contained-html
-pytest --browser webkit   --html=reports/report-webkit.html   --self-contained-html
-pytest --browser chromium --device "Pixel 7" -m "e2e or mock" --html=reports/report-mobile.html --self-contained-html
-pytest --browser chromium --browser firefox --browser webkit --html=reports/report-all-browsers.html --self-contained-html
+pytest                                                    # one browser (default chromium)
+pytest --browser chromium --browser firefox --browser webkit    # all browsers, one report
+pytest --browser chromium --device "Pixel 7" -m "e2e or mock"   # mobile emulation
 pytest tests/e2e/test_login.py        # one file
 pytest -m negative                    # one marker (e2e, api, mock, positive, negative)
 ```
-Failed tests are retried up to 2 times (`pytest-rerunfailures`) because the Firebase/Atlas/Cloudinary network calls occasionally drop; the report lists reruns.
+Failed tests are retried up to 2 times (`pytest-rerunfailures`) because Firebase/Atlas/Cloudinary calls occasionally drop.
 
 ## Folder structure
 `tests/{e2e,api,mock}` tests · `pages/` page objects · `utils/` config, Firebase REST, MongoDB helpers · `scripts/` user setup + Firebase user delete · `fixtures/` test image · `reports/` HTML reports · `screenshots/<browser>/` evidence · `bug-demo/` intentional bug.
 
 ## Reports and screenshots
-`reports/report-*.html`, `reports/report-all-browsers.html`, `reports/bug-demo-report.html`; screenshots in `screenshots/` (per browser) and `screenshots/bug-demo/`. Results and bugs: see [REPORT.md](REPORT.md).
+One report: [REPORT.md](REPORT.md) (everything: approach, test table, results, bugs, bug demo, screenshots). `reports/report.html` is the raw pytest-html output of the latest run. Screenshots: `screenshots/<browser>/` and `screenshots/bug-demo/`.
 
 ## Bug demo
-A one-line bug (search ignores the typed text) is shown to be caught by the suite – see [bug-demo/README.md](bug-demo/README.md).
+A one-line bug (search ignores the typed text) is caught by TC-07 and TC-09 - see [bug-demo/README.md](bug-demo/README.md) and `bug-demo/bug.patch`.
 
 ## Before zipping
 Delete `.env.test`, `.venv/` and `test-results/` (secrets / large).

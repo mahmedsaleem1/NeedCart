@@ -28,6 +28,10 @@ class CreatePostPage:
         if with_image:
             self.image.set_input_files(str(TEST_IMAGE))
 
+    def click_only(self):
+        """Click 'Create Post' once, for tests where the browser should block the submit."""
+        self.submit_button.click()
+
     def submit(self):
         """Click 'Create Post' until the app really sends the request.
 

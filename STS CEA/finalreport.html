@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NeedCart Playwright Report</title><style>body{font-family:Segoe UI,Arial,sans-serif;max-width:1100px;margin:2rem auto;padding:0 1rem;line-height:1.5;color:#222}
+table{border-collapse:collapse;margin:1rem 0;width:100%}th,td{border:1px solid #bbb;padding:6px 8px;vertical-align:top;font-size:.92rem}
+th{background:#f0f0f0}img{max-width:100%;height:auto;border:1px solid #ddd}code,pre{background:#f5f5f5}pre{padding:10px;overflow:auto}
+h1,h2{border-bottom:1px solid #ddd;padding-bottom:.2rem}</style></head><body>
+<h1>Software Testing: Playwright Automation of NeedCart</h1>
+<p><strong>Team:</strong> Shaheer, Ahmed  <strong>Course:</strong> ________  <strong>Instructor:</strong> ________  <strong>Date:</strong> 30 October 2026</p>
+<p>This is the single report for the whole assignment. The only generated HTML file is the raw pytest-html evidence of the final run: <a href="reports/report.html">reports/report.html</a>.</p>
+<hr />
+<h2>1. Introduction</h2>
+<p>NeedCart is a marketplace where buyers post requirements and sellers list products (React + Vite frontend, Express + MongoDB backend, Firebase authentication). The goal of this work was to build an automated Playwright (Python, pytest) suite that checks four user-facing features end to end, the products API, and how the page behaves when the network misbehaves, and to prove the suite catches a deliberately introduced bug.</p>
+<h2>2. Tools and environment</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OS</td>
+<td>Windows 11 Pro Education 10.0.26200</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>3.12.10</td>
+</tr>
+<tr>
+<td>Playwright (Python)</td>
+<td>1.64.1</td>
+</tr>
+<tr>
+<td>pytest / pytest-playwright / pytest-html / pytest-rerunfailures</td>
+<td>9.2.0 / 0.10.0 / 4.2.0 / 16.7</td>
+</tr>
+<tr>
+<td>Other libraries</td>
+<td>pymongo 4.19.0, requests 2.34.2, python-dotenv 1.2.4</td>
+</tr>
+<tr>
+<td>Browsers</td>
+<td>Chromium 156.0.8078.4, Firefox 157.0, WebKit 27.2</td>
+</tr>
+<tr>
+<td>App under test</td>
+<td>Frontend <code>http://localhost:5173</code>, backend <code>http://localhost:8000</code>, MongoDB Atlas db <code>NeedKart</code>, Firebase Auth</td>
+</tr>
+<tr>
+<td>Run mode</td>
+<td><strong>Headed</strong> (real browser windows, <code>--headed --slowmo 150</code>), so every action can be watched live</td>
+</tr>
+</tbody>
+</table>
+<h2>3. Testing approach</h2>
+<ul>
+<li><strong>E2E (12 tests):</strong> real browser, user-facing locators (role, placeholder, text), asserts on what the user sees (URL, headings, messages, lists). Page Objects live in <code>pages/</code>.</li>
+<li><strong>API (4 CRUD tests + 2 extra):</strong> Playwright <code>APIRequestContext</code> with a Firebase ID token (<code>Authorization: Bearer</code>), asserting status code and body. No browser, so they run once.</li>
+<li><strong>Network mocking (2 tests):</strong> <code>page.route()</code> on <code>**/product/all</code> fakes an empty list and a 500 error; both also fail on any uncaught JavaScript error.</li>
+<li><strong>Cross-browser:</strong> the same suite on Chromium, Firefox and WebKit in one run, plus Pixel 7 mobile emulation (E2E + mock).</li>
+<li><strong>Intentional bug:</strong> one-line break of the search filter on a throw-away git branch, to show the suite fails when the app is wrong.</li>
+<li><strong>Test data:</strong> dedicated accounts and records titled <code>STS-TEST…</code>, removed after every test and at session start/end. The database has 0 leftover <code>STS-TEST</code> records after the final runs. No <code>time.sleep</code> in any test; waiting is done with Playwright auto-waiting <code>expect()</code>.</li>
+<li><strong>Retries:</strong> a failed test is retried up to 2 times because calls to Firebase / Atlas / Cloudinary over this internet connection occasionally drop. The two final full runs needed <strong>0 reruns</strong>.</li>
+</ul>
+<h2>4. Features tested / left out</h2>
+<p><strong>Tested:</strong> Login, Signup + OTP, Product browse/search/filter, Buyer create post, Products API CRUD, Network failure handling.</p>
+<p><strong>Left out, with reasons</strong></p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stripe payments</td>
+<td>Third-party iframe, test-card flows, risky to automate</td>
+</tr>
+<tr>
+<td>Google OAuth login</td>
+<td>Third-party popup; Google blocks automated sign-in</td>
+</tr>
+<tr>
+<td>Gemini AI chatbot</td>
+<td>Answers change every time, nothing stable to assert</td>
+</tr>
+<tr>
+<td>Cloudinary image quality</td>
+<td>External service, slow, uses quota (it is only exercised because creation requires an image)</td>
+</tr>
+<tr>
+<td>Admin dashboard</td>
+<td>Needs an admin account; lower user-facing priority</td>
+</tr>
+<tr>
+<td>Real email delivery</td>
+<td>External SMTP (and it is broken here, see 9.2); OTP is read from MongoDB</td>
+</tr>
+<tr>
+<td>Offers, orders, escrow, reviews</td>
+<td>Multi-user, multi-step flows that depend on payments</td>
+</tr>
+</tbody>
+</table>
+<h2>5. What differs from the plan (adaptations)</h2>
+<table>
+<thead>
+<tr>
+<th>Plan</th>
+<th>Reality in the code</th>
+<th>What we did</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/api/...</code> routes, PUT/DELETE</td>
+<td>Routes have no <code>/api</code> or version prefix; delete is <code>POST /product/remove/:id</code></td>
+<td>Used the real routes</td>
+</tr>
+<tr>
+<td>Product update (PUT)</td>
+<td><strong>No product update endpoint exists</strong></td>
+<td>TC-15 uses the only real update: <code>PATCH /buyer-dashboard/posts/:id/status</code></td>
+</tr>
+<tr>
+<td>Login redirects to buyer dashboard</td>
+<td>Redirects to <code>/</code></td>
+<td>Asserted <code>/</code> plus the "Buyer" menu</td>
+</tr>
+<tr>
+<td>Signup logs the user in</td>
+<td>After the OTP the app shows a message and goes to <code>/login</code></td>
+<td>Asserted message + URL + buyer record in MongoDB</td>
+</tr>
+<tr>
+<td>Login error shown on page</td>
+<td>Shown in a browser <code>alert()</code></td>
+<td>Test captures the dialog</td>
+</tr>
+<tr>
+<td>Image optional?</td>
+<td><strong>Mandatory</strong> (Multer → Cloudinary)</td>
+<td>Tiny <code>fixtures/test-image.png</code> (74 bytes)</td>
+</tr>
+<tr>
+<td>Seed products via the API</td>
+<td>Would need 3 Cloudinary uploads per run</td>
+<td>Seeded straight into MongoDB; API create is covered by TC-13</td>
+</tr>
+<tr>
+<td>Seller can add products</td>
+<td>Sellers must be approved by an admin</td>
+<td>Setup script sets <code>is_verified</code> in MongoDB</td>
+</tr>
+<tr>
+<td>Signup email works</td>
+<td>Gmail rejects the backend's app password (signup returns 500 after saving the OTP)</td>
+<td>The signup page object and setup script treat exactly that "Failed to send OTP email" answer as success; any other error is passed through unchanged</td>
+</tr>
+<tr>
+<td>Delete test Firebase user via REST</td>
+<td>Needs the user's token and Firebase rate-limits sign-ins</td>
+<td><code>scripts/delete_firebase_user.mjs</code> uses the backend's own Admin SDK setup</td>
+</tr>
+<tr>
+<td>Separate HTML report per browser</td>
+<td>Requested change: one report</td>
+<td>One <code>reports/report.html</code> + this file</td>
+</tr>
+</tbody>
+</table>
+<p><code>data-testid</code> attributes added to the app (only 2): <code>product-card</code> (<code>Frontend/src/components/Product/ProductCard.jsx</code>) and <code>category-filter</code> (<code>Frontend/src/pages/Products.jsx</code>).</p>
+<h2>6. Test cases</h2>
+<p>Result = final headed run on Chromium, Firefox and WebKit (all three agree).</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Feature</th>
+<th>Type</th>
+<th>Description</th>
+<th>Expected result</th>
+<th>Actual result</th>
+<th>Status</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC-01</td>
+<td>Login</td>
+<td>Positive</td>
+<td>Valid buyer email + password</td>
+<td>Lands on <code>/</code>, "Buyer" menu visible, Login link gone</td>
+<td>As expected</td>
+<td>Pass</td>
+<td>Shaheer</td>
+</tr>
+<tr>
+<td>TC-02</td>
+<td>Login</td>
+<td>Negative</td>
+<td>Valid email, wrong password</td>
+<td>Error alert (<code>auth/invalid-credential</code>), stays on <code>/login</code></td>
+<td>As expected</td>
+<td>Pass</td>
+<td>Shaheer</td>
+</tr>
+<tr>
+<td>TC-03</td>
+<td>Login</td>
+<td>Negative</td>
+<td>Empty email and password</td>
+<td>Submit blocked by <code>required</code>, no navigation, no alert</td>
+<td>As expected</td>
+<td>Pass</td>
+<td>Shaheer</td>
+</tr>
+<tr>
+<td>TC-04</td>
+<td>Signup</td>
+<td>Positive</td>
+<td>Sign up as buyer, OTP read from MongoDB</td>
+<td>OTP modal, then "Account created successfully!", <code>/login</code>, buyer record exists; account cleaned up</td>
+<td>As expected</td>
+<td>Pass</td>
+<td>Shaheer</td>
+</tr>
+<tr>
+<td>TC-05</td>
+<td>Signup</td>
+<td>Negative</td>
+<td>Email <code>notanemail</code></td>
+<td>Browser validation error, no OTP modal, no OTP stored</td>
+<td>As expected</td>
+<td>Pass</td>
+<td>Shaheer</td>
+</tr>
+<tr>
+<td>TC-06</td>
+<td>Signup</td>
+<td>Negative</td>
+<td>Wrong OTP <code>000000</code></td>
+<td>"Invalid or expired OTP", modal stays, no account</td>
+<td>As expected</td>
+<td>Pass</td>
+<td>Shaheer</td>
+</tr>
+<tr>
+<td>TC-07</td>
+<td>Product search</td>
+<td>Positive</td>
+<td>Search <code>STS-TEST Laptop</code></td>
+<td>Laptop card visible; Novel and Tshirt absent</td>
+<td>As expected</td>
+<td>Pass</td>
+<td>Ahmed</td>
+</tr>
+<tr>
+<td>TC-08</td>
+<td>Product filter</td>
+<td>Positive</td>
+<td>Category = Books</td>
+<td>Novel visible, laptop absent, every card shows "Books"</td>
+<td>As expected</td>
+<td>Pass</td>
+<td>Ahmed</td>
+</tr>
+<tr>
+<td>TC-09</td>
+<td>Product search</td>
+<td>Negative</td>
+<td>Search <code>zzqxv-no-such-item-123</code></td>
+<td>"No products found matching your criteria", 0 cards, page intact</td>
+<td>As expected</td>
+<td>Pass</td>
+<td>Ahmed</td>
+</tr>
+<tr>
+<td>TC-10</td>
+<td>Create post</td>
+<td>Positive</td>
+<td>Logged-in buyer submits valid form</td>
+<td>"Post created successfully", post found in <code>/posts</code>, one DB record, cleaned up</td>
+<td>As expected</td>
+<td>Pass</td>
+<td>Ahmed</td>
+</tr>
+<tr>
+<td>TC-11</td>
+<td>Create post</td>
+<td>Negative</td>
+<td>Empty title</td>
+<td>Blocked by form validation, nothing saved</td>
+<td>As expected</td>
+<td>Pass</td>
+<td>Ahmed</td>
+</tr>
+<tr>
+<td>TC-12</td>
+<td>Create post</td>
+<td>Negative</td>
+<td>Budget <code>-100</code></td>
+<td>Request rejected (4xx), no post saved</td>
+<td><strong>Server accepted it and created the post</strong></td>
+<td><strong>XFail (BUG-02)</strong></td>
+<td>Ahmed</td>
+</tr>
+<tr>
+<td>TC-13</td>
+<td>API Create</td>
+<td>API</td>
+<td><code>POST /product/add</code> as seller; same call without token</td>
+<td>201 with <code>_id</code>, title, price; no token → 401/403</td>
+<td>As expected</td>
+<td>Pass</td>
+<td>Shaheer</td>
+</tr>
+<tr>
+<td>TC-14</td>
+<td>API Read</td>
+<td>API</td>
+<td><code>GET /product/getOne/:id</code>; valid-format unknown id</td>
+<td>200 with the data; unknown id → 404 "Product not found"</td>
+<td>As expected</td>
+<td>Pass</td>
+<td>Shaheer</td>
+</tr>
+<tr>
+<td>TC-15</td>
+<td>API Update</td>
+<td>API</td>
+<td><code>PATCH /buyer-dashboard/posts/:id/status</code> → closed, then GET; invalid status</td>
+<td>200, GET shows <code>closed</code>; invalid → 400</td>
+<td>As expected</td>
+<td>Pass</td>
+<td>Shaheer</td>
+</tr>
+<tr>
+<td>TC-16</td>
+<td>API Delete</td>
+<td>API</td>
+<td><code>POST /product/remove/:id</code>, then GET</td>
+<td>200, then 404</td>
+<td>As expected</td>
+<td>Pass</td>
+<td>Shaheer</td>
+</tr>
+<tr>
+<td>TC-17</td>
+<td>Mock</td>
+<td>Mock</td>
+<td><code>/product/all</code> returns 200 with empty list</td>
+<td>"No products available yet", no cards, no JS errors</td>
+<td>As expected</td>
+<td>Pass</td>
+<td>Ahmed</td>
+</tr>
+<tr>
+<td>TC-18</td>
+<td>Mock</td>
+<td>Mock</td>
+<td><code>/product/all</code> returns 500 <code>Internal Server Error</code></td>
+<td>Error text + "Try Again" button, header still shown, no cards, no JS errors</td>
+<td>As expected</td>
+<td>Pass</td>
+<td>Ahmed</td>
+</tr>
+<tr>
+<td>TC-14b</td>
+<td>API (extra)</td>
+<td>API</td>
+<td><code>GET /product/getOne/not-an-id</code></td>
+<td>400 or 404</td>
+<td><strong>500 (Mongoose CastError)</strong></td>
+<td><strong>XFail (BUG-01)</strong></td>
+<td>Shaheer</td>
+</tr>
+<tr>
+<td>TC-16b</td>
+<td>API (extra)</td>
+<td>API</td>
+<td><code>POST /product/remove/&lt;unknown id&gt;</code></td>
+<td>404</td>
+<td><strong>500 (TypeError on null product)</strong></td>
+<td><strong>XFail (BUG-03)</strong></td>
+<td>Shaheer</td>
+</tr>
+</tbody>
+</table>
+<p>An XFail means the test asserts the correct behaviour and fails because the application is wrong (<code>xfail(strict=True)</code>, so it turns into a hard failure the day the bug is fixed).</p>
+<h2>7. Results</h2>
+<h3>7.1 Cross-browser</h3>
+<p>Run 1 and run 2 of the full suite (headed, one pytest command, <code>--browser chromium --browser firefox --browser webkit</code>) both gave <strong>43 passed, 5 xfailed, 0 failed, 0 reruns</strong> (4 min 54 s and 5 min 39 s), so no flaky tests were observed in the final code.</p>
+<table>
+<thead>
+<tr>
+<th>Browser</th>
+<th>Tests run</th>
+<th>Passed</th>
+<th>Failed</th>
+<th>XFailed</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chromium 156</td>
+<td>14 (12 E2E + 2 mock)</td>
+<td>13</td>
+<td>0</td>
+<td>1 (TC-12)</td>
+<td></td>
+</tr>
+<tr>
+<td>Firefox 157</td>
+<td>14</td>
+<td>13</td>
+<td>0</td>
+<td>1 (TC-12)</td>
+<td></td>
+</tr>
+<tr>
+<td>WebKit 27.2</td>
+<td>14</td>
+<td>13</td>
+<td>0</td>
+<td>1 (TC-12)</td>
+<td></td>
+</tr>
+<tr>
+<td>API (browser-independent, run once)</td>
+<td>6</td>
+<td>4</td>
+<td>0</td>
+<td>2 (TC-14b, TC-16b)</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>All browsers, total</strong></td>
+<td><strong>48</strong></td>
+<td><strong>43</strong></td>
+<td><strong>0</strong></td>
+<td><strong>5</strong></td>
+<td><a href="reports/report.html">reports/report.html</a></td>
+</tr>
+<tr>
+<td>Chromium, Pixel 7 emulation (E2E + mock)</td>
+<td>14</td>
+<td>13</td>
+<td>0</td>
+<td>1 (TC-12)</td>
+<td>console run, screenshots in <code>screenshots/chromium-mobile/</code></td>
+</tr>
+</tbody>
+</table>
+<h3>7.2 How the suite got to green (honest log)</h3>
+<p>Earlier runs failed for reasons that were fixed in the tests, not hidden: a missing <code>base_url</code> argument in a fixture, a race on the login <code>alert</code> (TC-02), two elements matching the same OTP error text (TC-06), Firebase sign-in rate-limiting caused by the cleanup of the signup account (replaced by the Admin-SDK script), a login that occasionally dropped on a flaky connection (the login fixture now retries up to 3 times), and our own retry-click helper wrongly retrying when TC-11's form is correctly blocked. No test was weakened to pass: TC-12, TC-14b and TC-16b still assert the correct behaviour.</p>
+<h2>8. Intentional bug demo (owner: Shaheer)</h2>
+<ul>
+<li><strong>Change:</strong> in <code>Frontend/src/pages/Products.jsx</code> (line 63) the search predicate was replaced by <code>const matchesSearch = true;</code>, so the search box ignores what is typed. Done on a temporary git branch <code>bug-demo</code>; diff in <a href="bug-demo/bug.patch">bug-demo/bug.patch</a>.</li>
+<li><strong>Run:</strong> <code>tests/e2e/test_product_search.py</code> on Chromium, headed. Result: <strong>2 failed, 1 passed</strong>.</li>
+<li>TC-07 failed: <code>Locator expected to have count '0' ... unexpected value "1"</code> (the STS-TEST Novel card was still shown while searching for the laptop). Screenshot: <img alt="TC-07 failure" src="screenshots/bug-demo/bug_tc07_failed.png" /></li>
+<li>TC-09 failed: <code>Locator expected to be visible</code> (no "no products found" message, because every product matches). Screenshot: <img alt="TC-09 failure" src="screenshots/bug-demo/bug_tc09_failed.png" /></li>
+<li>TC-08 (category filter) correctly still passed.</li>
+<li><strong>Revert:</strong> change checked out, branch deleted without merging, back on <code>main</code>; the search tests then passed again (3 passed). Details: <a href="bug-demo/README.md">bug-demo/README.md</a>.</li>
+</ul>
+<h2>9. Bugs found (real, in the application)</h2>
+<table>
+<thead>
+<tr>
+<th>Bug ID</th>
+<th>Description</th>
+<th>Found by</th>
+<th>Expected</th>
+<th>Actual</th>
+<th>Severity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BUG-01</td>
+<td><code>GET /product/getOne/:id</code> with a malformed id</td>
+<td>TC-14b</td>
+<td>400 or 404</td>
+<td>500 with a raw Mongoose "Cast to ObjectId failed" message</td>
+<td>Low–Medium</td>
+</tr>
+<tr>
+<td>BUG-02</td>
+<td>Create post with a negative budget (-100)</td>
+<td>TC-12</td>
+<td>Rejected with an error</td>
+<td>Accepted; the post is saved (backend only checks <code>!budget</code>, the form has no <code>min</code>)</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>BUG-03</td>
+<td><code>POST /product/remove/:id</code> with an id that does not exist</td>
+<td>TC-16b</td>
+<td>404</td>
+<td>500 (code reads <code>product.sellerId</code> on <code>null</code>)</td>
+<td>Low–Medium</td>
+</tr>
+<tr>
+<td>BUG-04</td>
+<td>On screens narrower than 768 px the navbar's Posts and Products links are hidden (<code>hidden md:flex</code>) and there is no menu button</td>
+<td>Mobile run (TC-18 first assertion)</td>
+<td>Navigation reachable on phones</td>
+<td>Links missing</td>
+<td>Medium (usability)</td>
+</tr>
+</tbody>
+</table>
+<h3>9.2 Environment / other observations</h3>
+<ul>
+<li><strong>Signup email is broken on this machine:</strong> Gmail answers <code>535 Username and Password not accepted</code> for the backend's app password, so <code>POST /auth/signup</code> always returns 500 after saving the OTP and the real signup UI never shows the OTP screen. Fix by creating a new Gmail app password in <code>Backend/.env</code>. The tests work around only this one error (see section 5).</li>
+<li><strong>Security:</strong> an uncommitted/committed <code>console.log(idToken)</code> in <code>Backend/src/middlewares/verifyIdToken.middleware.js</code> prints every user's Firebase ID token to the server log. It is not part of the tests and should be removed.</li>
+<li><strong>Google login</strong> in <code>auth.config.js</code> posts to <code>VITE_VERCEL_URL</code>, a variable not used anywhere else (not tested, noted only).</li>
+</ul>
+<h2>10. Screenshots (final run)</h2>
+<table>
+<thead>
+<tr>
+<th>&nbsp;</th>
+<th>&nbsp;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="TC-01 login, Chromium" src="screenshots/chromium/tc01_login_success.png" /> TC-01 login (Chromium)</td>
+<td><img alt="TC-04 signup, Firefox" src="screenshots/firefox/tc04_signup_success.png" /> TC-04 signup (Firefox)</td>
+</tr>
+<tr>
+<td><img alt="TC-07 search, WebKit" src="screenshots/webkit/tc07_search_results.png" /> TC-07 search (WebKit)</td>
+<td><img alt="TC-08 filter, Chromium" src="screenshots/chromium/tc08_category_filter.png" /> TC-08 filter (Chromium)</td>
+</tr>
+<tr>
+<td><img alt="TC-10 post created, Firefox" src="screenshots/firefox/tc10_post_created.png" /> TC-10 create post (Firefox)</td>
+<td><img alt="TC-17 mock empty, Chromium" src="screenshots/chromium/tc17_mock_empty_list.png" /> TC-17 empty list mock</td>
+</tr>
+<tr>
+<td><img alt="TC-18 mock error, WebKit" src="screenshots/webkit/tc18_mock_server_error.png" /> TC-18 server-error mock (WebKit)</td>
+<td><img alt="TC-01 mobile" src="screenshots/chromium-mobile/tc01_login_success.png" /> TC-01 on Pixel 7 emulation</td>
+</tr>
+</tbody>
+</table>
+<p>All positive-test screenshots exist for every browser in <code>screenshots/chromium|firefox|webkit|chromium-mobile/</code>.</p>
+<h2>11. Work division</h2>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Shaheer</strong> (A)</td>
+<td>Feature 1 Login (TC-01–03), Feature 2 Signup + OTP (TC-04–06), API CRUD tests (TC-13–16), test-user setup script, intentional bug demo</td>
+</tr>
+<tr>
+<td><strong>Ahmed</strong> (B)</td>
+<td>Feature 3 Product search/filter (TC-07–09), Feature 4 Create post (TC-10–12), network mocking (TC-17–18), cross-browser runs</td>
+</tr>
+<tr>
+<td>Both</td>
+<td>Shared fixtures and utilities (<code>conftest.py</code>, <code>utils/</code>, <code>pages/</code>), README, this report</td>
+</tr>
+</tbody>
+</table>
+<h2>12. How to run</h2>
+<pre><code>cd &quot;STS CEA&quot;
+.venv\Scripts\activate
+python scripts/setup_test_users.py                          # once
+pytest                                                      # all browsers: add --browser chromium --browser firefox --browser webkit
+pytest --browser chromium --device &quot;Pixel 7&quot; -m &quot;e2e or mock&quot;
+pytest tests/e2e/test_login.py                              # one file;  pytest -m negative  # one marker
+</code></pre>
+<p>Backend (<code>npm start</code> in <code>Backend/</code>) and frontend (<code>npm run dev</code> in <code>Frontend/</code>) must be running. Runs are headed by default (see <code>pytest.ini</code>). Delete <code>.env.test</code>, <code>.venv/</code> and <code>test-results/</code> before zipping.</p>
+<h2>13. Conclusion</h2>
+<p>The suite covers four features, the products API and network-failure handling with 18 required tests plus 2 extra ones. After fixing test-side problems it passes 43/43 non-xfail tests on Chromium, Firefox and WebKit, twice in a row with no reruns, and 13/13 on mobile emulation. It found four real application problems (BUG-01 to BUG-04) and one environment fault (broken Gmail credentials), and the one-line search bug was caught by two tests as intended. Remaining limits: payments, Google login, the chatbot and admin features are not automated, and Cloudinary/Firebase/Atlas are real external services, so the suite needs an internet connection.</p>
+</body></html>

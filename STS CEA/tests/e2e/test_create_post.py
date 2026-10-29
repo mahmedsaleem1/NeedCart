@@ -46,7 +46,7 @@ def test_tc11_empty_title_is_rejected(logged_in_buyer_page):
     description = unique_name("no-title description")
     form = CreatePostPage(page).open()
     form.fill("", description, "5000")
-    form.submit()
+    form.click_only()  # the browser blocks this submit, so no request is expected
 
     assert form.title.evaluate("el => el.validity.valueMissing") is True
     expect(page.get_by_text("Post created successfully")).to_have_count(0)
