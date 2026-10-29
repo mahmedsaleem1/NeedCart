@@ -10,6 +10,8 @@ export const verifyFirebaseToken = async (req, res, next) => {
   }
   
   const idToken = authHeader.split(" ")[1];  
+  console.log(idToken);
+  
 
   try {
     const decoded = await admin.auth().verifyIdToken(idToken);

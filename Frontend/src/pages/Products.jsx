@@ -131,6 +131,7 @@ export default function Products() {
 
                   {/* Category Filter */}
                   <select
+                    data-testid="category-filter"
                     value={filterCategory}
                     onChange={(e) => setFilterCategory(e.target.value)}
                     className="px-4 py-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-600 transition-all"

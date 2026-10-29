@@ -13,6 +13,7 @@ export default function ProductCard({ product }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -5 }}
+      data-testid="product-card"
       onClick={() => navigate(`/product/${product._id}`)}
       className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden cursor-pointer border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition-all duration-300"
     >
